@@ -117,7 +117,7 @@ const HeaderUserbox = () => {
           <Avatar alt={user.name} src={user.avatar} variant="rounded" />
           <UserBoxText>
             <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-            <UserBoxDescription variant="body2">{user.jobtitle}</UserBoxDescription>
+            <UserBoxDescription variant="body2">{user.jobTitle}</UserBoxDescription>
           </UserBoxText>
         </MenuUserBox>
         <Divider

@@ -5,9 +5,9 @@ import { Box, Button, Divider, Menu, MenuItem, Popover, Stack, styled, Tooltip, 
 import Fab from '@mui/material/Fab';
 import { useContext, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router';
 
-import { ThemeContext } from '../../theme/ThemeProvider';
+import { LayoutContext } from '../../layouts/LayoutProvider';
+import { ThemeContext } from '../../themes/ThemeProvider';
 
 const ThemeSettingsButton = styled(Box)(
   ({ theme }) => `
@@ -202,12 +202,20 @@ const ThemeSettings = () => {
 
   const setThemeName = useContext(ThemeContext);
   const curThemeName = localStorage.getItem('appTheme') || 'PureLightTheme';
-
   const [theme, setTheme] = useState(curThemeName);
+
+  const setLayoutName = useContext(LayoutContext);
+  const curLayoutName = localStorage.getItem('appLayout') || 'accent-header';
+  const [layout, setLayout] = useState(curLayoutName);
 
   const changeTheme = (theme) => {
     setTheme(theme);
     setThemeName(theme);
+  };
+
+  const changeLayout = (layout) => {
+    setLayout(layout);
+    setLayoutName(layout);
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -280,67 +288,26 @@ const ThemeSettings = () => {
               onClose={closeMenu}
             >
               <MenuItem
-                component={NavLink}
-                to="/extended-sidebar/dashboards"
+                selected={layout === 'extended-sidebar'}
                 sx={{
                   fontWeight: 'bold',
+                }}
+                onClick={() => {
+                  changeLayout('extended-sidebar');
                 }}
               >
                 Extended Sidebar
               </MenuItem>
               <MenuItem
-                component={NavLink}
-                to="/accent-header/dashboards"
+                selected={layout === 'accent-header'}
                 sx={{
                   fontWeight: 'bold',
+                }}
+                onClick={() => {
+                  changeLayout('accent-header');
                 }}
               >
                 Accent Header
-              </MenuItem>
-              <MenuItem
-                component={NavLink}
-                to="/accent-sidebar/dashboards"
-                sx={{
-                  fontWeight: 'bold',
-                }}
-              >
-                Accent Sidebar
-              </MenuItem>
-              <MenuItem
-                component={NavLink}
-                to="/boxed-sidebar/dashboards"
-                sx={{
-                  fontWeight: 'bold',
-                }}
-              >
-                Boxed Sidebar
-              </MenuItem>
-              <MenuItem
-                component={NavLink}
-                to="/collapsed-sidebar/dashboards"
-                sx={{
-                  fontWeight: 'bold',
-                }}
-              >
-                Collapsed Sidebar
-              </MenuItem>
-              <MenuItem
-                component={NavLink}
-                to="/bottom-navigation/dashboards"
-                sx={{
-                  fontWeight: 'bold',
-                }}
-              >
-                Bottom Navigation
-              </MenuItem>
-              <MenuItem
-                component={NavLink}
-                to="/top-navigation/dashboards"
-                sx={{
-                  fontWeight: 'bold',
-                }}
-              >
-                Top Navigation
               </MenuItem>
             </Menu>
           </Box>

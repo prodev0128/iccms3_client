@@ -5,9 +5,10 @@ import { SnackbarProvider } from 'notistack';
 import { useRoutes } from 'react-router';
 
 import AppInit from './components/AppInit';
+import Authenticated from './components/Authenticated';
 import useAuth from './hooks/useAuth';
 import router from './router';
-import ThemeProvider from './theme/ThemeProvider';
+import ThemeProvider from './themes/ThemeProvider';
 
 const App = () => {
   const content = useRoutes(router);
@@ -24,7 +25,7 @@ const App = () => {
           }}
         >
           <CssBaseline />
-          {auth.isInitialized ? content : <AppInit />}
+          {auth.isInitialized ? <Authenticated>{content}</Authenticated> : <AppInit />}
         </SnackbarProvider>
       </LocalizationProvider>
     </ThemeProvider>

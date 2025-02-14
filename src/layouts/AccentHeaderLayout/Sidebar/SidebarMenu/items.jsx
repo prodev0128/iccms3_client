@@ -1,7 +1,6 @@
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import AnalyticsTwoToneIcon from '@mui/icons-material/AnalyticsTwoTone';
 import AssignmentIndTwoToneIcon from '@mui/icons-material/AssignmentIndTwoTone';
-import BackupTableTwoToneIcon from '@mui/icons-material/BackupTableTwoTone';
 import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
 import ErrorTwoToneIcon from '@mui/icons-material/ErrorTwoTone';
 import HealthAndSafetyTwoToneIcon from '@mui/icons-material/HealthAndSafetyTwoTone';
@@ -15,45 +14,6 @@ const menuItems = [
   {
     heading: 'General',
     items: [
-      {
-        icon: BackupTableTwoToneIcon,
-        items: [
-          {
-            badge: 'v3.0',
-            badgeTooltip: 'Added in version 3.0',
-            link: '/extended-sidebar/dashboards',
-            name: 'Extended sidebar',
-          },
-          {
-            badge: '',
-            badgeTooltip: 'Updated',
-            link: '/accent-header/dashboards',
-            name: 'Accent header',
-          },
-          {
-            link: '/accent-sidebar/dashboards',
-            name: 'Accent sidebar',
-          },
-          {
-            link: '/boxed-sidebar/dashboards',
-            name: 'Boxed sidebar',
-          },
-          {
-            link: '/collapsed-sidebar/dashboards',
-            name: 'Collapsed sidebar',
-          },
-          {
-            link: '/bottom-navigation/dashboards',
-            name: 'Bottom navigation',
-          },
-          {
-            link: '/top-navigation/dashboards',
-            name: 'Top navigation',
-          },
-        ],
-        link: '',
-        name: 'Blueprints',
-      },
       {
         icon: SmartToyTwoToneIcon,
         items: [

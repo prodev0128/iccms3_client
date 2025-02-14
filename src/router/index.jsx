@@ -1,31 +1,26 @@
 import { Navigate } from 'react-router';
 
-import Authenticated from '../components/Authenticated';
-import AccentHeaderLayout from '../layouts/AccentHeaderLayout';
-import dashboardsRoutes from './dashboards';
+import LayoutProvider from '../layouts/LayoutProvider';
+import Dashboard from '../pages/dashboard';
+import Home from '../pages/home';
 
 const router = [
   {
-    element: <Navigate replace to="/accent-header" />,
-    index: true,
-  },
-  {
     children: [
       {
-        element: <Navigate replace to="dashboards" />,
-        index: true,
+        element: <Home />,
+        path: '/',
       },
       {
-        children: dashboardsRoutes,
-        path: 'dashboards',
+        element: <Dashboard />,
+        path: '/dashboards',
+      },
+      {
+        element: <Navigate replace to="/" />,
+        path: '*',
       },
     ],
-    element: (
-      <Authenticated>
-        <AccentHeaderLayout />
-      </Authenticated>
-    ),
-    path: 'accent-header',
+    element: <LayoutProvider />,
   },
 ];
 

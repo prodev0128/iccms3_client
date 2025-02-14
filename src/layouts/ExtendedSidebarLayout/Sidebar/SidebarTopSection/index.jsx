@@ -9,33 +9,20 @@ import {
   Box,
   Button,
   Divider,
+  IconButton,
   List,
   ListItem,
   ListItemText,
   Popover,
   styled,
   Typography,
+  useTheme,
 } from '@mui/material';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation, useNavigate } from 'react-router';
 
 import useAuth from '../../../../hooks/useAuth';
-
-const UserBoxButton = styled(Button)(
-  ({ theme }) => `
-    padding: ${theme.spacing(1)};
-    background-color: ${alpha(theme.colors.alpha.black[100], 0.08)};
-
-    .MuiButton-label {
-      justify-content: flex-start;
-    }
-
-    &:hover {
-      background-color: ${alpha(theme.colors.alpha.black[100], 0.12)};
-    }
-`,
-);
 
 const MenuUserBox = styled(Box)(
   ({ theme }) => `
@@ -75,6 +62,7 @@ const UserBoxDescription = styled(Typography)(
 
 const SidebarTopSection = () => {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -102,22 +90,60 @@ const SidebarTopSection = () => {
   };
 
   return (
-    <>
-      <UserBoxButton fullWidth color="secondary" ref={ref} onClick={handleOpen}>
-        <Avatar alt={user.name} src={user.avatar} variant="rounded" />
-        <Box alignItems="center" display="flex" flex={1} justifyContent="space-between">
-          <UserBoxText>
-            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-            <UserBoxDescription variant="body2">{user.jobTitle}</UserBoxDescription>
-          </UserBoxText>
-          <UnfoldMoreTwoToneIcon
-            fontSize="small"
-            sx={{
-              ml: 1,
-            }}
-          />
-        </Box>
-      </UserBoxButton>
+    <Box
+      sx={{
+        mx: 2,
+        position: 'relative',
+        pt: 1,
+        textAlign: 'center',
+      }}
+    >
+      <Avatar
+        alt={user.name}
+        src={user.avatar}
+        sx={{
+          height: 68,
+          mb: 2,
+          mx: 'auto',
+          width: 68,
+        }}
+      />
+
+      <Typography
+        variant="h4"
+        sx={{
+          color: `${theme.colors.alpha.trueWhite[100]}`,
+        }}
+      >
+        {user.name}
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        sx={{
+          color: `${theme.colors.alpha.trueWhite[70]}`,
+        }}
+      >
+        {user.jobtitle}
+      </Typography>
+      <IconButton
+        ref={ref}
+        size="small"
+        sx={{
+          '&:hover': {
+            background: `${alpha(theme.colors.alpha.trueWhite[100], 0.2)}`,
+            color: `${theme.colors.alpha.trueWhite[100]}`,
+          },
+          background: `${theme.colors.alpha.trueWhite[10]}`,
+          color: `${theme.colors.alpha.trueWhite[70]}`,
+          position: 'absolute',
+          right: theme.spacing(0),
+
+          top: theme.spacing(0),
+        }}
+        onClick={handleOpen}
+      >
+        <UnfoldMoreTwoToneIcon fontSize="small" />
+      </IconButton>
       <Popover
         disableScrollLock
         anchorEl={ref.current}
@@ -144,7 +170,7 @@ const SidebarTopSection = () => {
               {user.name}
             </UserBoxLabel>
             <UserBoxDescription className="popoverTypo" variant="body2">
-              {user.jobTitle}
+              {user.jobtitle}
             </UserBoxDescription>
           </UserBoxText>
         </MenuUserBox>
@@ -205,7 +231,7 @@ const SidebarTopSection = () => {
           </Button>
         </Box>
       </Popover>
-    </>
+    </Box>
   );
 };
 
