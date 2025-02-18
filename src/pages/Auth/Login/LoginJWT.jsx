@@ -14,10 +14,10 @@ import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router';
 import * as Yup from 'yup';
 
-import useAuth from '../../../../hooks/useAuth';
-import useRefMounted from '../../../../hooks/useRefMounted';
+import useAuth from '../../../hooks/useAuth';
+import useRefMounted from '../../../hooks/useRefMounted';
 
-const LoginAmplify = () => {
+const LoginJWT = () => {
   const { login } = useAuth();
   const isMountedRef = useRefMounted();
   const { t } = useTranslation();
@@ -48,7 +48,6 @@ const LoginAmplify = () => {
           }
         } catch (err) {
           console.error(err);
-
           if (isMountedRef.current) {
             setStatus({ success: false });
             setErrors({ submit: err.message });
@@ -128,4 +127,4 @@ const LoginAmplify = () => {
   );
 };
 
-export default LoginAmplify;
+export default LoginJWT;

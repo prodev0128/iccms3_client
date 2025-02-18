@@ -14,7 +14,7 @@ import { AuthProvider } from './contexts/JWTAuthContext';
 import { SidebarProvider } from './contexts/SidebarContext';
 import ScrollTop from './hooks/useScrollTop';
 import reportWebVitals from './reportWebVitals';
-import store from './store';
+import store from './store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

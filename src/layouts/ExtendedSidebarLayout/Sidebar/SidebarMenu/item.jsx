@@ -9,21 +9,23 @@ import { NavLink as RouterLink } from 'react-router';
 
 import { SidebarContext } from '../../../../contexts/SidebarContext';
 
-const TooltipWrapper = styled(({ className, ...props }) => <Tooltip {...props} classes={{ popper: className }} />)(
-  ({ theme }) => ({
-    [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: theme.colors.alpha.trueWhite[100],
-      borderRadius: theme.general.borderRadiusSm,
-      boxShadow: '0 .2rem .8rem rgba(7,9,25,.18), 0 .08rem .15rem rgba(7,9,25,.15)',
-      color: theme.palette.getContrastText(theme.colors.alpha.trueWhite[100]),
-      fontSize: theme.typography.pxToRem(12),
-      fontWeight: 'bold',
-    },
-    [`& .${tooltipClasses.arrow}`]: {
-      color: theme.colors.alpha.trueWhite[100],
-    },
-  }),
-);
+const TooltipWrapper = styled(({ children, className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }}>
+    {children}
+  </Tooltip>
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.colors.alpha.trueWhite[100],
+    borderRadius: theme.general.borderRadiusSm,
+    boxShadow: '0 .2rem .8rem rgba(7,9,25,.18), 0 .08rem .15rem rgba(7,9,25,.15)',
+    color: theme.palette.getContrastText(theme.colors.alpha.trueWhite[100]),
+    fontSize: theme.typography.pxToRem(12),
+    fontWeight: 'bold',
+  },
+  [`& .${tooltipClasses.arrow}`]: {
+    color: theme.colors.alpha.trueWhite[100],
+  },
+}));
 
 const SidebarMenuItem = ({
   active,
@@ -73,7 +75,7 @@ const SidebarMenuItem = ({
     <ListItem component="div" key={name} {...rest}>
       <Button
         disableRipple
-        activeClassName="Mui-active"
+        className={clsx({ 'Mui-active': location.pathname === link })}
         component={RouterLink}
         startIcon={Icon && <Icon />}
         to={link}

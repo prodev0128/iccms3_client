@@ -212,14 +212,7 @@ const SidebarMenu = () => {
     <>
       {menuItems.map((section) => (
         <MenuWrapper key={section.heading}>
-          <List
-            component="div"
-            subheader={
-              <ListSubheader disableSticky component="div">
-                {t(section.heading)}
-              </ListSubheader>
-            }
-          >
+          <List component="div" subheader={<ListSubheader disableSticky>{t(section.heading)}</ListSubheader>}>
             {renderSidebarMenuItems({
               items: section.items,
               path: location.pathname,

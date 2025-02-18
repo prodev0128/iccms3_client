@@ -3,13 +3,10 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router';
 
-import Logo from '../../../../../components/Logo';
-import Scrollbar from '../../../../../components/Scrollbar';
-import useAuth from '../../../../../hooks/useAuth';
-import AmplifyLogin from '../LoginAmplify';
-import Auth0Login from '../LoginAuth0';
-import FirebaseAuthLogin from '../LoginFirebaseAuth';
-import JWTLogin from '../LoginJWT';
+import Logo from '../../../components/Logo';
+import Scrollbar from '../../../components/Scrollbar';
+import useAuth from '../../../hooks/useAuth';
+import JWTLogin from './LoginJWT';
 
 const icons = {
   Amplify: '/static/images/logo/amplify.svg',
@@ -217,10 +214,7 @@ const LoginCover = () => {
                   {t('Fill in the fields below to sign into your account.')}
                 </Typography>
               </Box>
-              {method === 'Auth0' && <Auth0Login />}
-              {method === 'FirebaseAuth' && <FirebaseAuthLogin />}
               {method === 'JWT' && <JWTLogin />}
-              {method === 'Amplify' && <AmplifyLogin />}
               <Box my={4}>
                 <Typography color="text.primary" component="span" fontWeight="bold" variant="subtitle2">
                   {t('Don’t have an account, yet?')}

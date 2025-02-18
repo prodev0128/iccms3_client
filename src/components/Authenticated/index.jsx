@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Navigate, useLocation } from 'react-router';
 
-import Login from '../../content/pages/Auth/Login/Cover';
 import useAuth from '../../hooks/useAuth';
+import Login from '../../pages/Auth/Login';
 
 const Authenticated = ({ children }) => {
   const auth = useAuth();

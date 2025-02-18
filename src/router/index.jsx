@@ -1,19 +1,19 @@
 import { Navigate } from 'react-router';
 
 import LayoutProvider from '../layouts/LayoutProvider';
-import Dashboard from '../pages/dashboard';
-import Home from '../pages/home';
+import adminRouter from './admin';
+import homeRouter from './home';
 
 const router = [
   {
     children: [
       {
-        element: <Home />,
-        path: '/',
+        children: homeRouter,
+        path: '',
       },
       {
-        element: <Dashboard />,
-        path: '/dashboards',
+        children: adminRouter,
+        path: 'admin',
       },
       {
         element: <Navigate replace to="/" />,
@@ -21,6 +21,7 @@ const router = [
       },
     ],
     element: <LayoutProvider />,
+    path: '/',
   },
 ];
 

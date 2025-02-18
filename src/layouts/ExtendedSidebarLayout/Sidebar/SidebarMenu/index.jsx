@@ -1,6 +1,6 @@
 import { alpha, Box, List, ListSubheader, styled } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { matchPath, useLocation } from 'react-router';
+import { useLocation, useMatch } from 'react-router';
 
 import SidebarMenuItem from './item';
 import menuItems from './items';
@@ -153,26 +153,12 @@ const renderSidebarMenuItems = ({ items, path }) => (
 const reduceChildRoutes = ({ ev, item, path }) => {
   const key = item.name;
 
-  const exactMatch = item.link
-    ? !!matchPath(
-        {
-          end: true,
-          path: item.link,
-        },
-        path,
-      )
-    : false;
+  const match = useMatch(item.link);
+  const exactMatch = !!match;
 
   if (item.items) {
-    const partialMatch = item.link
-      ? !!matchPath(
-          {
-            end: false,
-            path: item.link,
-          },
-          path,
-        )
-      : false;
+    const match = useMatch(item.link);
+    const partialMatch = !!match;
 
     ev.push(
       <SidebarMenuItem
@@ -215,15 +201,8 @@ const SidebarMenu = () => {
   return (
     <>
       {menuItems.map((section) => (
-        <MenuWrapper key={section.heading}>
-          <List
-            component="div"
-            subheader={
-              <ListSubheader disableSticky component="div">
-                {t(section.heading)}
-              </ListSubheader>
-            }
-          >
+        <MenuWrapper key={section.heading || ''}>
+          <List component="div" subheader={<ListSubheader disableSticky>{t(section.heading)}</ListSubheader>}>
             {renderSidebarMenuItems({
               items: section.items,
               path: location.pathname,
