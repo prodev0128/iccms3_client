@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink as RouterLink } from 'react-router';
+import { NavLink as RouterLink, useLocation } from 'react-router';
 
 import { SidebarContext } from '../../../../contexts/SidebarContext';
 
@@ -41,9 +41,10 @@ const SidebarMenuItem = ({
   const [menuToggle, setMenuToggle] = useState(openParent);
   const { t } = useTranslation();
   const { closeSidebar } = useContext(SidebarContext);
+  const location = useLocation();
 
   const toggleMenu = () => {
-    setMenuToggle((Open) => !Open);
+    setMenuToggle((prevOpen) => !prevOpen);
   };
 
   if (children) {

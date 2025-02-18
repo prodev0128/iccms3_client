@@ -40,6 +40,7 @@ const menuItems = [
             name: 'Settings',
           },
         ],
+        link: '/admin',
         name: 'Administration',
       },
       {
@@ -61,6 +62,7 @@ const menuItems = [
             name: 'Process',
           },
         ],
+        link: '/censor',
         name: 'Censor',
       },
       {
@@ -82,6 +84,7 @@ const menuItems = [
             name: 'Flow',
           },
         ],
+        link: '/stat',
         name: 'Statistics',
       },
     ],
