@@ -1,6 +1,5 @@
 import ChevronRightTwoToneIcon from '@mui/icons-material/ChevronRightTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
-import MonetizationOnTwoToneIcon from '@mui/icons-material/MonetizationOnTwoTone';
 import {
   alpha,
   Avatar,
@@ -17,45 +16,33 @@ import {
   useTheme,
 } from '@mui/material';
 import { useRef, useState } from 'react';
-import Chart from 'react-apexcharts';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
-import Text from '../../../../components/Text';
 import useAuth from '../../../../hooks/useAuth';
 import { logoutUser } from '../../../../redux/actions/auth';
 
-const DotLegend = styled('span')(
-  ({ theme }) => `
-    border-radius: 22px;
-    width: ${theme.spacing(1.38)};
-    height: ${theme.spacing(1.4)};
-    display: inline-block;
-    border: ${theme.colors.alpha.white[100]} solid 2px;
-`,
-);
-
 const UserBoxButton = styled(IconButton)(
   ({ theme }) => `
-  width: ${theme.spacing(4)};
-  padding: 0;
-  height: ${theme.spacing(4)};
-  margin-left: ${theme.spacing(1)};
-  border-radius: ${theme.general.borderRadiusLg};
-  
-  &:hover {
-    background: ${theme.colors.primary.main};
-  }
-`,
+    width: ${theme.spacing(4)};
+    padding: 0;
+    height: ${theme.spacing(4)};
+    margin-left: ${theme.spacing(1)};
+    border-radius: ${theme.general.borderRadiusLg};
+    
+    &:hover {
+      background: ${theme.colors.primary.main};
+    }
+  `,
 );
 
 const UserAvatar = styled(Avatar)(
   ({ theme }) => `
-        height: 90%;
-        width: 90%;
-        border-radius: ${theme.general.borderRadiusLg};
-`,
+    height: 90%;
+    width: 90%;
+    border-radius: ${theme.general.borderRadiusLg};
+  `,
 );
 
 const MenuListWrapperPrimary = styled(MenuList)(
@@ -142,74 +129,6 @@ const HeaderUserbox = () => {
     }
   };
 
-  const Box1Options = {
-    chart: {
-      background: 'transparent',
-      sparkline: {
-        enabled: true,
-      },
-      toolbar: {
-        show: false,
-      },
-      zoom: {
-        enabled: false,
-      },
-    },
-    colors: [theme.colors.error.main],
-    grid: {
-      padding: {
-        bottom: 5,
-        left: 5,
-        right: 5,
-      },
-    },
-    labels: [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-      'Last Week',
-      'Last Month',
-      'Last Year',
-      'Last Decade',
-    ],
-    stroke: {
-      colors: [theme.colors.error.main],
-      curve: 'smooth',
-      width: 3,
-    },
-    theme: {
-      mode: theme.palette.mode === 'dark' ? 'light' : 'dark',
-    },
-    tooltip: {
-      fixed: {
-        enabled: true,
-      },
-      marker: {
-        show: true,
-      },
-      x: {
-        show: false,
-      },
-      y: {
-        title: {
-          formatter: () => {
-            return 'Orders:';
-          },
-        },
-      },
-    },
-  };
-  const Box1Data = [
-    {
-      data: [465, 546, 234, 576, 554, 338, 427, 348, 586, 254, 348],
-      name: 'Revenue',
-    },
-  ];
-
   return (
     <>
       <UserBoxButton color="primary" ref={ref} onClick={handleOpen}>
@@ -248,12 +167,7 @@ const HeaderUserbox = () => {
         />
         <MenuListWrapperPrimary disablePadding>
           <MenuItem>
-            <ListItemText
-              primary={t('My account')}
-              primaryTypographyProps={{
-                variant: 'h5',
-              }}
-            />
+            <ListItemText primary={<Typography variant="h5">{t('My account')}</Typography>} />
             <ChevronRightTwoToneIcon
               sx={{
                 color: `${theme.colors.alpha.black[30]}`,
@@ -262,34 +176,7 @@ const HeaderUserbox = () => {
             />
           </MenuItem>
           <MenuItem>
-            <ListItemText
-              primary={t('Profile settings')}
-              primaryTypographyProps={{
-                variant: 'h5',
-              }}
-            />
-            <Box alignItems="center" display="flex">
-              <DotLegend
-                style={{
-                  background: `${theme.colors.warning.main}`,
-                }}
-              />
-              <ChevronRightTwoToneIcon
-                sx={{
-                  color: `${theme.colors.alpha.black[30]}`,
-                  ml: 1,
-                  opacity: 0.8,
-                }}
-              />
-            </Box>
-          </MenuItem>
-          <MenuItem>
-            <ListItemText
-              primary={t('Active tasks')}
-              primaryTypographyProps={{
-                variant: 'h5',
-              }}
-            />
+            <ListItemText primary={<Typography variant="h5">{t('Active tasks')}</Typography>} />
             <ChevronRightTwoToneIcon
               sx={{
                 color: `${theme.colors.alpha.black[30]}`,
@@ -298,21 +185,6 @@ const HeaderUserbox = () => {
             />
           </MenuItem>
         </MenuListWrapperPrimary>
-        <Divider />
-        <Box m={1}>
-          <Box alignItems="flex-start" display="flex" pb={0.5} pt={1} px={2}>
-            <Text color="warning">
-              <MonetizationOnTwoToneIcon fontSize="large" />
-            </Text>
-            <Box ml={1}>
-              <Typography variant="h3">$14,264</Typography>
-              <Typography noWrap variant="subtitle2">
-                {t('total value')}
-              </Typography>
-            </Box>
-          </Box>
-          <Chart height={60} options={Box1Options} series={Box1Data} type="line" />
-        </Box>
         <Divider />
         <Box m={1}>
           <Button fullWidth color="primary" onClick={handleLogout}>

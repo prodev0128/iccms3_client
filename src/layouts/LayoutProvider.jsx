@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react';
 
-import AccentHeaderLayout from './AccentHeaderLayout';
 import ExtendedSidebarLayout from './ExtendedSidebarLayout';
 
 export const LayoutContext = React.createContext();
@@ -14,8 +13,6 @@ const LayoutProviderWrapper = () => {
   };
   const layout = useMemo(() => {
     switch (layoutName) {
-      case 'accent-header':
-        return <AccentHeaderLayout />;
       default:
         return <ExtendedSidebarLayout />;
     }

@@ -1,36 +1,47 @@
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
-import { alpha, Box, Divider, IconButton, lighten, Stack, styled, Tooltip, useTheme } from '@mui/material';
+import {
+  alpha,
+  Box,
+  Divider,
+  IconButton,
+  lighten,
+  Stack,
+  styled,
+  Tooltip,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { useContext } from 'react';
 
 import { SidebarContext } from '../../../contexts/SidebarContext';
 import HeaderButtons from './Buttons';
-import HeaderMenu from './Menu';
 import HeaderSearch from './Search';
 import HeaderUserbox from './Userbox';
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
-        height: ${theme.header.height};
-        color: ${theme.header.textColor};
-        padding: ${theme.spacing(0, 2)};
-        right: 0;
-        z-index: 6;
-        background-color: ${alpha(theme.header.background, 0.95)};
-        backdrop-filter: blur(3px);
-        position: fixed;
-        justify-content: space-between;
-        width: 100%;
-        @media (min-width: ${theme.breakpoints.values.lg}px) {
+    height: ${theme.header.height};
+    color: ${theme.header.textColor};
+    padding: ${theme.spacing(0, 2)};
+    right: 0;
+    z-index: 6;
+    background-color: ${alpha(theme.header.background, 0.95)};
+    backdrop-filter: blur(3px);
+    position: fixed;
+    justify-content: space-between;
+    width: 100%;
+    @media (min-width: ${theme.breakpoints.values.lg}px) {
             left: ${theme.sidebar.width};
-            width: auto;
-        }
-`,
+      width: auto;
+    }
+  `,
 );
 
 const Header = () => {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
   const theme = useTheme();
+  const isLgScreen = useMediaQuery(theme.breakpoints.up('lg'));
 
   return (
     <HeaderWrapper
@@ -50,26 +61,19 @@ const Header = () => {
       }}
     >
       <Stack alignItems="center" direction="row" divider={<Divider flexItem orientation="vertical" />} spacing={2}>
-        <HeaderSearch />
-        <HeaderMenu />
-      </Stack>
-      <Box alignItems="center" display="flex">
-        <HeaderButtons />
-        <HeaderUserbox />
-        <Box
-          component="span"
-          sx={{
-            display: { lg: 'none', xs: 'inline-block' },
-            ml: 2,
-          }}
-        >
+        {!isLgScreen && (
           <Tooltip arrow title="Toggle Menu">
             <IconButton color="primary" onClick={toggleSidebar}>
               {!sidebarToggle ? <MenuTwoToneIcon fontSize="small" /> : <CloseTwoToneIcon fontSize="small" />}
             </IconButton>
           </Tooltip>
-        </Box>
-      </Box>
+        )}
+        <HeaderSearch />
+      </Stack>
+      <Stack alignItems="center" direction="row" divider={<Divider flexItem orientation="vertical" />} spacing={2}>
+        <HeaderButtons />
+        <HeaderUserbox />
+      </Stack>
     </HeaderWrapper>
   );
 };
