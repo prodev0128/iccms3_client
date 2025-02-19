@@ -21,7 +21,7 @@ const App = () => {
     if (!auth.initialized) {
       dispatch(initialize());
     }
-    if (auth.authenticated && !auth.user.name && auth.status !== 'loading') {
+    if (auth.authenticated && !auth.user.name) {
       dispatch(fetchProfile());
     }
   }, [dispatch, auth]);

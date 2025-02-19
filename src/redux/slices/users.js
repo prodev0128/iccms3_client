@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   error: '',
   status: 'idle',
+  totalCount: 0,
   users: [],
 };
 
@@ -14,7 +15,8 @@ const usersSlice = createSlice({
       const { data, error, status } = payload;
       state.status = status;
       if (status === 'succeeded') {
-        state.users = data;
+        state.users = data.users;
+        state.totalCount = data.totalCount;
       } else if (status === 'failed') {
         state.error = error;
       }

@@ -24,6 +24,8 @@ const authSlice = createSlice({
         state.user = data;
       } else if (status === 'failed') {
         state.error = error;
+        state.user = initialUser;
+        state.authenticated = false;
       }
     },
     initialize: (state) => {
