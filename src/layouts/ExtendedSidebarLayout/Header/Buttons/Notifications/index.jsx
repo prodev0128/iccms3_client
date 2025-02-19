@@ -401,7 +401,7 @@ const HeaderNotifications = () => {
                       Java exam day
                     </Typography>
                     <Typography color="text.secondary" variant="body2">
-                      Bill Clinton's presidential scandal makes it online.
+                      Bill Clinton&#39;s presidential scandal makes it online.
                     </Typography>
                     <Box alignItems="flex-start" display="flex" mt={1}>
                       <AvatarGroup max={4}>

@@ -15,6 +15,7 @@ import VerifiedUserTwoToneIcon from '@mui/icons-material/VerifiedUserTwoTone';
 
 const menuItems = [
   {
+    heading: 'Censor Pages',
     items: [
       {
         icon: HomeTwoToneIcon,

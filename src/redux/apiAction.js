@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const apiAction = async (dispatch, sliceAction, params) => {
+const apiAction = (sliceAction, params) => async (dispatch) => {
   dispatch(sliceAction({ status: 'loading' }));
   try {
     const result = await axios(params);
     dispatch(sliceAction({ data: result.data, status: 'succeeded' }));
-  } catch (error) {
-    dispatch(sliceAction({ error, status: 'failed' }));
+  } catch {
+    dispatch(sliceAction({ status: 'failed' }));
   }
 };
 

@@ -15,7 +15,7 @@ const usersSlice = createSlice({
       if (payload.status === 'succeeded') {
         state.users = payload.users;
       } else if (payload.status === 'failed') {
-        state.error = payload.error;
+        // state.error = payload.error;
       }
       return state;
     },

@@ -1,45 +1,41 @@
-import axios from '../../utils/axios';
 import apiAction from '../apiAction';
-import accountSlice from '../slices/auth';
+import authSlice from '../slices/auth';
 
 export const initialize = () => (dispatch) => {
-  dispatch(accountSlice.actions.initialize());
+  console.log('initialize');
+  dispatch(authSlice.actions.initialize());
 };
 
-export const loginUser = (data) => async (dispatch) => {
+export const loginUser = (data) => {
+  console.log('loginUser', data);
   const apiInfo = {
     data,
     method: 'POST',
     url: 'http://localhost:3128/auth/login',
   };
-  await apiAction(dispatch, accountSlice.actions.loginUser, apiInfo);
+  return apiAction(authSlice.actions.loginUser, apiInfo);
 };
 
 export const registerUser = async (data) => {
-  try {
-    const apiInfo = {
-      data,
-      method: 'POST',
-      url: 'http://localhost:3128/auth/register',
-    };
-    return await axios(apiInfo);
-  } catch (err) {
-    console.error(err);
-  }
+  console.log('registerUser', data);
+  const apiInfo = {
+    data,
+    method: 'POST',
+    url: 'http://localhost:3128/auth/register',
+  };
+  return apiAction(authSlice.actions.registerUser, apiInfo);
 };
 
-export const fetchProfile = () => async (dispatch) => {
-  try {
-    const apiInfo = {
-      method: 'GET',
-      url: 'http://localhost:3128/auth/profile',
-    };
-    await apiAction(dispatch, accountSlice.actions.fetchProfile, apiInfo);
-  } catch (err) {
-    console.error(err);
-  }
+export const fetchProfile = () => {
+  console.log('fetchProfile');
+  const apiInfo = {
+    method: 'GET',
+    url: 'http://localhost:3128/auth/profile',
+  };
+  return apiAction(authSlice.actions.fetchProfile, apiInfo);
 };
 
 export const logoutUser = () => (dispatch) => {
-  dispatch(accountSlice.actions.logoutUser());
+  console.log('logoutUser');
+  dispatch(authSlice.actions.logoutUser());
 };

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 import useRefMounted from '../../../hooks/useRefMounted';
-import { fetchProfile, loginUser } from '../../../redux/actions/auth';
+import { loginUser } from '../../../redux/actions/auth';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -23,10 +23,9 @@ const LoginForm = () => {
         password: Yup.string().max(255).required(t('The password field is required')),
         userID: Yup.string().max(255).required(t('The userID field is required')),
       })}
-      onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
+      onSubmit={(values, { setErrors, setStatus, setSubmitting }) => {
         try {
-          await dispatch(loginUser({ password: values.password, userID: values.userID }));
-          await dispatch(fetchProfile());
+          dispatch(loginUser({ password: values.password, userID: values.userID }));
 
           if (isMountedRef.current) {
             setStatus({ success: true });

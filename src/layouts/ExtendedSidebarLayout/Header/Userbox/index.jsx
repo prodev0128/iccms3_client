@@ -135,7 +135,7 @@ const HeaderUserbox = () => {
   const handleLogout = async () => {
     try {
       handleClose();
-      await dispatch(logoutUser());
+      dispatch(logoutUser());
       navigate('/');
     } catch (err) {
       console.error(err);

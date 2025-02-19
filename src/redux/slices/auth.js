@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { removeAccessToken, setAccessToken } from '../../utils/axios';
-import { JWT_SECRET, verify } from '../../utils/jwt';
+import { verify } from '../../utils/jwt';
 
 const initialUser = { avatar: '', jobTitle: '', name: '' };
 
 const initialState = {
   authenticated: false,
   error: '',
+  initialized: false,
   status: 'idle',
   user: initialUser,
 };
@@ -24,23 +25,20 @@ const authSlice = createSlice({
       } else if (status === 'failed') {
         state.error = error;
       }
-      return state;
     },
     initialize: (state) => {
-      try {
-        const accessToken = window.localStorage.getItem('accessToken');
-        if (accessToken && verify(accessToken, JWT_SECRET)) {
-          setAccessToken(accessToken);
-          state.authenticated = true;
-        } else {
-          removeAccessToken(accessToken);
-          state.authenticated = false;
-        }
-      } catch {
+      const accessToken = window.localStorage.getItem('accessToken');
+      if (accessToken && verify(accessToken)) {
+        setAccessToken(accessToken);
+        state.authenticated = true;
+      } else {
+        removeAccessToken(accessToken);
         state.authenticated = false;
       }
+      state.initialized = true;
     },
-    loginUser: (state, { payload }) => {
+    loginUser: (state, action) => {
+      const payload = action.payload;
       const { data, error, status } = payload;
       state.status = status;
       if (status === 'succeeded') {
@@ -49,13 +47,19 @@ const authSlice = createSlice({
       } else if (status === 'failed') {
         state.error = error;
       }
-      return state;
     },
     logoutUser: (state) => {
       removeAccessToken();
       state.authenticated = false;
       state.status = 'succeeded';
       state.user = initialUser;
+    },
+    registerUser: (state, { payload }) => {
+      const { error, status } = payload;
+      state.status = status;
+      if (status === 'failed') {
+        state.error = error;
+      }
     },
   },
 });
