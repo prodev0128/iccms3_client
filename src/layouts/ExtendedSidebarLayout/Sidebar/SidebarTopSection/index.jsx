@@ -22,7 +22,7 @@ import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation, useNavigate } from 'react-router';
 
-import useAuth from '../../../../hooks/useAuth';
+import useAuth from '../../../../redux/selectors/useAuth';
 
 const MenuUserBox = styled(Box)(
   ({ theme }) => `

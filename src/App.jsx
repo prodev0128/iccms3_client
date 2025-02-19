@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux';
 import { useRoutes } from 'react-router';
 
 import Authenticated from './components/Authenticated';
-import useAuth from './hooks/useAuth';
 import { fetchProfile, initialize } from './redux/actions/auth';
+import useAuth from './redux/selectors/useAuth';
 import router from './router';
 import ThemeProvider from './themes/ThemeProvider';
 

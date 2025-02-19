@@ -2,6 +2,7 @@ import { alpha, Box, lighten, useTheme } from '@mui/material';
 import { Outlet } from 'react-router';
 
 import ThemeSettings from '../../components/ThemeSettings';
+import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
@@ -48,6 +49,7 @@ const ExtendedSidebarLayout = () => {
           <Box display="block">
             <Outlet />
           </Box>
+          <Footer />
           <ThemeSettings />
         </Box>
       </Box>

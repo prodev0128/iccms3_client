@@ -20,8 +20,8 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
-import useAuth from '../../../../hooks/useAuth';
 import { logoutUser } from '../../../../redux/actions/auth';
+import useAuth from '../../../../redux/selectors/useAuth';
 
 const UserBoxButton = styled(IconButton)(
   ({ theme }) => `

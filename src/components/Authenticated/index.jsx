@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Navigate, useLocation } from 'react-router';
 
-import useAuth from '../../hooks/useAuth';
 import Login from '../../pages/Auth/Login';
+import useAuth from '../../redux/selectors/useAuth';
 
 const Authenticated = ({ children }) => {
   const auth = useAuth();

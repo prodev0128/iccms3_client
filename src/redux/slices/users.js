@@ -10,14 +10,14 @@ const usersSlice = createSlice({
   initialState,
   name: 'users',
   reducers: {
-    login: (state, { payload }) => {
-      state.status = payload.status;
-      if (payload.status === 'succeeded') {
-        state.users = payload.users;
-      } else if (payload.status === 'failed') {
-        // state.error = payload.error;
+    fetchUsers: (state, { payload }) => {
+      const { data, error, status } = payload;
+      state.status = status;
+      if (status === 'succeeded') {
+        state.users = data;
+      } else if (status === 'failed') {
+        state.error = error;
       }
-      return state;
     },
   },
 });
