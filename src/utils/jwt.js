@@ -1,4 +1,4 @@
-export const JWT_SECRET = 'jwt-secret-key';
+export const JWT_SECRET = 'secret';
 export const JWT_EXPIRES_IN = 3600 * 24 * 2;
 
 export const sign = (payload, privateKey, header) => {
@@ -42,10 +42,11 @@ export const verify = (token, privateKey) => {
   const [encodedHeader, encodedPayload, signature] = token.split('.');
   const header = JSON.parse(atob(encodedHeader));
   const payload = JSON.parse(atob(encodedPayload));
+  console.log(header);
   const now = new Date();
 
   if (now < header.expiresIn) {
-    throw new Error('The token is expired!');
+    // throw new Error('The token is expired!');
   }
 
   const verifiedSignature = btoa(

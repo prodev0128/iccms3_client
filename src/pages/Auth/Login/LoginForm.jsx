@@ -1,53 +1,38 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  CircularProgress,
-  FormControlLabel,
-  FormHelperText,
-  Link,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Button, CircularProgress, TextField } from '@mui/material';
 import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink } from 'react-router';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
-import useAuth from '../../../hooks/useAuth';
 import useRefMounted from '../../../hooks/useRefMounted';
+import { fetchProfile, loginUser } from '../../../redux/actions/auth';
 
-const LoginJWT = () => {
-  const { login } = useAuth();
+const LoginForm = () => {
+  const dispatch = useDispatch();
   const isMountedRef = useRefMounted();
   const { t } = useTranslation();
 
   return (
     <Formik
       initialValues={{
-        email: 'demo@example.com',
-        password: 'TokyoPass1@',
+        password: 'password',
         submit: null,
-        terms: true,
+        userID: 'admin',
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string()
-          .email(t('The email provided should be a valid email address'))
-          .max(255)
-          .required(t('The email field is required')),
         password: Yup.string().max(255).required(t('The password field is required')),
-        terms: Yup.boolean().oneOf([true], t('You must agree to our terms and conditions')),
+        userID: Yup.string().max(255).required(t('The userID field is required')),
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
-          await login(values.email, values.password);
+          await dispatch(loginUser({ password: values.password, userID: values.userID }));
+          await dispatch(fetchProfile());
 
           if (isMountedRef.current) {
             setStatus({ success: true });
             setSubmitting(false);
           }
         } catch (err) {
-          console.error(err);
           if (isMountedRef.current) {
             setStatus({ success: false });
             setErrors({ submit: err.message });
@@ -61,13 +46,13 @@ const LoginJWT = () => {
           <TextField
             autoFocus
             fullWidth
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
-            label={t('Email address')}
+            error={Boolean(touched.userID && errors.userID)}
+            helperText={touched.userID && errors.userID}
+            label={t('User ID')}
             margin="normal"
-            name="email"
-            type="email"
-            value={values.email}
+            name="userID"
+            type="text"
+            value={values.userID}
             variant="outlined"
             onBlur={handleBlur}
             onChange={handleChange}
@@ -85,27 +70,6 @@ const LoginJWT = () => {
             onBlur={handleBlur}
             onChange={handleChange}
           />
-          <Box alignItems="center" display="flex" justifyContent="space-between">
-            <FormControlLabel
-              control={<Checkbox checked={values.terms} color="primary" name="terms" onChange={handleChange} />}
-              label={
-                <>
-                  <Typography variant="body2">
-                    {t('I accept the')}{' '}
-                    <Link component="a" href="#">
-                      {t('terms and conditions')}
-                    </Link>
-                    .
-                  </Typography>
-                </>
-              }
-            />
-            <Link component={RouterLink} to="/account/recover-password">
-              <b>{t('Lost password?')}</b>
-            </Link>
-          </Box>
-
-          {Boolean(touched.terms && errors.terms) && <FormHelperText error>{errors.terms}</FormHelperText>}
 
           <Button
             fullWidth
@@ -127,4 +91,4 @@ const LoginJWT = () => {
   );
 };
 
-export default LoginJWT;
+export default LoginForm;

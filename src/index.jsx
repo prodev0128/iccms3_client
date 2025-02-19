@@ -1,6 +1,4 @@
 import './index.css';
-import './mocks';
-// import './utils/chart';
 import 'nprogress/nprogress.css';
 
 import React from 'react';
@@ -10,11 +8,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router';
 
 import App from './App';
-import { AuthProvider } from './contexts/JWTAuthContext';
 import { SidebarProvider } from './contexts/SidebarContext';
 import ScrollTop from './hooks/useScrollTop';
+import store from './redux/store';
 import reportWebVitals from './reportWebVitals';
-import store from './store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,9 +21,7 @@ root.render(
         <SidebarProvider>
           <BrowserRouter>
             <ScrollTop />
-            <AuthProvider>
-              <App />
-            </AuthProvider>
+            <App />
           </BrowserRouter>
         </SidebarProvider>
       </Provider>

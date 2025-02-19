@@ -1,7 +1,5 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
-import AuthContext from '../contexts/JWTAuthContext';
-
-const useAuth = () => useContext(AuthContext);
+const useAuth = () => useSelector((state) => state.auth);
 
 export default useAuth;

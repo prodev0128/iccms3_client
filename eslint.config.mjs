@@ -26,7 +26,7 @@ export default [
     },
     rules: {
       'import/no-unresolved': 'off',
-      'no-unused-vars': ['warn', { args: 'after-used', argsIgnorePattern: '^_', ignoreRestSiblings: true }],
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', ignoreRestSiblings: true }],
       'prefer-arrow/prefer-arrow-functions': [
         'error',
         {

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import AxiosMockAdapter from 'axios-mock-adapter';
 
 const axiosInt = axios.create();
 
@@ -8,6 +7,14 @@ axiosInt.interceptors.response.use(
   (error) => Promise.reject((error.response && error.response.data) || 'There is an error!'),
 );
 
-export const mock = new AxiosMockAdapter(axiosInt, { delayResponse: 0 });
+export const setAccessToken = (accessToken) => {
+  localStorage.setItem('accessToken', accessToken);
+  axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+};
+
+export const removeAccessToken = () => {
+  localStorage.removeItem('accessToken');
+  delete axios.defaults.headers.common.Authorization;
+};
 
 export default axiosInt;

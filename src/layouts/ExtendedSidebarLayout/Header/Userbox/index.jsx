@@ -19,10 +19,12 @@ import {
 import { useRef, useState } from 'react';
 import Chart from 'react-apexcharts';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import Text from '../../../../components/Text';
 import useAuth from '../../../../hooks/useAuth';
+import { logoutUser } from '../../../../redux/actions/auth';
 
 const DotLegend = styled('span')(
   ({ theme }) => `
@@ -111,12 +113,13 @@ const UserBoxDescription = styled(Typography)(
 );
 
 const HeaderUserbox = () => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const theme = useTheme();
 
   const navigate = useNavigate();
 
-  const { logout, user } = useAuth();
+  const { user } = useAuth();
 
   const ref = useRef(null);
   const [isOpen, setOpen] = useState(false);
@@ -132,7 +135,7 @@ const HeaderUserbox = () => {
   const handleLogout = async () => {
     try {
       handleClose();
-      await logout();
+      await dispatch(logoutUser());
       navigate('/');
     } catch (err) {
       console.error(err);

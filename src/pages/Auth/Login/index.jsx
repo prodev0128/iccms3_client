@@ -1,19 +1,11 @@
-import { Alert, Box, Card, Container, Link, styled, Tooltip, Typography } from '@mui/material';
+import { Box, Card, Container, Link, styled, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router';
 
 import Logo from '../../../components/Logo';
 import Scrollbar from '../../../components/Scrollbar';
-import useAuth from '../../../hooks/useAuth';
-import JWTLogin from './LoginJWT';
-
-const icons = {
-  Amplify: '/static/images/logo/amplify.svg',
-  Auth0: '/static/images/logo/auth0.svg',
-  FirebaseAuth: '/static/images/logo/firebase.svg',
-  JWT: '/static/images/logo/jwt.svg',
-};
+import LoginForm from './LoginForm';
 
 const Content = styled(Box)(
   () => `
@@ -51,23 +43,6 @@ const SidebarContent = styled(Box)(
 `,
 );
 
-const CardImg = styled(Card)(
-  ({ theme }) => `
-    border-radius: 100%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border: 1px solid ${theme.colors.alpha.black[10]};
-    transition: ${theme.transitions.create(['border'])};
-    position: absolute;
-
-    &:hover {
-      border-color: ${theme.colors.primary.main};
-    }
-`,
-);
-
 const TypographyH1 = styled(Typography)(
   ({ theme }) => `
     font-size: ${theme.typography.pxToRem(33)};
@@ -75,7 +50,6 @@ const TypographyH1 = styled(Typography)(
 );
 
 const LoginCover = () => {
-  const { method } = useAuth();
   const { t } = useTranslation();
 
   return (
@@ -101,61 +75,6 @@ const LoginCover = () => {
                 >
                   {t('International Communication Censor Management System')}
                 </TypographyH1>
-                <Box
-                  sx={{
-                    height: 120,
-                    position: 'relative',
-                    width: 300,
-                  }}
-                >
-                  <Tooltip arrow placement="top" title="Auth0">
-                    <CardImg
-                      sx={{
-                        height: 80,
-                        left: -20,
-                        top: -40,
-                        width: 80,
-                      }}
-                    >
-                      <img alt="Auth0" src={icons.Auth0} width={40} />
-                    </CardImg>
-                  </Tooltip>
-                  <Tooltip arrow placement="top" title="Firebase">
-                    <CardImg
-                      sx={{
-                        height: 90,
-                        left: 70,
-                        width: 90,
-                      }}
-                    >
-                      <img alt="Firebase" src={icons.FirebaseAuth} width={50} />
-                    </CardImg>
-                  </Tooltip>
-                  <Tooltip arrow placement="top" title="JSON Web Token">
-                    <CardImg
-                      sx={{
-                        height: 110,
-                        left: 170,
-                        top: -30,
-                        width: 110,
-                      }}
-                    >
-                      <img alt="JSON Web Token" src={icons.JWT} width={80} />
-                    </CardImg>
-                  </Tooltip>
-                  <Tooltip arrow placement="top" title="AWS Amplify">
-                    <CardImg
-                      sx={{
-                        bottom: 0,
-                        height: 70,
-                        right: -55,
-                        width: 70,
-                      }}
-                    >
-                      <img alt="Amplify" src={icons.Amplify} width={50} />
-                    </CardImg>
-                  </Tooltip>
-                </Box>
                 <Typography
                   variant="subtitle1"
                   sx={{
@@ -214,7 +133,7 @@ const LoginCover = () => {
                   {t('Fill in the fields below to sign into your account.')}
                 </Typography>
               </Box>
-              {method === 'JWT' && <JWTLogin />}
+              <LoginForm />
               <Box my={4}>
                 <Typography color="text.primary" component="span" fontWeight="bold" variant="subtitle2">
                   {t('Don’t have an account, yet?')}
@@ -223,13 +142,6 @@ const LoginCover = () => {
                   <b>Sign up here</b>
                 </Link>
               </Box>
-              {method !== 'Auth0' && (
-                <Tooltip title={t('Used only for the live preview demonstration !')}>
-                  <Alert severity="warning">
-                    Use <b>demo@example.com</b> and password <b>TokyoPass1@</b>
-                  </Alert>
-                </Tooltip>
-              )}
             </Card>
           </Container>
         </MainContent>

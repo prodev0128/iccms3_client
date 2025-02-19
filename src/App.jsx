@@ -4,15 +4,12 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { SnackbarProvider } from 'notistack';
 import { useRoutes } from 'react-router';
 
-import AppInit from './components/AppInit';
 import Authenticated from './components/Authenticated';
-import useAuth from './hooks/useAuth';
 import router from './router';
 import ThemeProvider from './themes/ThemeProvider';
 
 const App = () => {
   const content = useRoutes(router);
-  const auth = useAuth();
 
   return (
     <ThemeProvider>
@@ -25,7 +22,7 @@ const App = () => {
           }}
         >
           <CssBaseline />
-          {auth.isInitialized ? <Authenticated>{content}</Authenticated> : <AppInit />}
+          <Authenticated>{content}</Authenticated>
         </SnackbarProvider>
       </LocalizationProvider>
     </ThemeProvider>
