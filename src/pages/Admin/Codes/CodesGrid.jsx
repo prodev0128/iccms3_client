@@ -38,24 +38,21 @@ const CodesGrid = ({ currentCodeOption }) => {
   const rows = useMemo(() => codes.map((code) => ({ ...code, id: code._id })), [codes]);
 
   const columns = [
-    { field: 'no', headerName: 'No', width: 150 },
     { field: 'type', headerName: 'Type', width: 150 },
     { field: 'name', headerName: 'Name', width: 150 },
     { field: 'value', headerName: 'Value', width: 150 },
   ];
 
   return (
-    <>
-      <DataGrid
-        columns={columns}
-        loading={status === 'loading'}
-        rowCount={totalCount}
-        rows={rows}
-        onFilterModelChange={setFilterModel}
-        onPaginationModelChange={setPaginationModel}
-        onSortModelChange={setSortModel}
-      />
-    </>
+    <DataGrid
+      columns={columns}
+      loading={status === 'loading'}
+      rowCount={totalCount}
+      rows={rows}
+      onFilterModelChange={setFilterModel}
+      onPaginationModelChange={setPaginationModel}
+      onSortModelChange={setSortModel}
+    />
   );
 };
 

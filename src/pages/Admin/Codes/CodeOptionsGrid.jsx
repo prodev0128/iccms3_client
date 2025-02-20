@@ -35,26 +35,23 @@ const CodeOptionsGrid = ({ setCurrentCodeOption }) => {
   const rows = useMemo(() => codeOptions.map((codeOption) => ({ ...codeOption, id: codeOption._id })), [codeOptions]);
 
   const columns = [
-    { field: 'no', headerName: 'No', width: 150 },
     { field: 'type', headerName: 'Type', width: 150 },
     { field: 'name', headerName: 'Name', width: 150 },
   ];
 
   return (
-    <>
-      <DataGrid
-        columns={columns}
-        loading={status === 'loading'}
-        rowCount={totalCount}
-        rows={rows}
-        onFilterModelChange={setFilterModel}
-        onPaginationModelChange={setPaginationModel}
-        onSortModelChange={setSortModel}
-        onRowClick={(data) => {
-          setCurrentCodeOption(data.row);
-        }}
-      />
-    </>
+    <DataGrid
+      columns={columns}
+      loading={status === 'loading'}
+      rowCount={totalCount}
+      rows={rows}
+      onFilterModelChange={setFilterModel}
+      onPaginationModelChange={setPaginationModel}
+      onSortModelChange={setSortModel}
+      onRowClick={(data) => {
+        setCurrentCodeOption(data.row);
+      }}
+    />
   );
 };
 

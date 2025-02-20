@@ -1,6 +1,7 @@
 import { CssBaseline } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
+import { DialogsProvider } from '@toolpad/core';
 import { SnackbarProvider } from 'notistack';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -46,8 +47,10 @@ const App = () => {
             vertical: 'top',
           }}
         >
-          <CssBaseline />
-          <Authenticated>{content}</Authenticated>
+          <DialogsProvider>
+            <CssBaseline />
+            <Authenticated>{content}</Authenticated>
+          </DialogsProvider>
         </SnackbarProvider>
       </LocalizationProvider>
     </ThemeProvider>
