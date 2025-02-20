@@ -82,10 +82,8 @@ const Sidebar = () => {
         anchor={theme.direction === 'rtl' ? 'right' : 'left'}
         elevation={9}
         open={sidebarToggle}
+        sx={{ boxShadow: `${theme.sidebar.boxShadow}` }}
         variant="temporary"
-        sx={{
-          boxShadow: `${theme.sidebar.boxShadow}`,
-        }}
         onClose={closeSidebar}
       >
         <SidebarWrapper

@@ -31,10 +31,10 @@ const LoginForm = () => {
             setStatus({ success: true });
             setSubmitting(false);
           }
-        } catch (err) {
+        } catch (error) {
           if (isMountedRef.current) {
             setStatus({ success: false });
-            setErrors({ submit: err.message });
+            setErrors({ submit: error.message });
             setSubmitting(false);
           }
         }

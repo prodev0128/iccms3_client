@@ -5,7 +5,7 @@ import { alpha, Badge, Box, IconButton, styled, Tooltip, tooltipClasses, useThem
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate } from 'react-router';
 
-import useAuth from '../../../../redux/selectors/useAuth';
+import { useAuth } from '../../../../redux/selectors';
 
 const LightTooltip = styled(({ className, ...props }) => <Tooltip {...props} classes={{ popper: className }} />)(
   ({ theme }) => ({
@@ -32,8 +32,8 @@ const SidebarFooter = () => {
     try {
       await logout();
       navigate('/');
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   };
 

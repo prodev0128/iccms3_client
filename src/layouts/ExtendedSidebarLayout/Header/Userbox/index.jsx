@@ -21,7 +21,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { logoutUser } from '../../../../redux/actions/auth';
-import useAuth from '../../../../redux/selectors/useAuth';
+import { useAuth } from '../../../../redux/selectors';
 
 const UserBoxButton = styled(IconButton)(
   ({ theme }) => `
@@ -124,8 +124,8 @@ const HeaderUserbox = () => {
       handleClose();
       dispatch(logoutUser());
       navigate('/');
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   };
 

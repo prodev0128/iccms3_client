@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Navigate, useLocation } from 'react-router';
 
 import Login from '../../pages/Auth/Login';
-import useAuth from '../../redux/selectors/useAuth';
+import { useAuth } from '../../redux/selectors';
 
 const Authenticated = ({ children }) => {
   const auth = useAuth();

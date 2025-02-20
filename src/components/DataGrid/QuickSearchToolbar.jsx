@@ -9,7 +9,12 @@ const QuickSearchToolbar = () => {
         pb: 0,
       }}
     >
-      <GridToolbarQuickFilter />
+      <GridToolbarQuickFilter
+        placeholder={'Search............'}
+        sx={{
+          '& .MuiInputBase-root': { height: '50px', padding: '10px' },
+        }}
+      />
     </Box>
   );
 };

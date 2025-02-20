@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import PageTitleWrapper from '../../../components/PageTitleWrapper';
 import PageHeader from './PageHeader';
-import UserGrid from './UserGrid';
+import UsersGrid from './UsersGrid';
 
 const Users = () => {
   return (
@@ -14,8 +14,8 @@ const Users = () => {
       <PageTitleWrapper>
         <PageHeader />
       </PageTitleWrapper>
-      <Box sx={{ height: 600, width: '100%' }}>
-        <UserGrid />
+      <Box sx={{ height: 600, p: 1, width: '100%' }}>
+        <UsersGrid />
       </Box>
     </>
   );

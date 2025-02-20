@@ -22,7 +22,7 @@ import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation, useNavigate } from 'react-router';
 
-import useAuth from '../../../../redux/selectors/useAuth';
+import { useAuth } from '../../../../redux/selectors';
 
 const MenuUserBox = styled(Box)(
   ({ theme }) => `
@@ -84,8 +84,8 @@ const SidebarTopSection = () => {
       handleClose();
       await logout();
       navigate('/');
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   };
 

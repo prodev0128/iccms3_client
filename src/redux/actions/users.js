@@ -1,5 +1,5 @@
 import apiAction from '../apiAction';
-import authSlice from '../slices/users';
+import usersSlice from '../slices/users';
 
 export const fetchUsers = (params) => {
   const apiInfo = {
@@ -7,5 +7,5 @@ export const fetchUsers = (params) => {
     params,
     url: 'http://localhost:3128/users',
   };
-  return apiAction(authSlice.actions.fetchUsers, apiInfo);
+  return apiAction(usersSlice.actions.fetchUsers, apiInfo);
 };
