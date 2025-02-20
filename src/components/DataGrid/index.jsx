@@ -1,9 +1,14 @@
 import { DataGridPro } from '@mui/x-data-grid-pro';
+import { LicenseInfo } from '@mui/x-license';
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 
 import QuickSearchToolbar from '../../components/DataGrid/QuickSearchToolbar';
 import { initialPaginationModel, pageSizes } from '../../utils/utils';
+
+LicenseInfo.setLicenseKey(
+  'e0d9bb8070ce0054c9d9ecb6e82cb58fTz0wLEU9MzI0NzIxNDQwMDAwMDAsUz1wcmVtaXVtLExNPXBlcnBldHVhbCxLVj0y',
+);
 
 const DataGrid = ({ columns, ...props }) => {
   const [selectedRows, setSelectedRows] = useState([]);
