@@ -11,7 +11,7 @@ const SnackbarManager = () => {
     if (status === 'idle') {
       return;
     }
-    enqueueSnackbar(notification.message, {
+    enqueueSnackbar(notification.message || '', {
       autoHideDuration: notification.duration || 3000,
       variant: notification.type || 'success',
     });

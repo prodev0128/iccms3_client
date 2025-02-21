@@ -4,20 +4,24 @@ const notificationMiddleware = (store) => (next) => (action) => {
   if (!action.payload || !action.payload.status) {
     return next(action);
   }
-  const { error, status } = action.payload;
+  const { data, error, status } = action.payload;
   const type = `${action.type}/${status}`;
-  console.log('type', type);
+  let notification = {};
 
   switch (type) {
-    case 'auth/fetchProfile/success':
-      store.dispatch(notificationSlice.actions.setNotification({ message: 'Login Successfully', type: 'success' }));
+    case 'auth/login/success':
+      notification = { message: 'Login Successfully', type: 'success' };
       break;
     case 'auth/login/failed':
-      store.dispatch(notificationSlice.actions.setNotification({ message: error, type: 'error' }));
+      notification = { message: error, type: 'error' };
+      break;
+    case 'auth/fetchProfile/success':
+      notification = { message: `${data.name}, Congratulations!!!`, type: 'success' };
       break;
     default:
-      break;
+      return next(action);
   }
+  store.dispatch(notificationSlice.actions.setNotification(notification));
 
   return next(action);
 };

@@ -5,7 +5,7 @@ export const initialize = () => (dispatch) => {
   dispatch(authSlice.actions.initialize());
 };
 
-export const loginUser = (data) => {
+export const login = (data) => {
   const apiInfo = {
     data,
     method: 'POST',
@@ -14,7 +14,7 @@ export const loginUser = (data) => {
   return apiAction(authSlice.actions.login, apiInfo);
 };
 
-export const registerUser = async (data) => {
+export const register = async (data) => {
   const apiInfo = {
     data,
     method: 'POST',
@@ -31,6 +31,6 @@ export const fetchProfile = () => {
   return apiAction(authSlice.actions.fetchProfile, apiInfo);
 };
 
-export const logoutUser = () => (dispatch) => {
+export const logout = () => (dispatch) => {
   dispatch(authSlice.actions.logout());
 };

@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
-import { logoutUser } from '../../../../redux/actions/auth';
+import { logout } from '../../../../redux/actions/auth';
 import { useAuth } from '../../../../redux/selectors';
 
 const UserBoxButton = styled(IconButton)(
@@ -122,7 +122,7 @@ const HeaderUserbox = () => {
   const handleLogout = async () => {
     try {
       handleClose();
-      dispatch(logoutUser());
+      dispatch(logout());
       navigate('/');
     } catch (error) {
       console.error(error);
