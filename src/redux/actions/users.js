@@ -9,3 +9,20 @@ export const fetchUsers = (params) => {
   };
   return apiAction(usersSlice.actions.fetchUsers, apiInfo);
 };
+
+export const updateUser = (id, data) => {
+  const apiInfo = {
+    data,
+    method: 'PATCH',
+    url: `http://localhost:3128/users/${id}`,
+  };
+  return apiAction(usersSlice.actions.updateUser, apiInfo);
+};
+
+export const removeUser = (id) => {
+  const apiInfo = {
+    method: 'DELETE',
+    url: `http://localhost:3128/users/${id}`,
+  };
+  return apiAction(usersSlice.actions.removeUser, apiInfo);
+};

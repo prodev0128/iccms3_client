@@ -1,33 +1,44 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useDialogs } from '@toolpad/core';
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { Check, Delete, DoDisturb, Edit, Key } from '@mui/icons-material';
 
 import GridAction from '../../../../components/DataGrid/GridAction';
 
-const useColumns = () => {
-  const dispatch = useDispatch();
-  const dialogs = useDialogs();
-
-  const removeUser = useCallback(
-    async (data) => {
-      const confirm = await dialogs.confirm('Are you sure you want to delete this user?');
-      if (!confirm) {
-        return;
-      }
-      console.log(data);
-    },
-    [dispatch, dialogs],
-  );
-
+const useColumns = (actions) => {
   return [
     {
       field: 'actions',
       getActions: (params) => [
-        <GridAction icon={<DeleteIcon />} key="Delete" label="Delete" onClick={() => removeUser(params.row)} />,
+        <GridAction
+          icon={<Check />}
+          key="Allow"
+          label="Allow"
+          visible={!params.row.isActive}
+          onClick={() => actions.allowUser(params.row)}
+        />,
+        <GridAction
+          icon={<DoDisturb />}
+          key="Disallow"
+          label="Disallow"
+          visible={params.row.isActive}
+          onClick={() => actions.disallowUser(params.row)}
+        />,
+        <GridAction
+          visible
+          icon={<Key />}
+          key="Reset"
+          label="Reset Password"
+          onClick={() => actions.resetPassword(params.row)}
+        />,
+        <GridAction visible icon={<Edit />} key="Edit" label="Edit" onClick={() => actions.editUser(params.row)} />,
+        <GridAction
+          visible
+          icon={<Delete />}
+          key="Delete"
+          label="Delete"
+          onClick={() => actions.removeUser(params.row)}
+        />,
       ],
       type: 'actions',
-      width: 100,
+      width: 160,
     },
     { field: 'userID', headerName: 'User ID', width: 150 },
     { field: 'name', headerName: 'Name', width: 150 },

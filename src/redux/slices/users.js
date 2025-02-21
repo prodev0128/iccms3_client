@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { enqueueSnackbar } from 'notistack';
 
 const initialState = {
   error: '',
@@ -18,6 +19,20 @@ const usersSlice = createSlice({
         state.users = data.users;
         state.totalCount = data.totalCount;
       } else if (status === 'failed') {
+        state.error = error;
+      }
+    },
+    removeUser: (state, { payload }) => {
+      const { error, status } = payload;
+      state.status = status;
+      if (status === 'failed') {
+        state.error = error;
+      }
+    },
+    updateUser: (state, { payload }) => {
+      const { error, status } = payload;
+      state.status = status;
+      if (status === 'failed') {
         state.error = error;
       }
     },

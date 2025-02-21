@@ -7,7 +7,6 @@ export const initialize = () => (dispatch) => {
 };
 
 export const loginUser = (data) => {
-  console.log('loginUser', data);
   const apiInfo = {
     data,
     method: 'POST',
