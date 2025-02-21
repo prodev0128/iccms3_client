@@ -9,6 +9,7 @@ import { useRoutes } from 'react-router';
 
 import Authenticated from './components/Authenticated';
 import useDebounceCallback from './hooks/useDebounceCallback';
+import SnackbarManager from './pages/SnackbarManager';
 import { fetchProfile, initialize } from './redux/actions/auth';
 import { useAuth } from './redux/selectors';
 import router from './router';
@@ -41,12 +42,13 @@ const App = () => {
     <ThemeProvider>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <SnackbarProvider
-          maxSnack={10}
+          maxSnack={20}
           anchorOrigin={{
             horizontal: 'right',
             vertical: 'top',
           }}
         >
+          <SnackbarManager />
           <DialogsProvider>
             <CssBaseline />
             <Authenticated>{content}</Authenticated>

@@ -3,11 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import { removeAccessToken, setAccessToken } from '../../utils/axios';
 import { verify } from '../../utils/jwt';
 
-const initialUser = { avatar: '', jobTitle: '', name: '' };
+const initialUser = {
+  avatar: '',
+  jobTitle: '',
+  name: '',
+};
 
 const initialState = {
   authenticated: false,
-  error: '',
   initialized: false,
   status: 'idle',
   user: initialUser,
@@ -18,14 +21,13 @@ const authSlice = createSlice({
   name: 'auth',
   reducers: {
     fetchProfile: (state, { payload }) => {
-      const { data, error, status } = payload;
+      const { data, status } = payload;
       state.status = status;
-      if (status === 'succeeded') {
+      if (status === 'success') {
         state.user = data;
       } else if (status === 'failed') {
-        state.error = error;
-        state.user = initialUser;
         state.authenticated = false;
+        state.user = initialUser;
       }
     },
     initialize: (state) => {
@@ -39,29 +41,24 @@ const authSlice = createSlice({
       }
       state.initialized = true;
     },
-    loginUser: (state, action) => {
+    login: (state, action) => {
       const payload = action.payload;
-      const { data, error, status } = payload;
+      const { data, status } = payload;
       state.status = status;
-      if (status === 'succeeded') {
+      if (status === 'success') {
         setAccessToken(data.accessToken);
         state.authenticated = true;
-      } else if (status === 'failed') {
-        state.error = error;
       }
     },
-    logoutUser: (state) => {
+    logout: (state) => {
       removeAccessToken();
       state.authenticated = false;
-      state.status = 'succeeded';
+      state.status = 'success';
       state.user = initialUser;
     },
-    registerUser: (state, { payload }) => {
-      const { error, status } = payload;
+    register: (state, { payload }) => {
+      const { status } = payload;
       state.status = status;
-      if (status === 'failed') {
-        state.error = error;
-      }
     },
   },
 });

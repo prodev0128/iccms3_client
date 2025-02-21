@@ -7,7 +7,7 @@ const GridAction = ({ icon, label, onClick, visible }) => {
     <GridActionsCellItem
       icon={<Tooltip title={label}>{icon}</Tooltip>}
       label={label}
-      sx={{ display: visible ? 'block' : 'none' }}
+      sx={{ display: visible ? 'flex' : 'none' }}
       onClick={onClick}
     />
   );

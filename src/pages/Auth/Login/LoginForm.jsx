@@ -4,12 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
-import useRefMounted from '../../../hooks/useRefMounted';
 import { loginUser } from '../../../redux/actions/auth';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const isMountedRef = useRefMounted();
   const { t } = useTranslation();
 
   return (
@@ -24,19 +22,15 @@ const LoginForm = () => {
         userID: Yup.string().max(255).required(t('The userID field is required')),
       })}
       onSubmit={(values, { setErrors, setStatus, setSubmitting }) => {
+        setSubmitting(true);
         try {
           dispatch(loginUser({ password: values.password, userID: values.userID }));
-
-          if (isMountedRef.current) {
-            setStatus({ success: true });
-            setSubmitting(false);
-          }
+          setStatus({ success: true });
         } catch (error) {
-          if (isMountedRef.current) {
-            setStatus({ success: false });
-            setErrors({ submit: error.message });
-            setSubmitting(false);
-          }
+          setStatus({ success: false });
+          setErrors({ submit: error.message });
+        } finally {
+          setSubmitting(false);
         }
       }}
     >

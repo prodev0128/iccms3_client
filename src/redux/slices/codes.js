@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   codes: [],
-  error: '',
   status: 'idle',
   totalCount: 0,
 };
@@ -12,13 +11,11 @@ const codesSlice = createSlice({
   name: 'codes',
   reducers: {
     fetchCodes: (state, { payload }) => {
-      const { data, error, status } = payload;
+      const { data, status } = payload;
       state.status = status;
-      if (status === 'succeeded') {
+      if (status === 'success') {
         state.codes = data.codes;
         state.totalCount = data.totalCount;
-      } else if (status === 'failed') {
-        state.error = error;
       }
     },
   },

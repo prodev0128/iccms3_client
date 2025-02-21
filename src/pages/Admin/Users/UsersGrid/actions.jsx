@@ -1,5 +1,4 @@
 import { useDialogs } from '@toolpad/core';
-import { useSnackbar } from 'notistack';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -11,7 +10,6 @@ import UserDialog from '../Dialogs/UserDialog';
 const useActions = (paginationModel, filterModel, sortModel) => {
   const dispatch = useDispatch();
   const dialogs = useDialogs();
-  const { enqueueSnackbar } = useSnackbar();
 
   const debouncedFetchUsers = useDebounceCallback(
     useCallback(async () => {
@@ -37,9 +35,8 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       }
       await dispatch(removeUser(data.id));
       await debouncedFetchUsers();
-      enqueueSnackbar('Remove User Successfully.', { variant: 'success' });
     },
-    [dispatch, debouncedFetchUsers, dialogs, enqueueSnackbar],
+    [dispatch, debouncedFetchUsers, dialogs],
   );
 
   const handleEditUser = useCallback(
@@ -50,9 +47,8 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       }
       await dispatch(updateUser(data.id, updatedUser));
       await debouncedFetchUsers();
-      enqueueSnackbar('Edit User Successfully.', { variant: 'success' });
     },
-    [dispatch, debouncedFetchUsers, dialogs, enqueueSnackbar],
+    [dispatch, debouncedFetchUsers, dialogs],
   );
 
   const handleResetPassword = useCallback(
@@ -66,27 +62,24 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       }
       await dispatch(updateUser(data.id, updatedUser));
       await debouncedFetchUsers();
-      enqueueSnackbar('Reset Password User Successfully.', { variant: 'success' });
     },
-    [dispatch, debouncedFetchUsers, dialogs, enqueueSnackbar],
+    [dispatch, debouncedFetchUsers, dialogs],
   );
 
   const handleAllowUser = useCallback(
     async (data) => {
       await dispatch(updateUser(data.id, { isActive: true }));
       await debouncedFetchUsers();
-      enqueueSnackbar('Allow User Successfully.', { variant: 'success' });
     },
-    [dispatch, debouncedFetchUsers, enqueueSnackbar],
+    [dispatch, debouncedFetchUsers],
   );
 
   const handleDisallowUser = useCallback(
     async (data) => {
       await dispatch(updateUser(data.id, { isActive: false }));
       await debouncedFetchUsers();
-      enqueueSnackbar('Disallow User Successfully.', { variant: 'success' });
     },
-    [dispatch, debouncedFetchUsers, enqueueSnackbar],
+    [dispatch, debouncedFetchUsers],
   );
 
   useEffect(() => {
