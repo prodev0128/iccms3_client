@@ -9,12 +9,12 @@ axiosInt.interceptors.response.use(
 
 export const setAccessToken = (accessToken) => {
   localStorage.setItem('accessToken', accessToken);
-  axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+  axiosInt.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 };
 
 export const removeAccessToken = () => {
   localStorage.removeItem('accessToken');
-  delete axios.defaults.headers.common.Authorization;
+  delete axiosInt.defaults.headers.common.Authorization;
 };
 
 export default axiosInt;
