@@ -3,7 +3,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
-import { deleteUser, fetchUsers, resetPassword, updateUser } from '../../../../redux/actions/users';
+import { createUser, deleteUser, fetchUsers, resetPassword, updateUser } from '../../../../redux/actions/users';
 import { debounceTime } from '../../../../utils/utils';
 import UserDialog from '../Dialogs/UserDialog';
 
@@ -24,6 +24,26 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     debounceTime,
   );
 
+  const handleCreateUser = useCallback(async () => {
+    const createdUser = await dialogs.open(UserDialog, { type: 'Create' });
+    if (!createdUser) {
+      return;
+    }
+    console.log('createdUser', createdUser);
+    await dispatch(createUser(createdUser));
+  }, [dispatch, dialogs]);
+
+  const handleUpdateUser = useCallback(
+    async (data) => {
+      const updatedUser = await dialogs.open(UserDialog, { data, type: 'Edit' });
+      if (!updatedUser) {
+        return;
+      }
+      await dispatch(updateUser(data.id, updatedUser));
+    },
+    [dispatch, dialogs],
+  );
+
   const handleDeleteUser = useCallback(
     async (data) => {
       const confirm = await dialogs.confirm('Are you sure you want to delete this user?', {
@@ -35,18 +55,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       }
       await dispatch(deleteUser(data.id));
     },
-    [dispatch, debouncedFetchUsers, dialogs],
-  );
-
-  const handleEditUser = useCallback(
-    async (data) => {
-      const updatedUser = await dialogs.open(UserDialog, { data, type: 'Edit' });
-      if (!updatedUser) {
-        return;
-      }
-      await dispatch(updateUser(data.id, updatedUser));
-    },
-    [dispatch, debouncedFetchUsers, dialogs],
+    [dispatch, dialogs],
   );
 
   const handleResetPassword = useCallback(
@@ -60,21 +69,21 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       }
       await dispatch(resetPassword(data.id));
     },
-    [dispatch, debouncedFetchUsers, dialogs],
+    [dispatch, dialogs],
   );
 
   const handleAllowUser = useCallback(
     async (data) => {
       await dispatch(updateUser(data.id, { isActive: true }));
     },
-    [dispatch, debouncedFetchUsers],
+    [dispatch],
   );
 
   const handleDisallowUser = useCallback(
     async (data) => {
       await dispatch(updateUser(data.id, { isActive: false }));
     },
-    [dispatch, debouncedFetchUsers],
+    [dispatch],
   );
 
   useEffect(() => {
@@ -82,12 +91,13 @@ const useActions = (paginationModel, filterModel, sortModel) => {
   }, [debouncedFetchUsers]);
 
   return {
-    allowUser: handleAllowUser,
-    deleteUser: handleDeleteUser,
-    disallowUser: handleDisallowUser,
-    editUser: handleEditUser,
     fetchUsers: debouncedFetchUsers,
+    createUser: handleCreateUser,
+    updateUser: handleUpdateUser,
+    deleteUser: handleDeleteUser,
     resetPassword: handleResetPassword,
+    allowUser: handleAllowUser,
+    disallowUser: handleDisallowUser,
   };
 };
 

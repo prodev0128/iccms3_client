@@ -1,18 +1,17 @@
 import { DataGridPro } from '@mui/x-data-grid-pro';
 import { LicenseInfo } from '@mui/x-license';
 import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-import QuickSearchToolbar from '../../components/DataGrid/QuickSearchToolbar';
+// import QuickSearchToolbar from '../../components/DataGrid/QuickSearchToolbar';
 import { initialPaginationModel, pageSizes } from '../../utils/utils';
+import GridCustomToolbar from './GridCustomToolbar';
 
 LicenseInfo.setLicenseKey(
   'e0d9bb8070ce0054c9d9ecb6e82cb58fTz0wLEU9MzI0NzIxNDQwMDAwMDAsUz1wcmVtaXVtLExNPXBlcnBldHVhbCxLVj0y',
 );
 
-const DataGrid = ({ columns, ...props }) => {
-  const [selectedRows, setSelectedRows] = useState([]);
-
+const DataGrid = ({ columns, toolbar, ...props }) => {
   const newColumns = useMemo(
     () => [
       {
@@ -36,40 +35,41 @@ const DataGrid = ({ columns, ...props }) => {
   );
 
   return (
-    <DataGridPro
-      checkboxSelection
-      pagination
-      columns={newColumns}
-      filterMode="server"
-      pageSizeOptions={pageSizes}
-      paginationMode="server"
-      selectionModel={selectedRows}
-      slots={{ toolbar: QuickSearchToolbar }}
-      sortingMode="server"
-      initialState={{
-        pagination: {
-          paginationModel: initialPaginationModel,
-        },
-        pinnedColumns: { left: ['no'] },
-      }}
-      slotProps={{
-        loadingOverlay: {
-          noRowsVariant: 'skeleton',
-          variant: 'circular-progress',
-        },
-        toolbar: {
-          showQuickFilter: true,
-        },
-      }}
-      onRowClick={(params) => setSelectedRows([params.id])}
-      onRowSelectionModelChange={(newSelection) => setSelectedRows(newSelection)}
-      {...props}
-    />
+    <>
+      <DataGridPro
+        checkboxSelection
+        pagination
+        columns={newColumns}
+        filterMode="server"
+        pageSizeOptions={pageSizes}
+        paginationMode="server"
+        slots={{ toolbar: () => <GridCustomToolbar toolbar={toolbar} /> }}
+        sortingMode="server"
+        initialState={{
+          pagination: {
+            paginationModel: initialPaginationModel,
+          },
+          pinnedColumns: { left: ['no'] },
+        }}
+        slotProps={{
+          loadingOverlay: {
+            noRowsVariant: 'skeleton',
+            variant: 'circular-progress',
+          },
+        }}
+        {...props}
+        // apiRef={apiRef}
+        // selectionModel={selectedRows}
+        // onRowClick={(params) => apiRef.selectedRows([params.id])}
+        // onRowSelectionModelChange={(newSelection) => setSelectedRows(newSelection)}
+      />
+    </>
   );
 };
 
 DataGrid.propTypes = {
   columns: PropTypes.array.isRequired,
+  toolbar: PropTypes.element.isRequired,
 };
 
 export default DataGrid;

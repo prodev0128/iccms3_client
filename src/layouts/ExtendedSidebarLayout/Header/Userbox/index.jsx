@@ -1,5 +1,4 @@
-import ChevronRightTwoToneIcon from '@mui/icons-material/ChevronRightTwoTone';
-import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
+import { ChevronRightTwoTone, LockOpenTwoTone } from '@mui/icons-material';
 import {
   alpha,
   Avatar,
@@ -168,7 +167,7 @@ const HeaderUserbox = () => {
         <MenuListWrapperPrimary disablePadding>
           <MenuItem>
             <ListItemText primary={<Typography variant="h5">{t('My account')}</Typography>} />
-            <ChevronRightTwoToneIcon
+            <ChevronRightTwoTone
               sx={{
                 color: `${theme.colors.alpha.black[30]}`,
                 opacity: 0.8,
@@ -177,7 +176,7 @@ const HeaderUserbox = () => {
           </MenuItem>
           <MenuItem>
             <ListItemText primary={<Typography variant="h5">{t('Active tasks')}</Typography>} />
-            <ChevronRightTwoToneIcon
+            <ChevronRightTwoTone
               sx={{
                 color: `${theme.colors.alpha.black[30]}`,
                 opacity: 0.8,
@@ -188,7 +187,7 @@ const HeaderUserbox = () => {
         <Divider />
         <Box m={1}>
           <Button fullWidth color="primary" onClick={handleLogout}>
-            <LockOpenTwoToneIcon
+            <LockOpenTwoTone
               sx={{
                 mr: 1,
               }}

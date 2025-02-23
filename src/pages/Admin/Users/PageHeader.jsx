@@ -1,6 +1,4 @@
-import AssignmentIndTwoToneIcon from '@mui/icons-material/AssignmentIndTwoTone';
-import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
-import KeyboardArrowDownTwoToneIcon from '@mui/icons-material/KeyboardArrowDownTwoTone';
+import { AssignmentIndTwoTone, DocumentScannerTwoTone, KeyboardArrowDownTwoTone } from '@mui/icons-material';
 import { alpha, Avatar, Box, Button, lighten, Menu, MenuItem, styled, Typography } from '@mui/material';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -57,7 +55,7 @@ const PageHeader = () => {
     >
       <Box alignItems="center" display="flex">
         <AvatarPageTitle variant="rounded">
-          <AssignmentIndTwoToneIcon fontSize="large" />
+          <AssignmentIndTwoTone fontSize="large" />
         </AvatarPageTitle>
         <Box>
           <Typography gutterBottom component="h3" variant="h3">
@@ -68,7 +66,7 @@ const PageHeader = () => {
       </Box>
       <Box mt={{ md: 0, xs: 3 }}>
         <Button
-          endIcon={<KeyboardArrowDownTwoToneIcon fontSize="small" />}
+          endIcon={<KeyboardArrowDownTwoTone fontSize="small" />}
           ref={actionRef1}
           variant="outlined"
           sx={{
@@ -105,7 +103,7 @@ const PageHeader = () => {
           ))}
         </Menu>
 
-        <Button startIcon={<DocumentScannerTwoToneIcon />} variant="contained">
+        <Button startIcon={<DocumentScannerTwoTone />} variant="contained">
           {t('Export')}
         </Button>
       </Box>

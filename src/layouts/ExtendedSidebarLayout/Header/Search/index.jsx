@@ -1,11 +1,13 @@
-import AppSettingsAltTwoToneIcon from '@mui/icons-material/AppSettingsAltTwoTone';
-import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
-import ContactSupportTwoToneIcon from '@mui/icons-material/ContactSupportTwoTone';
-import DashboardTwoToneIcon from '@mui/icons-material/DashboardTwoTone';
-import KeyboardArrowRightTwoToneIcon from '@mui/icons-material/KeyboardArrowRightTwoTone';
-import RestoreTwoToneIcon from '@mui/icons-material/RestoreTwoTone';
-import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
-import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
+import {
+  AppSettingsAltTwoTone,
+  CloseTwoTone,
+  ContactSupportTwoTone,
+  DashboardTwoTone,
+  KeyboardArrowRightTwoTone,
+  RestoreTwoTone,
+  SearchTwoTone,
+  StarTwoTone,
+} from '@mui/icons-material';
 import {
   alpha,
   Box,
@@ -13,7 +15,7 @@ import {
   CircularProgress,
   Dialog,
   Divider,
-  Grid,
+  Grid2,
   IconButton,
   InputBase,
   Link,
@@ -178,7 +180,7 @@ const HeaderSearch = () => {
     <>
       <Tooltip arrow title={t('Search')}>
         <IconButtonWrapper color="primary" onClick={handleClickOpen}>
-          <SearchTwoToneIcon fontSize="small" />
+          <SearchTwoTone fontSize="small" />
         </IconButtonWrapper>
       </Tooltip>
 
@@ -195,7 +197,7 @@ const HeaderSearch = () => {
           <form onSubmit={submitSearch}>
             <Box alignItems="center" display="flex">
               <Box alignItems="center" display="flex" flexGrow={1}>
-                <SearchTwoToneIcon
+                <SearchTwoTone
                   sx={{
                     color: theme.colors.secondary.main,
                     ml: 2,
@@ -244,7 +246,7 @@ const HeaderSearch = () => {
                   p: 1,
                 }}
               >
-                <ContactSupportTwoToneIcon
+                <ContactSupportTwoTone
                   sx={{
                     fontSize: theme.typography.pxToRem(18),
                     mr: 0.8,
@@ -288,7 +290,7 @@ const HeaderSearch = () => {
                         <Fragment key={result.title}>
                           <ListButton>
                             <Box alignItems="flex-start" display="flex">
-                              <RestoreTwoToneIcon
+                              <RestoreTwoTone
                                 fontSize="small"
                                 sx={{
                                   mr: 1,
@@ -296,7 +298,7 @@ const HeaderSearch = () => {
                               />
                               <Typography>{result.title}</Typography>
                             </Box>
-                            <KeyboardArrowRightTwoToneIcon fontSize="small" />
+                            <KeyboardArrowRightTwoTone fontSize="small" />
                           </ListButton>
                         </Fragment>
                       ))}
@@ -322,7 +324,7 @@ const HeaderSearch = () => {
                     </Typography>
                     <ListButton>
                       <Box alignItems="center" display="flex">
-                        <RestoreTwoToneIcon
+                        <RestoreTwoTone
                           fontSize="small"
                           sx={{
                             mr: 1,
@@ -333,19 +335,19 @@ const HeaderSearch = () => {
                       <Box>
                         <Tooltip arrow placement="top" title={t('Save this search')}>
                           <IconButton color="primary" size="small">
-                            <StarTwoToneIcon fontSize="small" />
+                            <StarTwoTone fontSize="small" />
                           </IconButton>
                         </Tooltip>
                         <Tooltip arrow placement="top" title={t('Remove this search from history')}>
                           <IconButton color="error" size="small">
-                            <CloseTwoToneIcon fontSize="small" />
+                            <CloseTwoTone fontSize="small" />
                           </IconButton>
                         </Tooltip>
                       </Box>
                     </ListButton>
                     <ListButton>
                       <Box alignItems="center" display="flex">
-                        <RestoreTwoToneIcon
+                        <RestoreTwoTone
                           fontSize="small"
                           sx={{
                             mr: 1,
@@ -356,12 +358,12 @@ const HeaderSearch = () => {
                       <Box>
                         <Tooltip arrow placement="top" title={t('Save this search')}>
                           <IconButton color="primary" size="small">
-                            <StarTwoToneIcon fontSize="small" />
+                            <StarTwoTone fontSize="small" />
                           </IconButton>
                         </Tooltip>
                         <Tooltip arrow placement="top" title={t('Remove this search from history')}>
                           <IconButton color="error" size="small">
-                            <CloseTwoToneIcon fontSize="small" />
+                            <CloseTwoTone fontSize="small" />
                           </IconButton>
                         </Tooltip>
                       </Box>
@@ -377,7 +379,7 @@ const HeaderSearch = () => {
                     </Typography>
                     <ListButton>
                       <Box alignItems="center" display="flex">
-                        <StarTwoToneIcon
+                        <StarTwoTone
                           fontSize="small"
                           sx={{
                             mr: 1,
@@ -388,7 +390,7 @@ const HeaderSearch = () => {
                       <Box>
                         <Tooltip arrow placement="top" title={t('Remove this search from favourites')}>
                           <IconButton color="error" size="small">
-                            <CloseTwoToneIcon fontSize="small" />
+                            <CloseTwoTone fontSize="small" />
                           </IconButton>
                         </Tooltip>
                       </Box>
@@ -400,10 +402,10 @@ const HeaderSearch = () => {
                     />
                     <Typography variant="h5">{t('Popular searches')}</Typography>
                     <Box p={4}>
-                      <Grid container spacing={3}>
-                        <Grid item sm={6} xs={12}>
+                      <Grid2 container spacing={3}>
+                        <Grid2 size={{ sm: 6, xs: 12 }}>
                           <Box alignItems="center" display="flex" fontSize={13} mb={1}>
-                            <DashboardTwoToneIcon
+                            <DashboardTwoTone
                               sx={{
                                 color: theme.colors.primary.main,
                                 fontSize: theme.typography.pxToRem(18),
@@ -458,10 +460,10 @@ const HeaderSearch = () => {
                               </Link>
                             </ListItem>
                           </List>
-                        </Grid>
-                        <Grid item sm={6} xs={12}>
+                        </Grid2>
+                        <Grid2 size={{ sm: 6, xs: 12 }}>
                           <Box alignItems="center" display="flex" fontSize={13} mb={1}>
-                            <AppSettingsAltTwoToneIcon
+                            <AppSettingsAltTwoTone
                               sx={{
                                 color: theme.colors.primary.main,
                                 fontSize: theme.typography.pxToRem(18),
@@ -516,8 +518,8 @@ const HeaderSearch = () => {
                               </Link>
                             </ListItem>
                           </List>
-                        </Grid>
-                      </Grid>
+                        </Grid2>
+                      </Grid2>
                     </Box>
                   </Box>
                 </Scrollbar>

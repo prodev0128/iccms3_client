@@ -1,6 +1,4 @@
-import EventTwoToneIcon from '@mui/icons-material/EventTwoTone';
-import PowerSettingsNewTwoToneIcon from '@mui/icons-material/PowerSettingsNewTwoTone';
-import SmsTwoToneIcon from '@mui/icons-material/SmsTwoTone';
+import { EventTwoTone, PowerSettingsNewTwoTone, SmsTwoTone } from '@mui/icons-material';
 import { alpha, Badge, Box, IconButton, styled, Tooltip, tooltipClasses, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate } from 'react-router';
@@ -61,7 +59,7 @@ const SidebarFooter = () => {
             transition: `${theme.transitions.create(['all'])}`,
           }}
         >
-          <EventTwoToneIcon fontSize="small" />
+          <EventTwoTone fontSize="small" />
         </IconButton>
       </LightTooltip>
       <LightTooltip arrow placement="top" title={t('Messenger')}>
@@ -96,7 +94,7 @@ const SidebarFooter = () => {
               transition: `${theme.transitions.create(['all'])}`,
             }}
           >
-            <SmsTwoToneIcon fontSize="small" />
+            <SmsTwoTone fontSize="small" />
           </IconButton>
         </Badge>
       </LightTooltip>
@@ -114,7 +112,7 @@ const SidebarFooter = () => {
           }}
           onClick={handleLogout}
         >
-          <PowerSettingsNewTwoToneIcon fontSize="small" />
+          <PowerSettingsNewTwoTone fontSize="small" />
         </IconButton>
       </LightTooltip>
     </Box>

@@ -1,8 +1,10 @@
-import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
-import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
-import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
-import UnfoldMoreTwoToneIcon from '@mui/icons-material/UnfoldMoreTwoTone';
+import {
+  AccountBoxTwoTone,
+  AccountTreeTwoTone,
+  InboxTwoTone,
+  LockOpenTwoTone,
+  UnfoldMoreTwoTone,
+} from '@mui/icons-material';
 import {
   alpha,
   Avatar,
@@ -142,7 +144,7 @@ const SidebarTopSection = () => {
         }}
         onClick={handleOpen}
       >
-        <UnfoldMoreTwoToneIcon fontSize="small" />
+        <UnfoldMoreTwoTone fontSize="small" />
       </IconButton>
       <Popover
         disableScrollLock
@@ -193,7 +195,7 @@ const SidebarTopSection = () => {
               handleClose();
             }}
           >
-            <AccountBoxTwoToneIcon fontSize="small" />
+            <AccountBoxTwoTone fontSize="small" />
             <ListItemText primary={t('Profile')} />
           </ListItem>
           <ListItem
@@ -204,7 +206,7 @@ const SidebarTopSection = () => {
               handleClose();
             }}
           >
-            <InboxTwoToneIcon fontSize="small" />
+            <InboxTwoTone fontSize="small" />
             <ListItemText primary={t('Inbox')} />
           </ListItem>
           <ListItem
@@ -215,14 +217,14 @@ const SidebarTopSection = () => {
               handleClose();
             }}
           >
-            <AccountTreeTwoToneIcon fontSize="small" />
+            <AccountTreeTwoTone fontSize="small" />
             <ListItemText primary={t('Projects')} />
           </ListItem>
         </List>
         <Divider />
         <Box m={1}>
           <Button fullWidth color="primary" onClick={handleLogout}>
-            <LockOpenTwoToneIcon
+            <LockOpenTwoTone
               sx={{
                 mr: 1,
               }}

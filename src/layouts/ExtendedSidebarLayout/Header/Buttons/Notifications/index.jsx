@@ -1,9 +1,11 @@
-import AccessTimeTwoToneIcon from '@mui/icons-material/AccessTimeTwoTone';
-import ArrowForwardTwoToneIcon from '@mui/icons-material/ArrowForwardTwoTone';
-import AssignmentIndTwoToneIcon from '@mui/icons-material/AssignmentIndTwoTone';
-import BusinessCenterTwoToneIcon from '@mui/icons-material/BusinessCenterTwoTone';
-import CheckTwoToneIcon from '@mui/icons-material/CheckTwoTone';
-import NotificationsActiveTwoToneIcon from '@mui/icons-material/NotificationsActiveTwoTone';
+import {
+  AccessTimeTwoTone,
+  ArrowForwardTwoTone,
+  AssignmentIndTwoTone,
+  BusinessCenterTwoTone,
+  CheckTwoTone,
+  NotificationsActiveTwoTone,
+} from '@mui/icons-material';
 import Timeline from '@mui/lab/Timeline';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
@@ -284,7 +286,7 @@ const HeaderNotifications = () => {
             }}
             onClick={handleOpen}
           >
-            <NotificationsActiveTwoToneIcon fontSize="small" />
+            <NotificationsActiveTwoTone fontSize="small" />
           </IconButtonWrapper>
         </Badge>
       </Tooltip>
@@ -387,7 +389,7 @@ const HeaderNotifications = () => {
                         top: `-${theme.spacing(0.5)}`,
                       }}
                     >
-                      <BusinessCenterTwoToneIcon />
+                      <BusinessCenterTwoTone />
                     </TimelineDot>
                     <TimelineConnector />
                   </TimelineSeparator>
@@ -487,7 +489,7 @@ const HeaderNotifications = () => {
                         top: `-${theme.spacing(0.5)}`,
                       }}
                     >
-                      <AssignmentIndTwoToneIcon />
+                      <AssignmentIndTwoTone />
                     </TimelineDot>
                     <TimelineConnector />
                   </TimelineSeparator>
@@ -625,7 +627,7 @@ const HeaderNotifications = () => {
                   <Box alignItems="center" display="flex" mt={1.5}>
                     <LabelPrimary>{t('On hold')}</LabelPrimary>
                     <Text flex color="error">
-                      <AccessTimeTwoToneIcon
+                      <AccessTimeTwoTone
                         fontSize="small"
                         sx={{
                           ml: 1,
@@ -653,7 +655,7 @@ const HeaderNotifications = () => {
                   }}
                 >
                   <AvatarSuccess>
-                    <CheckTwoToneIcon />
+                    <CheckTwoTone />
                   </AvatarSuccess>
                   <Typography gutterBottom variant="h4">
                     {t('Nothing to report')}
@@ -696,7 +698,7 @@ const HeaderNotifications = () => {
         >
           <Button
             color="primary"
-            endIcon={<ArrowForwardTwoToneIcon />}
+            endIcon={<ArrowForwardTwoTone />}
             variant="contained"
             sx={{
               '&:active': {

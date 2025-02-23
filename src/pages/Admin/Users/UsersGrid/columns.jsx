@@ -1,37 +1,43 @@
-import { Check, Delete, DoDisturb, Edit, Key } from '@mui/icons-material';
+import { CheckTwoTone, DeleteTwoTone, DoDisturbTwoTone, EditTwoTone, KeyTwoTone } from '@mui/icons-material';
 
-import GridAction from '../../../../components/DataGrid/GridAction';
+import GridActionItem from '../../../../components/DataGrid/GridActionItem';
 
 const useColumns = (actions) => {
   return [
     {
       field: 'actions',
       getActions: (params) => [
-        <GridAction
-          icon={<Check />}
+        <GridActionItem
+          icon={<CheckTwoTone />}
           key="Allow"
           label="Allow"
           visible={!params.row.isActive}
           onClick={() => actions.allowUser(params.row)}
         />,
-        <GridAction
-          icon={<DoDisturb />}
+        <GridActionItem
+          icon={<DoDisturbTwoTone />}
           key="Disallow"
           label="Disallow"
           visible={params.row.isActive}
           onClick={() => actions.disallowUser(params.row)}
         />,
-        <GridAction
+        <GridActionItem
           visible
-          icon={<Key />}
+          icon={<KeyTwoTone />}
           key="Reset"
           label="Reset Password"
           onClick={() => actions.resetPassword(params.row)}
         />,
-        <GridAction visible icon={<Edit />} key="Edit" label="Edit" onClick={() => actions.editUser(params.row)} />,
-        <GridAction
+        <GridActionItem
           visible
-          icon={<Delete />}
+          icon={<EditTwoTone />}
+          key="Edit"
+          label="Edit"
+          onClick={() => actions.updateUser(params.row)}
+        />,
+        <GridActionItem
+          visible
+          icon={<DeleteTwoTone />}
           key="Delete"
           label="Delete"
           onClick={() => actions.deleteUser(params.row)}

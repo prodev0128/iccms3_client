@@ -1,6 +1,4 @@
-import CheckTwoToneIcon from '@mui/icons-material/CheckTwoTone';
-import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
-import UnfoldMoreTwoToneIcon from '@mui/icons-material/UnfoldMoreTwoTone';
+import { CheckTwoTone, SettingsTwoTone, UnfoldMoreTwoTone } from '@mui/icons-material';
 import { Box, Button, Divider, Menu, MenuItem, Popover, Stack, styled, Tooltip, Typography } from '@mui/material';
 import Fab from '@mui/material/Fab';
 import { useContext, useRef, useState } from 'react';
@@ -232,7 +230,7 @@ const ThemeSettings = () => {
       <ThemeSettingsButton>
         <Tooltip arrow title={t('Theme Settings')}>
           <Fab aria-label="add" color="primary" ref={ref} onClick={handleOpen}>
-            <SettingsTwoToneIcon />
+            <SettingsTwoTone />
           </Fab>
         </Tooltip>
         <Popover
@@ -266,7 +264,7 @@ const ThemeSettings = () => {
               aria-expanded={open ? 'true' : undefined}
               aria-haspopup="true"
               color="primary"
-              endIcon={<UnfoldMoreTwoToneIcon />}
+              endIcon={<UnfoldMoreTwoTone />}
               size="large"
               variant="outlined"
               onClick={openMenu}
@@ -336,7 +334,7 @@ const ThemeSettings = () => {
                   >
                     {theme === 'PureLightTheme' && (
                       <CheckSelected>
-                        <CheckTwoToneIcon />
+                        <CheckTwoTone />
                       </CheckSelected>
                     )}
                     <ColorSchemeWrapper className="colorSchemeWrapper pureLight">
@@ -354,7 +352,7 @@ const ThemeSettings = () => {
                   >
                     {theme === 'GreyGooseTheme' && (
                       <CheckSelected>
-                        <CheckTwoToneIcon />
+                        <CheckTwoTone />
                       </CheckSelected>
                     )}
                     <ColorSchemeWrapper className="colorSchemeWrapper greyGoose">
@@ -372,7 +370,7 @@ const ThemeSettings = () => {
                   >
                     {theme === 'PurpleFlowTheme' && (
                       <CheckSelected>
-                        <CheckTwoToneIcon />
+                        <CheckTwoTone />
                       </CheckSelected>
                     )}
                     <ColorSchemeWrapper className="colorSchemeWrapper purpleFlow">
@@ -406,7 +404,7 @@ const ThemeSettings = () => {
                   >
                     {theme === 'NebulaFighterTheme' && (
                       <CheckSelected>
-                        <CheckTwoToneIcon />
+                        <CheckTwoTone />
                       </CheckSelected>
                     )}
                     <ColorSchemeWrapper className="colorSchemeWrapper nebulaFighter">
@@ -424,7 +422,7 @@ const ThemeSettings = () => {
                   >
                     {theme === 'GreenFieldsTheme' && (
                       <CheckSelected>
-                        <CheckTwoToneIcon />
+                        <CheckTwoTone />
                       </CheckSelected>
                     )}
                     <ColorSchemeWrapper className="colorSchemeWrapper greenFields">
@@ -442,7 +440,7 @@ const ThemeSettings = () => {
                   >
                     {theme === 'DarkSpacesTheme' && (
                       <CheckSelected>
-                        <CheckTwoToneIcon />
+                        <CheckTwoTone />
                       </CheckSelected>
                     )}
                     <ColorSchemeWrapper className="colorSchemeWrapper darkSpaces">

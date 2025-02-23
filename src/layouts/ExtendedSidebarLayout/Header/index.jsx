@@ -1,5 +1,4 @@
-import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
-import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
+import { CloseTwoTone, MenuTwoTone } from '@mui/icons-material';
 import {
   alpha,
   Box,
@@ -64,7 +63,7 @@ const Header = () => {
         {!isLgScreen && (
           <Tooltip arrow title="Toggle Menu">
             <IconButton color="primary" onClick={toggleSidebar}>
-              {!sidebarToggle ? <MenuTwoToneIcon fontSize="small" /> : <CloseTwoToneIcon fontSize="small" />}
+              {!sidebarToggle ? <MenuTwoTone fontSize="small" /> : <CloseTwoTone fontSize="small" />}
             </IconButton>
           </Tooltip>
         )}

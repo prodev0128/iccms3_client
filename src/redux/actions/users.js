@@ -10,7 +10,7 @@ export const fetchUsers = (params) => {
   return apiAction(usersSlice.actions.fetchUsers, apiInfo);
 };
 
-export const createUser = (id, data) => {
+export const createUser = (data) => {
   const apiInfo = {
     data,
     method: 'POST',

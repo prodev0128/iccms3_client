@@ -1,42 +1,44 @@
-import AdminPanelSettingsTwoToneIcon from '@mui/icons-material/AdminPanelSettingsTwoTone';
-import AssessmentTwoToneIcon from '@mui/icons-material/AssessmentTwoTone';
-import AssignmentIndTwoToneIcon from '@mui/icons-material/AssignmentIndTwoTone';
-import BarChartTwoToneIcon from '@mui/icons-material/BarChartTwoTone';
-import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
-import DonutLargeTwoToneIcon from '@mui/icons-material/DonutLargeTwoTone';
-import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
-import LocalPoliceTwoToneIcon from '@mui/icons-material/LocalPoliceTwoTone';
-import PolicyTwoToneIcon from '@mui/icons-material/PolicyTwoTone';
-import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
-import SupportTwoToneIcon from '@mui/icons-material/SupportTwoTone';
-import TransferWithinAStationTwoToneIcon from '@mui/icons-material/TransferWithinAStationTwoTone';
-import TroubleshootTwoToneIcon from '@mui/icons-material/TroubleshootTwoTone';
-import VerifiedUserTwoToneIcon from '@mui/icons-material/VerifiedUserTwoTone';
+import {
+  AdminPanelSettingsTwoTone,
+  AssessmentTwoTone,
+  AssignmentIndTwoTone,
+  BarChartTwoTone,
+  DesignServicesTwoTone,
+  DonutLargeTwoTone,
+  HomeTwoTone,
+  LocalPoliceTwoTone,
+  PolicyTwoTone,
+  SettingsTwoTone,
+  SupportTwoTone,
+  TransferWithinAStationTwoTone,
+  TroubleshootTwoTone,
+  VerifiedUserTwoTone,
+} from '@mui/icons-material';
 
 const menuItems = [
   {
     heading: 'Censor Pages',
     items: [
       {
-        icon: HomeTwoToneIcon,
+        icon: HomeTwoTone,
         link: '/',
         name: 'Home',
       },
       {
-        icon: AdminPanelSettingsTwoToneIcon,
+        icon: AdminPanelSettingsTwoTone,
         items: [
           {
-            icon: AssignmentIndTwoToneIcon,
+            icon: AssignmentIndTwoTone,
             link: '/admin/users',
             name: 'Users',
           },
           {
-            icon: DesignServicesTwoToneIcon,
+            icon: DesignServicesTwoTone,
             link: '/admin/codes',
             name: 'Codes',
           },
           {
-            icon: SettingsTwoToneIcon,
+            icon: SettingsTwoTone,
             link: '/admin/settings',
             name: 'Settings',
           },
@@ -45,20 +47,20 @@ const menuItems = [
         name: 'Administration',
       },
       {
-        icon: LocalPoliceTwoToneIcon,
+        icon: LocalPoliceTwoTone,
         items: [
           {
-            icon: PolicyTwoToneIcon,
+            icon: PolicyTwoTone,
             link: '/censor/receipt',
             name: 'Receipt',
           },
           {
-            icon: TransferWithinAStationTwoToneIcon,
+            icon: TransferWithinAStationTwoTone,
             link: '/censor/assign',
             name: 'Assign',
           },
           {
-            icon: VerifiedUserTwoToneIcon,
+            icon: VerifiedUserTwoTone,
             link: '/censor/process',
             name: 'Process',
           },
@@ -67,20 +69,20 @@ const menuItems = [
         name: 'Censor',
       },
       {
-        icon: AssessmentTwoToneIcon,
+        icon: AssessmentTwoTone,
         items: [
           {
-            icon: BarChartTwoToneIcon,
+            icon: BarChartTwoTone,
             link: '/stat/receipt',
             name: 'People',
           },
           {
-            icon: DonutLargeTwoToneIcon,
+            icon: DonutLargeTwoTone,
             link: '/stat/assign',
             name: 'Pub',
           },
           {
-            icon: TroubleshootTwoToneIcon,
+            icon: TroubleshootTwoTone,
             link: '/stat/process',
             name: 'Flow',
           },
@@ -94,12 +96,12 @@ const menuItems = [
     heading: 'Extra Pages',
     items: [
       {
-        icon: DesignServicesTwoToneIcon,
+        icon: DesignServicesTwoTone,
         link: '/overview',
         name: 'Overview',
       },
       {
-        icon: SupportTwoToneIcon,
+        icon: SupportTwoTone,
         link: '/docs',
         name: 'Documentation',
       },

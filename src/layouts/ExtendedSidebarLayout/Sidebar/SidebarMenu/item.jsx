@@ -1,5 +1,4 @@
-import ExpandLessTwoToneIcon from '@mui/icons-material/ExpandLessTwoTone';
-import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
+import { ExpandLessTwoTone, ExpandMoreTwoTone } from '@mui/icons-material';
 import { Badge, Button, Collapse, ListItem, styled, Tooltip, tooltipClasses } from '@mui/material';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -52,7 +51,7 @@ const SidebarMenuItem = ({
       <ListItem className="Mui-children" component="div" key={name} {...rest}>
         <Button
           className={clsx({ 'Mui-active': menuToggle })}
-          endIcon={menuToggle ? <ExpandLessTwoToneIcon /> : <ExpandMoreTwoToneIcon />}
+          endIcon={menuToggle ? <ExpandLessTwoTone /> : <ExpandMoreTwoTone />}
           startIcon={Icon && <Icon />}
           onClick={toggleMenu}
         >
