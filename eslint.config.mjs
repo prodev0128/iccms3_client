@@ -71,6 +71,7 @@ export default [
           separator: '\n',
         },
       ],
+      'sort/object-properties': 'off',
     },
     settings: { react: { version: 'detect' } },
   },

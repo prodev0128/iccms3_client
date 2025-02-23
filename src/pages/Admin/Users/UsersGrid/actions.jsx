@@ -3,7 +3,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
-import { fetchUsers, removeUser, updateUser } from '../../../../redux/actions/users';
+import { deleteUser, fetchUsers, resetPassword, updateUser } from '../../../../redux/actions/users';
 import { debounceTime } from '../../../../utils/utils';
 import UserDialog from '../Dialogs/UserDialog';
 
@@ -24,7 +24,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     debounceTime,
   );
 
-  const handleRemoveUser = useCallback(
+  const handleDeleteUser = useCallback(
     async (data) => {
       const confirm = await dialogs.confirm('Are you sure you want to delete this user?', {
         cancelText: 'No',
@@ -33,8 +33,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       if (!confirm) {
         return;
       }
-      await dispatch(removeUser(data.id));
-      await debouncedFetchUsers();
+      await dispatch(deleteUser(data.id));
     },
     [dispatch, debouncedFetchUsers, dialogs],
   );
@@ -46,22 +45,20 @@ const useActions = (paginationModel, filterModel, sortModel) => {
         return;
       }
       await dispatch(updateUser(data.id, updatedUser));
-      await debouncedFetchUsers();
     },
     [dispatch, debouncedFetchUsers, dialogs],
   );
 
   const handleResetPassword = useCallback(
     async (data) => {
-      const updatedUser = await dialogs.confirm('Are you sure you want to reset password for this user?', {
+      const confirm = await dialogs.confirm('Are you sure you want to reset password for this user?', {
         cancelText: 'Cancel',
         okText: 'Yes',
       });
-      if (!updatedUser) {
+      if (!confirm) {
         return;
       }
-      await dispatch(updateUser(data.id, updatedUser));
-      await debouncedFetchUsers();
+      await dispatch(resetPassword(data.id));
     },
     [dispatch, debouncedFetchUsers, dialogs],
   );
@@ -69,7 +66,6 @@ const useActions = (paginationModel, filterModel, sortModel) => {
   const handleAllowUser = useCallback(
     async (data) => {
       await dispatch(updateUser(data.id, { isActive: true }));
-      await debouncedFetchUsers();
     },
     [dispatch, debouncedFetchUsers],
   );
@@ -77,7 +73,6 @@ const useActions = (paginationModel, filterModel, sortModel) => {
   const handleDisallowUser = useCallback(
     async (data) => {
       await dispatch(updateUser(data.id, { isActive: false }));
-      await debouncedFetchUsers();
     },
     [dispatch, debouncedFetchUsers],
   );
@@ -88,10 +83,10 @@ const useActions = (paginationModel, filterModel, sortModel) => {
 
   return {
     allowUser: handleAllowUser,
+    deleteUser: handleDeleteUser,
     disallowUser: handleDisallowUser,
     editUser: handleEditUser,
     fetchUsers: debouncedFetchUsers,
-    removeUser: handleRemoveUser,
     resetPassword: handleResetPassword,
   };
 };

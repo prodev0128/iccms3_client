@@ -3,13 +3,10 @@ import { GridActionsCellItem } from '@mui/x-data-grid-pro';
 import PropTypes from 'prop-types';
 
 const GridAction = ({ icon, label, onClick, visible }) => {
-  return (
-    <GridActionsCellItem
-      icon={<Tooltip title={label}>{icon}</Tooltip>}
-      label={label}
-      sx={{ display: visible ? 'flex' : 'none' }}
-      onClick={onClick}
-    />
+  return visible ? (
+    <GridActionsCellItem icon={<Tooltip title={label}>{icon}</Tooltip>} label={label} onClick={onClick} />
+  ) : (
+    <></>
   );
 };
 

@@ -13,7 +13,7 @@ const LoginForm = () => {
   return (
     <Formik
       initialValues={{
-        password: 'password',
+        password: '12345678',
         submit: null,
         userID: 'admin',
       }}

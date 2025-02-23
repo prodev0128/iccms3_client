@@ -20,16 +20,6 @@ const authSlice = createSlice({
   initialState,
   name: 'auth',
   reducers: {
-    fetchProfile: (state, { payload }) => {
-      const { data, status } = payload;
-      state.status = status;
-      if (status === 'success') {
-        state.user = data;
-      } else if (status === 'failed') {
-        state.authenticated = false;
-        state.user = initialUser;
-      }
-    },
     initialize: (state) => {
       const accessToken = window.localStorage.getItem('accessToken');
       if (accessToken && verify(accessToken)) {
@@ -59,6 +49,16 @@ const authSlice = createSlice({
     register: (state, { payload }) => {
       const { status } = payload;
       state.status = status;
+    },
+    fetchProfile: (state, { payload }) => {
+      const { data, status } = payload;
+      state.status = status;
+      if (status === 'success') {
+        state.user = data;
+      } else if (status === 'failed') {
+        state.authenticated = false;
+        state.user = initialUser;
+      }
     },
   },
 });

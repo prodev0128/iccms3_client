@@ -18,11 +18,30 @@ const usersSlice = createSlice({
         state.totalCount = data.totalCount;
       }
     },
-    removeUser: (state, { payload }) => {
-      const { status } = payload;
+    createUser: (state, { payload }) => {
+      const { data, status } = payload;
       state.status = status;
+      if (status === 'success') {
+        state.users.push(data);
+        state.totalCount++;
+      }
     },
     updateUser: (state, { payload }) => {
+      const { data, status } = payload;
+      state.status = status;
+      if (status === 'success') {
+        state.users = state.users.map((user) => (user.id === data.id ? data : user));
+      }
+    },
+    deleteUser: (state, { payload }) => {
+      const { data, status } = payload;
+      state.status = status;
+      if (status === 'success') {
+        state.users = state.users.filter((user) => user.id !== data.id);
+        state.totalCount--;
+      }
+    },
+    resetPassword: (state, { payload }) => {
       const { status } = payload;
       state.status = status;
     },

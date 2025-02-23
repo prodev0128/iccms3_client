@@ -34,7 +34,7 @@ const useColumns = (actions) => {
           icon={<Delete />}
           key="Delete"
           label="Delete"
-          onClick={() => actions.removeUser(params.row)}
+          onClick={() => actions.deleteUser(params.row)}
         />,
       ],
       type: 'actions',

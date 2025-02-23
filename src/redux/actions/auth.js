@@ -14,6 +14,10 @@ export const login = (data) => {
   return apiAction(authSlice.actions.login, apiInfo);
 };
 
+export const logout = () => (dispatch) => {
+  dispatch(authSlice.actions.logout());
+};
+
 export const register = async (data) => {
   const apiInfo = {
     data,
@@ -29,8 +33,4 @@ export const fetchProfile = () => {
     url: 'http://localhost:3128/auth/profile',
   };
   return apiAction(authSlice.actions.fetchProfile, apiInfo);
-};
-
-export const logout = () => (dispatch) => {
-  dispatch(authSlice.actions.logout());
 };
