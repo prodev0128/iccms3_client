@@ -18,7 +18,7 @@ import { debounceTime } from './utils/utils';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { authenticated, initialized, user } = useAuth();
+  const { authenticated, initialized } = useAuth();
   const content = useRoutes(router);
 
   const debouncedFetchProfile = useDebounceCallback(
@@ -33,10 +33,10 @@ const App = () => {
   }, [dispatch, initialized]);
 
   useEffect(() => {
-    if (authenticated && !user.name) {
+    if (authenticated) {
       debouncedFetchProfile();
     }
-  }, [authenticated, user.name, debouncedFetchProfile]);
+  }, [authenticated, debouncedFetchProfile]);
 
   return (
     <ThemeProvider>
