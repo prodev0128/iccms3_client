@@ -22,7 +22,7 @@ const UsersGrid = () => {
       <CustomDataGrid
         columns={columns}
         loading={status === 'loading'}
-        placeholder="UserID/Name"
+        placeholder="User ID/Name"
         rowCount={totalCount}
         rows={users}
         toolbar={toolbar}

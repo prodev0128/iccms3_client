@@ -10,16 +10,16 @@ const CustomDialog = ({ children, confirmWithoutSaving = false, draggable = fals
 
   const onConfirmClose = useCallback(async () => {
     if (!confirmWithoutSaving) {
+      onClose();
       return;
     }
     const confirmed = await dialogs.confirm('Are you discard the changes?', {
       okText: 'Discard',
       cancelText: 'Cancel',
     });
-    if (!confirmed) {
-      return;
+    if (confirmed) {
+      onClose();
     }
-    onClose(null);
   }, [onClose, confirmWithoutSaving, dialogs]);
 
   return (
