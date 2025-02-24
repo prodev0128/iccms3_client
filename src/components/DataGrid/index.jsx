@@ -10,7 +10,7 @@ LicenseInfo.setLicenseKey(
   'e0d9bb8070ce0054c9d9ecb6e82cb58fTz0wLEU9MzI0NzIxNDQwMDAwMDAsUz1wcmVtaXVtLExNPXBlcnBldHVhbCxLVj0y',
 );
 
-const DataGrid = ({ columns, toolbar, ...props }) => {
+const DataGrid = ({ columns, placeholder, toolbar, ...props }) => {
   const apiRef = useGridApiRef();
 
   const newColumns = useMemo(
@@ -22,11 +22,11 @@ const DataGrid = ({ columns, toolbar, ...props }) => {
         filterable: false,
         editable: false,
         sortable: false,
-        renderCell: (params) => {
-          const pageSize = params.api.state.pagination.paginationModel.pageSize; // Get page size
-          const currentPage = params.api.state.pagination.paginationModel.page; // Get current page
-          const sortedRowIds = params.api.getSortedRowIds(); // Get all sorted row IDs
-          const rowIndex = sortedRowIds.indexOf(params.id); // Get index of the current row
+        renderCell: ({ api, id }) => {
+          const pageSize = api.state.pagination.paginationModel.pageSize; // Get page size
+          const currentPage = api.state.pagination.paginationModel.page; // Get current page
+          const sortedRowIds = api.getSortedRowIds(); // Get all sorted row IDs
+          const rowIndex = sortedRowIds.indexOf(id); // Get index of the current row
           return currentPage * pageSize + rowIndex + 1; // Adjusted to start from 1
         },
       },
@@ -45,7 +45,7 @@ const DataGrid = ({ columns, toolbar, ...props }) => {
         filterMode="server"
         pageSizeOptions={pageSizes}
         paginationMode="server"
-        slots={{ toolbar: () => <GridCustomToolbar toolbar={toolbar} /> }}
+        slots={{ toolbar: () => <GridCustomToolbar placeholder={placeholder} toolbar={toolbar} /> }}
         sortingMode="server"
         initialState={{
           pagination: {
@@ -61,7 +61,7 @@ const DataGrid = ({ columns, toolbar, ...props }) => {
         }}
         {...props}
         disableRowSelectionOnClick={true}
-        onRowClick={(params) => apiRef.current.setRowSelectionModel([params.id])}
+        onRowClick={({ id }) => apiRef.current.setRowSelectionModel([id])}
       />
     </>
   );
@@ -70,6 +70,7 @@ const DataGrid = ({ columns, toolbar, ...props }) => {
 DataGrid.propTypes = {
   columns: PropTypes.array.isRequired,
   toolbar: PropTypes.element.isRequired,
+  placeholder: PropTypes.string.isRequired,
 };
 
 export default DataGrid;

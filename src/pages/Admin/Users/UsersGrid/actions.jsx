@@ -29,7 +29,6 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     if (!createdUser) {
       return;
     }
-    console.log('createdUser', createdUser);
     await dispatch(createUser(createdUser));
   }, [dispatch, dialogs]);
 
