@@ -1,6 +1,8 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid2, TextField } from '@mui/material';
+import { Button, DialogActions, DialogContent, DialogTitle, Grid2, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
+
+import DraggableDialog from '../../../../components/DraggableDialog';
 
 const UserDialog = ({ onClose, open, payload }) => {
   const [data, setData] = useState(payload.data || {});
@@ -11,8 +13,10 @@ const UserDialog = ({ onClose, open, payload }) => {
   };
 
   return (
-    <Dialog fullWidth open={open} onClose={() => onClose(null)}>
-      <DialogTitle>{title}</DialogTitle>
+    <DraggableDialog open={open} onClose={() => onClose(null)}>
+      <DialogTitle id="draggable-dialog-title" style={{ cursor: 'move' }}>
+        {title}
+      </DialogTitle>
       <DialogContent>
         <Grid2 container spacing={2} sx={{ pt: 2 }}>
           <Grid2 size={{ sm: 6, xs: 12 }}>
@@ -43,7 +47,7 @@ const UserDialog = ({ onClose, open, payload }) => {
           Cancel
         </Button>
       </DialogActions>
-    </Dialog>
+    </DraggableDialog>
   );
 };
 
