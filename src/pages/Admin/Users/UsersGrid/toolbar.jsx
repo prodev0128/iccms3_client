@@ -4,12 +4,12 @@ import { IconButton, Tooltip } from '@mui/material';
 const useToolbar = (actions) => {
   return (
     <>
-      <Tooltip arrow title="Toggle Menu">
+      <Tooltip arrow title="Refresh">
         <IconButton color="primary" onClick={actions.fetchUsers}>
           <RefreshTwoTone />
         </IconButton>
       </Tooltip>
-      <Tooltip arrow title="Toggle Menu">
+      <Tooltip arrow title="Add User">
         <IconButton color="primary" onClick={actions.createUser}>
           <AddTwoTone />
         </IconButton>

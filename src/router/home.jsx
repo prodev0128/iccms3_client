@@ -7,12 +7,12 @@ const Home = ComponentLoader(lazy(() => import('../pages/Home')));
 
 const router = [
   {
-    element: <Home />,
     path: '',
+    element: <Home />,
   },
   {
-    element: <Navigate replace to="/" />,
     path: '*',
+    element: <Navigate replace to="/" />,
   },
 ];
 

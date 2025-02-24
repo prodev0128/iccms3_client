@@ -9,29 +9,26 @@ const Settings = ComponentLoader(lazy(() => import('../pages/Admin/Settings')));
 
 const router = [
   {
-    element: <Navigate replace to="users" />,
     path: '',
+    element: <Navigate replace to="users" />,
   },
   {
     children: [
       {
-        element: <Users />,
-        name: 'users',
         path: 'users',
+        element: <Users />,
       },
       {
-        element: <Codes />,
-        name: 'codes',
         path: 'codes',
+        element: <Codes />,
       },
       {
-        element: <Settings />,
-        name: 'settings',
         path: 'settings',
+        element: <Settings />,
       },
       {
-        element: <Navigate replace to="/admin/users" />,
         path: '*',
+        element: <Navigate replace to="/admin/users" />,
       },
     ],
   },

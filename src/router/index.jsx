@@ -6,22 +6,22 @@ import homeRouter from './home';
 
 const router = [
   {
+    path: '/',
+    element: <LayoutProvider />,
     children: [
       {
-        children: homeRouter,
         path: '',
+        children: homeRouter,
       },
       {
-        children: adminRouter,
         path: 'admin',
+        children: adminRouter,
       },
       {
-        element: <Navigate replace to="/" />,
         path: '*',
+        element: <Navigate replace to="/" />,
       },
     ],
-    element: <LayoutProvider />,
-    path: '/',
   },
 ];
 

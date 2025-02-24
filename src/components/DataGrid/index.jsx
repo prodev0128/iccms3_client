@@ -1,9 +1,8 @@
-import { DataGridPro } from '@mui/x-data-grid-pro';
+import { DataGridPro, useGridApiRef } from '@mui/x-data-grid-pro';
 import { LicenseInfo } from '@mui/x-license';
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 
-// import QuickSearchToolbar from '../../components/DataGrid/QuickSearchToolbar';
 import { initialPaginationModel, pageSizes } from '../../utils/utils';
 import GridCustomToolbar from './GridCustomToolbar';
 
@@ -12,13 +11,17 @@ LicenseInfo.setLicenseKey(
 );
 
 const DataGrid = ({ columns, toolbar, ...props }) => {
+  const apiRef = useGridApiRef();
+
   const newColumns = useMemo(
     () => [
       {
-        editable: false,
         field: 'no',
-        filterable: false,
         headerName: 'No',
+        width: 50,
+        filterable: false,
+        editable: false,
+        sortable: false,
         renderCell: (params) => {
           const pageSize = params.api.state.pagination.paginationModel.pageSize; // Get page size
           const currentPage = params.api.state.pagination.paginationModel.page; // Get current page
@@ -26,8 +29,6 @@ const DataGrid = ({ columns, toolbar, ...props }) => {
           const rowIndex = sortedRowIds.indexOf(params.id); // Get index of the current row
           return currentPage * pageSize + rowIndex + 1; // Adjusted to start from 1
         },
-        sortable: false,
-        width: 50,
       },
       ...columns,
     ],
@@ -39,6 +40,7 @@ const DataGrid = ({ columns, toolbar, ...props }) => {
       <DataGridPro
         checkboxSelection
         pagination
+        apiRef={apiRef}
         columns={newColumns}
         filterMode="server"
         pageSizeOptions={pageSizes}
@@ -58,10 +60,8 @@ const DataGrid = ({ columns, toolbar, ...props }) => {
           },
         }}
         {...props}
-        // apiRef={apiRef}
-        // selectionModel={selectedRows}
-        // onRowClick={(params) => apiRef.selectedRows([params.id])}
-        // onRowSelectionModelChange={(newSelection) => setSelectedRows(newSelection)}
+        disableRowSelectionOnClick={true}
+        onRowClick={(params) => apiRef.current.setRowSelectionModel([params.id])}
       />
     </>
   );
