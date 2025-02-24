@@ -2,21 +2,26 @@ import { Button, DialogActions, DialogContent, DialogTitle, Grid2, TextField } f
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 
-import DraggableDialog from '../../../../components/DraggableDialog';
+import CustomDialog from '../../../../components/CustomDialog';
 
 const UserDialog = ({ onClose, open, payload }) => {
+  const [confirmWithoutSaving, setConfirmWithoutSaving] = useState(false);
   const [data, setData] = useState(payload.data || {});
   const title = useMemo(() => `${payload.type} User`, [payload]);
 
   const updateData = (key, value) => {
+    setConfirmWithoutSaving(true);
     setData((prevData) => ({ ...prevData, [key]: value }));
   };
 
   return (
-    <DraggableDialog open={open} onClose={() => onClose(null)}>
-      <DialogTitle id="draggable-dialog-title" style={{ cursor: 'move' }}>
-        {title}
-      </DialogTitle>
+    <CustomDialog
+      confirmWithoutSaving={confirmWithoutSaving}
+      draggable={true}
+      open={open}
+      onClose={() => onClose(null)}
+    >
+      <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent>
         <Grid2 container spacing={2} sx={{ pt: 2 }}>
           <Grid2 size={{ sm: 6, xs: 12 }}>
@@ -47,7 +52,7 @@ const UserDialog = ({ onClose, open, payload }) => {
           Cancel
         </Button>
       </DialogActions>
-    </DraggableDialog>
+    </CustomDialog>
   );
 };
 

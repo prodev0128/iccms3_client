@@ -1,6 +1,5 @@
 import { Paper } from '@mui/material';
 import { useRef } from 'react';
-
 import Draggable from 'react-draggable';
 
 const PaperComponent = (props) => {

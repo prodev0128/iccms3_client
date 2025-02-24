@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import DataGrid from '../../../../components/DataGrid';
+import CustomDataGrid from '../../../../components/CustomDataGrid';
 import { initialPaginationModel } from '../../../../utils/utils';
 import useActions from './actions';
 import useColumns from './columns';
@@ -19,7 +19,7 @@ const UsersGrid = () => {
 
   return (
     <>
-      <DataGrid
+      <CustomDataGrid
         columns={columns}
         loading={status === 'loading'}
         placeholder="UserID/Name"

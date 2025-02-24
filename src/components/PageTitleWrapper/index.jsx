@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 const PageTitle = styled(Box)(
   ({ theme }) => `
-        padding: ${theme.spacing(4)};
-`,
+    padding: ${theme.spacing(4)};
+  `,
 );
 
 const PageTitleWrapper = ({ children }) => {

@@ -8,8 +8,9 @@ import {
   KeyTwoTone,
 } from '@mui/icons-material';
 import { Chip } from '@mui/material';
+import { format } from 'date-fns';
 
-import GridActionItem from '../../../../components/DataGrid/GridActionItem';
+import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
 
 const useColumns = (actions) => {
   return [
@@ -58,7 +59,15 @@ const useColumns = (actions) => {
     { field: 'userID', headerName: 'User ID', width: 150 },
     { field: 'name', headerName: 'Name', width: 150 },
     { field: 'genderNo', headerName: 'Gender', type: 'number', width: 150 },
-    { field: 'birthday', headerName: 'Birthday', type: 'date', width: 150 },
+    {
+      field: 'birthday',
+      headerName: 'Birthday',
+      valueFormatter: (value) => {
+        return format(new Date(value), 'yyyy-MM-dd');
+      },
+      type: 'date',
+      width: 150,
+    },
     { field: 'stampNo', headerName: 'Stamp No', type: 'number', width: 150 },
     { field: 'depNo', headerName: 'Dep Name', type: 'number', width: 150 },
     {

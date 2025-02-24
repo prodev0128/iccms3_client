@@ -10,7 +10,7 @@ LicenseInfo.setLicenseKey(
   'e0d9bb8070ce0054c9d9ecb6e82cb58fTz0wLEU9MzI0NzIxNDQwMDAwMDAsUz1wcmVtaXVtLExNPXBlcnBldHVhbCxLVj0y',
 );
 
-const DataGrid = ({ columns, placeholder, toolbar, ...props }) => {
+const CustomDataGrid = ({ columns, placeholder, toolbar, ...props }) => {
   const apiRef = useGridApiRef();
 
   const newColumns = useMemo(
@@ -42,6 +42,7 @@ const DataGrid = ({ columns, placeholder, toolbar, ...props }) => {
         pagination
         apiRef={apiRef}
         columns={newColumns}
+        disableRowSelectionOnClick={true}
         filterMode="server"
         pageSizeOptions={pageSizes}
         paginationMode="server"
@@ -59,18 +60,17 @@ const DataGrid = ({ columns, placeholder, toolbar, ...props }) => {
             variant: 'circular-progress',
           },
         }}
-        {...props}
-        disableRowSelectionOnClick={true}
         onRowClick={({ id }) => apiRef.current.setRowSelectionModel([id])}
+        {...props}
       />
     </>
   );
 };
 
-DataGrid.propTypes = {
+CustomDataGrid.propTypes = {
   columns: PropTypes.array.isRequired,
   toolbar: PropTypes.element.isRequired,
   placeholder: PropTypes.string.isRequired,
 };
 
-export default DataGrid;
+export default CustomDataGrid;

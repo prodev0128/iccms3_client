@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import DataGrid from '../../../components/DataGrid';
+import CustomDataGrid from '../../../components/CustomDataGrid';
 import useDebounceCallback from '../../../hooks/useDebounceCallback';
 import { fetchCodes } from '../../../redux/actions/codes';
 import { useCodes } from '../../../redux/selectors';
@@ -44,9 +44,10 @@ const CodesGrid = ({ currentCodeOption }) => {
   ];
 
   return (
-    <DataGrid
+    <CustomDataGrid
       columns={columns}
       loading={status === 'loading'}
+      placeholder="Name/Type"
       rowCount={totalCount}
       rows={rows}
       onFilterModelChange={setFilterModel}
