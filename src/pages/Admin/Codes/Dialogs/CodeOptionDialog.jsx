@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import CustomDialog from '../../../../components/CustomDialog';
 
 const schema = Yup.object({
-  userID: Yup.string().required('UserID is required'),
+  type: Yup.string().required('Type is required'),
   name: Yup.string().required('Name is required'),
 });
 
@@ -15,7 +15,7 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
   const [errors, setErrors] = useState({});
   const [confirmWithoutSaving, setConfirmWithoutSaving] = useState(false);
 
-  const title = useMemo(() => `${payload.type} User`, [payload]);
+  const title = useMemo(() => `${payload.type} CodeOption`, [payload]);
 
   const updateData = (key, value) => {
     setConfirmWithoutSaving(true);
@@ -44,12 +44,12 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
           <Grid2 size={{ sm: 6, xs: 12 }}>
             <TextField
               fullWidth
-              error={!!errors.userID}
-              helperText={errors.userID}
-              label="userID"
-              placeholder="userID"
-              value={data.userID || ''}
-              onChange={(e) => updateData('userID', e.target.value)}
+              error={!!errors.type}
+              helperText={errors.type}
+              label="type"
+              placeholder="type"
+              value={data.type || ''}
+              onChange={(e) => updateData('type', e.target.value)}
             />
           </Grid2>
           <Grid2 size={{ sm: 6, xs: 12 }}>

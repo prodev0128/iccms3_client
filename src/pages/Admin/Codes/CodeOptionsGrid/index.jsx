@@ -46,7 +46,7 @@ const UsersGrid = () => {
 
   const actions = useActions(paginationModel, filterModel, sortModel);
   const columns = useColumns(actions);
-  const { status, totalCount, users } = useRows();
+  const { codeOptions, status, totalCount } = useRows();
   const toolbar = useToolbar(actions);
 
   return (
@@ -55,9 +55,9 @@ const UsersGrid = () => {
         columns={columns}
         initialPagination={initialPagination}
         loading={status === 'loading'}
-        placeholder="User ID / Name"
+        placeholder="Type / Name"
         rowCount={totalCount}
-        rows={users}
+        rows={codeOptions}
         toolbar={toolbar}
         onFilterModelChange={setFilterModel}
         onPaginationModelChange={setPagination}

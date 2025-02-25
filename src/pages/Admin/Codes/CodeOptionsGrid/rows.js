@@ -1,9 +1,9 @@
-import { useUsers } from '../../../../redux/selectors';
+import { useCodeOptions } from '../../../../redux/selectors';
 
 const useRows = () => {
-  const { status, totalCount, users } = useUsers();
+  const { codeOptions, status, totalCount } = useCodeOptions();
 
-  return { status, totalCount, users };
+  return { status, totalCount, codeOptions };
 };
 
 export default useRows;

@@ -5,12 +5,12 @@ const useToolbar = (actions) => {
   return (
     <>
       <Tooltip arrow title="Refresh">
-        <IconButton color="primary" onClick={actions.fetchUsers}>
+        <IconButton color="primary" onClick={actions.fetchCodeOptions}>
           <RefreshTwoTone />
         </IconButton>
       </Tooltip>
       <Tooltip arrow title="Add User">
-        <IconButton color="primary" onClick={actions.createUser}>
+        <IconButton color="primary" onClick={actions.createCodeOption}>
           <AddTwoTone />
         </IconButton>
       </Tooltip>
