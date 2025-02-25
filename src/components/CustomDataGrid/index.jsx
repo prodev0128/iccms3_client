@@ -10,7 +10,7 @@ LicenseInfo.setLicenseKey(
   'e0d9bb8070ce0054c9d9ecb6e82cb58fTz0wLEU9MzI0NzIxNDQwMDAwMDAsUz1wcmVtaXVtLExNPXBlcnBldHVhbCxLVj0y',
 );
 
-const CustomDataGrid = ({ columns, initialPagination, placeholder, toolbar, ...props }) => {
+const CustomDataGrid = ({ columns, initialPagination, onRowClick, placeholder, toolbar, ...props }) => {
   const apiRef = useGridApiRef();
 
   console.log('This is CustomDataGrid');
@@ -60,7 +60,10 @@ const CustomDataGrid = ({ columns, initialPagination, placeholder, toolbar, ...p
             variant: 'circular-progress',
           },
         }}
-        onRowClick={({ id }) => apiRef.current.setRowSelectionModel([id])}
+        onRowClick={(params) => {
+          apiRef.current.setRowSelectionModel([params.id]);
+          onRowClick && onRowClick(params);
+        }}
         {...props}
       />
     </>
@@ -72,6 +75,7 @@ CustomDataGrid.propTypes = {
   toolbar: PropTypes.element.isRequired,
   placeholder: PropTypes.string.isRequired,
   initialPagination: PropTypes.object.isRequired,
+  onRowClick: PropTypes.func,
 };
 
 export default CustomDataGrid;
