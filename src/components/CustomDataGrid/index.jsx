@@ -3,15 +3,17 @@ import { LicenseInfo } from '@mui/x-license';
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 
-import { initialPaginationModel, pageSizes } from '../../utils/utils';
+import { pageSizes } from '../../utils/utils';
 import GridCustomToolbar from './GridCustomToolbar';
 
 LicenseInfo.setLicenseKey(
   'e0d9bb8070ce0054c9d9ecb6e82cb58fTz0wLEU9MzI0NzIxNDQwMDAwMDAsUz1wcmVtaXVtLExNPXBlcnBldHVhbCxLVj0y',
 );
 
-const CustomDataGrid = ({ columns, placeholder, toolbar, ...props }) => {
+const CustomDataGrid = ({ columns, initialPagination, placeholder, toolbar, ...props }) => {
   const apiRef = useGridApiRef();
+
+  console.log('This is CustomDataGrid');
 
   const newColumns = useMemo(
     () => [
@@ -23,11 +25,11 @@ const CustomDataGrid = ({ columns, placeholder, toolbar, ...props }) => {
         editable: false,
         sortable: false,
         renderCell: ({ api, id }) => {
-          const pageSize = api.state.pagination.paginationModel.pageSize; // Get page size
-          const currentPage = api.state.pagination.paginationModel.page; // Get current page
-          const sortedRowIds = api.getSortedRowIds(); // Get all sorted row IDs
-          const rowIndex = sortedRowIds.indexOf(id); // Get index of the current row
-          return currentPage * pageSize + rowIndex + 1; // Adjusted to start from 1
+          const pageSize = api.state.pagination.paginationModel.pageSize;
+          const currentPage = api.state.pagination.paginationModel.page;
+          const sortedRowIds = api.getSortedRowIds();
+          const rowIndex = sortedRowIds.indexOf(id);
+          return currentPage * pageSize + rowIndex + 1;
         },
       },
       ...columns,
@@ -49,9 +51,7 @@ const CustomDataGrid = ({ columns, placeholder, toolbar, ...props }) => {
         slots={{ toolbar: () => <GridCustomToolbar placeholder={placeholder} toolbar={toolbar} /> }}
         sortingMode="server"
         initialState={{
-          pagination: {
-            paginationModel: initialPaginationModel,
-          },
+          pagination: { paginationModel: initialPagination },
           pinnedColumns: { left: ['no'] },
         }}
         slotProps={{
@@ -71,6 +71,7 @@ CustomDataGrid.propTypes = {
   columns: PropTypes.array.isRequired,
   toolbar: PropTypes.element.isRequired,
   placeholder: PropTypes.string.isRequired,
+  initialPagination: PropTypes.object.isRequired,
 };
 
 export default CustomDataGrid;

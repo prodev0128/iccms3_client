@@ -6,12 +6,12 @@ import CustomDataGrid from '../../../components/CustomDataGrid';
 import useDebounceCallback from '../../../hooks/useDebounceCallback';
 import { fetchCodeOptions } from '../../../redux/actions/codeOptions';
 import { useCodeOptions } from '../../../redux/selectors';
-import { debounceTime, initialPaginationModel } from '../../../utils/utils';
+import { debounceTime } from '../../../utils/utils';
 
 const CodeOptionsGrid = ({ setCurrentCodeOption }) => {
   const dispatch = useDispatch();
   const { codeOptions, status, totalCount } = useCodeOptions();
-  const [paginationModel, setPaginationModel] = useState(initialPaginationModel);
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
   const [filterModel, setFilterModel] = useState({ items: [] });
   const [sortModel, setSortModel] = useState([]);
 

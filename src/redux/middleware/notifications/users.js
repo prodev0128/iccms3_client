@@ -3,8 +3,6 @@ const users = (action) => {
   const type = `${action.type}/${status}`;
 
   switch (type) {
-    case 'users/fetchUsers/success':
-      return { message: 'Page Load Successfully', type: 'success' };
     case 'users/fetchUsers/failed':
       return { message: error, type: 'error' };
 
