@@ -12,7 +12,7 @@ import { format } from 'date-fns';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
 
-const useColumns = (actions) => {
+const useColumns = (actions, individualCodes) => {
   return [
     {
       field: 'actions',

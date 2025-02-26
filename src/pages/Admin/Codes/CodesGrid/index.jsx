@@ -20,6 +20,11 @@ const CodesGrid = () => {
   const [filterModel, setFilterModel] = useState({ items: [] });
   const [sortModel, setSortModel] = useState([]);
 
+  const actions = useActions(paginationModel, filterModel, sortModel);
+  const columns = useColumns(actions);
+  const { codes, status, totalCount } = useRows();
+  const toolbar = useToolbar(actions);
+
   const setPagination = useCallback(
     (pagination) => {
       setPaginationModel(pagination);
@@ -32,11 +37,6 @@ const CodesGrid = () => {
     },
     [setSearchParams],
   );
-
-  const actions = useActions(paginationModel, filterModel, sortModel);
-  const columns = useColumns(actions);
-  const { codes, status, totalCount } = useRows();
-  const toolbar = useToolbar(actions);
 
   return (
     <>

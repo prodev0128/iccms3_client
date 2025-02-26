@@ -3,11 +3,12 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
+import { fetchIndividualCodes } from '../../../../redux/actions/codes';
 import { createUser, deleteUser, fetchUsers, resetPassword, updateUser } from '../../../../redux/actions/users';
 import { debounceTime } from '../../../../utils/utils';
 import UserDialog from '../Dialogs/UserDialog';
 
-const useActions = (paginationModel, filterModel, sortModel) => {
+const useActions = (paginationModel, filterModel, sortModel, individualCodes) => {
   const dispatch = useDispatch();
   const dialogs = useDialogs();
 
@@ -25,22 +26,22 @@ const useActions = (paginationModel, filterModel, sortModel) => {
   );
 
   const handleCreateUser = useCallback(async () => {
-    const createdUser = await dialogs.open(UserDialog, { type: 'Create' });
+    const createdUser = await dialogs.open(UserDialog, { type: 'Create', individualCodes });
     if (!createdUser) {
       return;
     }
     await dispatch(createUser(createdUser));
-  }, [dispatch, dialogs]);
+  }, [dispatch, dialogs, individualCodes]);
 
   const handleUpdateUser = useCallback(
     async (data) => {
-      const updatedUser = await dialogs.open(UserDialog, { type: 'Edit', data });
+      const updatedUser = await dialogs.open(UserDialog, { type: 'Edit', data, individualCodes });
       if (!updatedUser) {
         return;
       }
       await dispatch(updateUser(data.id, updatedUser));
     },
-    [dispatch, dialogs],
+    [dispatch, dialogs, individualCodes],
   );
 
   const handleDeleteUser = useCallback(
@@ -85,9 +86,20 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     [dispatch],
   );
 
+  const debouncedFetchIndividualCodes = useDebounceCallback(
+    useCallback(async () => {
+      await dispatch(fetchIndividualCodes({ types: 'gender,job' }));
+    }, [dispatch]),
+    debounceTime,
+  );
+
   useEffect(() => {
     debouncedFetchUsers();
   }, [debouncedFetchUsers]);
+
+  useEffect(() => {
+    debouncedFetchIndividualCodes();
+  }, [debouncedFetchIndividualCodes]);
 
   return {
     fetchUsers: debouncedFetchUsers,

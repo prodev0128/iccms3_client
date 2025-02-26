@@ -14,7 +14,7 @@ export const createCodeOption = (data) => {
   const apiInfo = {
     data,
     method: 'POST',
-    url: `http://localhost:3128/codeOptions/`,
+    url: `http://localhost:3128/codeOptions`,
   };
   return apiAction(codeOptionsSlice.actions.createCodeOption, apiInfo);
 };

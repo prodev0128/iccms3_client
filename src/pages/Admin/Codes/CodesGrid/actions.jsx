@@ -19,7 +19,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
         return;
       }
       await dispatch(
-        fetchCodes(currentCodeOption.id, {
+        fetchCodes(currentCodeOption.type, {
           ...paginationModel,
           filterModel: JSON.stringify(filterModel),
           sortModel: JSON.stringify(sortModel),
@@ -34,7 +34,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     if (!createdCode) {
       return;
     }
-    await dispatch(createCode({ optionID: currentCodeOption.id, ...createdCode }));
+    await dispatch(createCode({ type: currentCodeOption.type, ...createdCode }));
   }, [dispatch, dialogs, currentCodeOption]);
 
   const handleUpdateCode = useCallback(

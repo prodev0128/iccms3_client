@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   codes: [],
+  individualCodes: {},
   status: 'idle',
   totalCount: 0,
 };
@@ -10,6 +11,13 @@ const codesSlice = createSlice({
   initialState,
   name: 'codes',
   reducers: {
+    fetchIndividualCodes: (state, { payload }) => {
+      const { data, status } = payload;
+      state.status = status;
+      if (status === 'success') {
+        state.individualCodes = data;
+      }
+    },
     fetchCodes: (state, { payload }) => {
       const { data, status } = payload;
       state.status = status;
