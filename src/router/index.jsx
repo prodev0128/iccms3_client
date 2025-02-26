@@ -2,7 +2,9 @@ import { Navigate } from 'react-router';
 
 import LayoutProvider from '../layouts/LayoutProvider';
 import adminRouter from './admin';
+import censorRouter from './censor';
 import homeRouter from './home';
+import statRouter from './stat';
 
 const router = [
   {
@@ -16,6 +18,14 @@ const router = [
       {
         path: 'admin',
         children: adminRouter,
+      },
+      {
+        path: 'censor',
+        children: censorRouter,
+      },
+      {
+        path: 'stat',
+        children: statRouter,
       },
       {
         path: '*',

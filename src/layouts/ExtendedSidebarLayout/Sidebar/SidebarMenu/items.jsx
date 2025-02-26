@@ -2,16 +2,16 @@ import {
   AdminPanelSettingsTwoTone,
   AssessmentTwoTone,
   AssignmentIndTwoTone,
+  AutoGraphTwoTone,
   BarChartTwoTone,
+  DataSaverOnTwoTone,
   DesignServicesTwoTone,
-  DonutLargeTwoTone,
+  ForwardToInboxTwoTone,
   HomeTwoTone,
+  InstallDesktopTwoTone,
   LocalPoliceTwoTone,
-  PolicyTwoTone,
   SettingsTwoTone,
   SupportTwoTone,
-  TransferWithinAStationTwoTone,
-  TroubleshootTwoTone,
   VerifiedUserTwoTone,
 } from '@mui/icons-material';
 
@@ -50,19 +50,19 @@ const menuItems = [
         icon: LocalPoliceTwoTone,
         items: [
           {
-            icon: PolicyTwoTone,
-            link: '/censor/receipt',
-            name: 'Receipt',
-          },
-          {
-            icon: TransferWithinAStationTwoTone,
-            link: '/censor/assign',
-            name: 'Assign',
-          },
-          {
             icon: VerifiedUserTwoTone,
-            link: '/censor/process',
-            name: 'Process',
+            link: '/censor/processing',
+            name: 'Processing',
+          },
+          {
+            icon: InstallDesktopTwoTone,
+            link: '/censor/incoming',
+            name: 'Incoming',
+          },
+          {
+            icon: ForwardToInboxTwoTone,
+            link: '/censor/outgoing',
+            name: 'Outgoing',
           },
         ],
         link: '/censor',
@@ -73,17 +73,17 @@ const menuItems = [
         items: [
           {
             icon: BarChartTwoTone,
-            link: '/stat/receipt',
+            link: '/stat/people',
             name: 'People',
           },
           {
-            icon: DonutLargeTwoTone,
-            link: '/stat/assign',
+            icon: DataSaverOnTwoTone,
+            link: '/stat/pub',
             name: 'Pub',
           },
           {
-            icon: TroubleshootTwoTone,
-            link: '/stat/process',
+            icon: AutoGraphTwoTone,
+            link: '/stat/flow',
             name: 'Flow',
           },
         ],
