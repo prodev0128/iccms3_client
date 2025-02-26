@@ -13,6 +13,7 @@ import { format } from 'date-fns';
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
 
 const useColumns = (actions, individualCodes) => {
+  const { dep: deps = [], gender: genders = [], job: jobs = [] } = individualCodes;
   return [
     {
       field: 'actions',
@@ -58,18 +59,32 @@ const useColumns = (actions, individualCodes) => {
     },
     { field: 'userID', headerName: 'User ID', width: 150 },
     { field: 'name', headerName: 'Name', width: 150 },
-    { field: 'genderNo', headerName: 'Gender', type: 'number', width: 150 },
+    {
+      field: 'gender',
+      headerName: 'Gender',
+      width: 150,
+      valueFormatter: (value) => (genders.find((gender) => gender.value === value) || {}).name,
+    },
     {
       field: 'birthday',
       headerName: 'Birthday',
-      valueFormatter: (value) => {
-        return format(new Date(value), 'yyyy-MM-dd');
-      },
       type: 'date',
       width: 150,
+      valueFormatter: (value) => format(new Date(value), 'yyyy-MM-dd'),
     },
     { field: 'stampNo', headerName: 'Stamp No', type: 'number', width: 150 },
-    { field: 'depNo', headerName: 'Dep Name', type: 'number', width: 150 },
+    {
+      field: 'dep',
+      headerName: 'Dep Name',
+      width: 150,
+      valueFormatter: (value) => (deps.find((dep) => dep.value === value) || {}).name,
+    },
+    {
+      field: 'job',
+      headerName: 'Job Name',
+      width: 150,
+      valueFormatter: (value) => (jobs.find((job) => job.value === value) || {}).name,
+    },
     {
       field: 'isActive',
       headerName: 'Active',

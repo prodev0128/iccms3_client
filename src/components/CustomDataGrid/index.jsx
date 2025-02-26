@@ -72,10 +72,10 @@ const CustomDataGrid = ({ columns, initialPagination, onRowClick, placeholder, t
 
 CustomDataGrid.propTypes = {
   columns: PropTypes.array.isRequired,
-  toolbar: PropTypes.element.isRequired,
-  placeholder: PropTypes.string.isRequired,
   initialPagination: PropTypes.object.isRequired,
   onRowClick: PropTypes.func,
+  placeholder: PropTypes.string.isRequired,
+  toolbar: PropTypes.element.isRequired,
 };
 
 export default CustomDataGrid;

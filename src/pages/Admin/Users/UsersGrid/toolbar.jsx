@@ -5,7 +5,13 @@ const useToolbar = (actions) => {
   return (
     <>
       <Tooltip arrow title="Refresh">
-        <IconButton color="primary" onClick={actions.fetchUsers}>
+        <IconButton
+          color="primary"
+          onClick={() => {
+            actions.fetchUsers();
+            actions.fetchIndividualCodes();
+          }}
+        >
           <RefreshTwoTone />
         </IconButton>
       </Tooltip>

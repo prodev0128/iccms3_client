@@ -88,7 +88,7 @@ const useActions = (paginationModel, filterModel, sortModel, individualCodes) =>
 
   const debouncedFetchIndividualCodes = useDebounceCallback(
     useCallback(async () => {
-      await dispatch(fetchIndividualCodes({ types: 'gender,job' }));
+      await dispatch(fetchIndividualCodes({ types: 'gender,job,dep' }));
     }, [dispatch]),
     debounceTime,
   );
@@ -109,6 +109,7 @@ const useActions = (paginationModel, filterModel, sortModel, individualCodes) =>
     resetPassword: handleResetPassword,
     allowUser: handleAllowUser,
     disallowUser: handleDisallowUser,
+    fetchIndividualCodes: debouncedFetchIndividualCodes,
   };
 };
 

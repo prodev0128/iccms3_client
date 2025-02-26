@@ -18,8 +18,8 @@ const GridCustomToolbar = ({ placeholder, toolbar }) => {
 };
 
 GridCustomToolbar.propTypes = {
-  toolbar: PropTypes.element.isRequired,
   placeholder: PropTypes.string.isRequired,
+  toolbar: PropTypes.element.isRequired,
 };
 
 export default GridCustomToolbar;
