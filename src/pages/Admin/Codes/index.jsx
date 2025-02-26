@@ -7,7 +7,7 @@ import CodeOptionsGrid from './CodeOptionsGrid';
 import CodesGrid from './CodesGrid';
 import PageHeader from './PageHeader';
 
-const Users = () => {
+const Codes = () => {
   const [currentCodeOption, setCurrentCodeOption] = useState(null);
   return (
     <>
@@ -27,4 +27,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Codes;

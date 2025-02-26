@@ -34,7 +34,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
 
   const handleUpdateUser = useCallback(
     async (data) => {
-      const updatedUser = await dialogs.open(UserDialog, { data, type: 'Edit' });
+      const updatedUser = await dialogs.open(UserDialog, { type: 'Edit', data });
       if (!updatedUser) {
         return;
       }

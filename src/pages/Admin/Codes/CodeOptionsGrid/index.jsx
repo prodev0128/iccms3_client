@@ -8,7 +8,7 @@ import useColumns from './columns';
 import useRows from './rows';
 import useToolbar from './toolbar';
 
-const UsersGrid = () => {
+const CodeOptionsGrid = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialPagination = useRef({
@@ -19,6 +19,11 @@ const UsersGrid = () => {
   const [paginationModel, setPaginationModel] = useState(initialPagination);
   const [filterModel, setFilterModel] = useState({ items: [] });
   const [sortModel, setSortModel] = useState([]);
+
+  const actions = useActions(paginationModel, filterModel, sortModel);
+  const columns = useColumns(actions);
+  const { codeOptions, status, totalCount } = useRows();
+  const toolbar = useToolbar(actions);
 
   const setPagination = useCallback(
     (pagination) => {
@@ -34,20 +39,16 @@ const UsersGrid = () => {
   );
 
   const setCurrentCodeOption = useCallback(
-    (currentOptionID) => {
+    (currentOption) => {
+      actions.setCurrentCodeOption(currentOption);
       setSearchParams((prev) => {
         const newParams = new URLSearchParams(prev);
-        newParams.set('current_option', currentOptionID);
+        newParams.set('current_option', currentOption.id);
         return newParams;
       });
     },
-    [setSearchParams],
+    [setSearchParams, actions],
   );
-
-  const actions = useActions(paginationModel, filterModel, sortModel);
-  const columns = useColumns(actions);
-  const { codeOptions, status, totalCount } = useRows();
-  const toolbar = useToolbar(actions);
 
   return (
     <>
@@ -61,11 +62,11 @@ const UsersGrid = () => {
         toolbar={toolbar}
         onFilterModelChange={setFilterModel}
         onPaginationModelChange={setPagination}
-        onRowClick={(data) => setCurrentCodeOption(data.id)}
+        onRowClick={(data) => setCurrentCodeOption(data.row)}
         onSortModelChange={setSortModel}
       />
     </>
   );
 };
 
-export default UsersGrid;
+export default CodeOptionsGrid;

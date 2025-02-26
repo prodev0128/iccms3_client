@@ -7,6 +7,7 @@ import {
   createCodeOption,
   deleteCodeOption,
   fetchCodeOptions,
+  setCurrentCodeOption,
   updateCodeOption,
 } from '../../../../redux/actions/codeOptions';
 import { debounceTime } from '../../../../utils/utils';
@@ -39,7 +40,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
 
   const handleUpdateCodeOption = useCallback(
     async (data) => {
-      const updatedCodeOption = await dialogs.open(CodeOptionDialog, { data, type: 'Edit' });
+      const updatedCodeOption = await dialogs.open(CodeOptionDialog, { type: 'Edit', data });
       if (!updatedCodeOption) {
         return;
       }
@@ -76,6 +77,13 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     [dispatch],
   );
 
+  const handleSetCurrentCodeOption = useCallback(
+    async (data) => {
+      await dispatch(setCurrentCodeOption(data));
+    },
+    [dispatch],
+  );
+
   useEffect(() => {
     debouncedFetchCodeOptions();
   }, [debouncedFetchCodeOptions]);
@@ -87,6 +95,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     deleteCodeOption: handleDeleteCodeOption,
     allowCodeOption: handleAllowCodeOption,
     disallowCodeOption: handleDisallowCodeOption,
+    setCurrentCodeOption: handleSetCurrentCodeOption,
   };
 };
 

@@ -6,8 +6,8 @@ import * as Yup from 'yup';
 import CustomDialog from '../../../../components/CustomDialog';
 
 const schema = Yup.object({
-  userID: Yup.string().required('UserID is required'),
   name: Yup.string().required('Name is required'),
+  value: Yup.string().required('Value is required'),
 });
 
 const CodeDialog = ({ onClose, open, payload }) => {
@@ -15,7 +15,7 @@ const CodeDialog = ({ onClose, open, payload }) => {
   const [errors, setErrors] = useState({});
   const [confirmWithoutSaving, setConfirmWithoutSaving] = useState(false);
 
-  const title = useMemo(() => `${payload.type} User`, [payload]);
+  const title = useMemo(() => `${payload.type} Code`, [payload]);
 
   const updateData = (key, value) => {
     setConfirmWithoutSaving(true);
@@ -36,21 +36,13 @@ const CodeDialog = ({ onClose, open, payload }) => {
     }
   };
 
-  return (
+  return payload.option ? (
     <CustomDialog confirmWithoutSaving={confirmWithoutSaving} draggable={true} open={open} onClose={() => onClose()}>
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent>
         <Grid2 container spacing={2} sx={{ pt: 2 }}>
-          <Grid2 size={{ sm: 6, xs: 12 }}>
-            <TextField
-              fullWidth
-              error={!!errors.userID}
-              helperText={errors.userID}
-              label="userID"
-              placeholder="userID"
-              value={data.userID || ''}
-              onChange={(e) => updateData('userID', e.target.value)}
-            />
+          <Grid2 size={12}>
+            <TextField disabled fullWidth label="type" placeholder="type" value={payload.option.name || ''} />
           </Grid2>
           <Grid2 size={{ sm: 6, xs: 12 }}>
             <TextField
@@ -61,6 +53,17 @@ const CodeDialog = ({ onClose, open, payload }) => {
               placeholder="name"
               value={data.name || ''}
               onChange={(e) => updateData('name', e.target.value)}
+            />
+          </Grid2>
+          <Grid2 size={{ sm: 6, xs: 12 }}>
+            <TextField
+              fullWidth
+              error={!!errors.value}
+              helperText={errors.value}
+              label="value"
+              placeholder="value"
+              value={data.value || ''}
+              onChange={(e) => updateData('value', e.target.value)}
             />
           </Grid2>
         </Grid2>
@@ -74,6 +77,8 @@ const CodeDialog = ({ onClose, open, payload }) => {
         </Button>
       </DialogActions>
     </CustomDialog>
+  ) : (
+    <></>
   );
 };
 

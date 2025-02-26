@@ -22,7 +22,7 @@ export const createCodeOption = (data) => {
 export const updateCodeOption = (id, data) => {
   const apiInfo = {
     data,
-    method: 'PATCH',
+    method: 'PUT',
     url: `http://localhost:3128/codeOptions/${id}`,
   };
   return apiAction(codeOptionsSlice.actions.updateCodeOption, apiInfo);
@@ -34,4 +34,8 @@ export const deleteCodeOption = (id) => {
     url: `http://localhost:3128/codeOptions/${id}`,
   };
   return apiAction(codeOptionsSlice.actions.deleteCodeOption, apiInfo);
+};
+
+export const setCurrentCodeOption = (codeOption) => (dispatch) => {
+  dispatch(codeOptionsSlice.actions.setCurrentCodeOption(codeOption));
 };

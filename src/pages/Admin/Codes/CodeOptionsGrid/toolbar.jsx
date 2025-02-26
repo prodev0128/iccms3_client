@@ -9,7 +9,7 @@ const useToolbar = (actions) => {
           <RefreshTwoTone />
         </IconButton>
       </Tooltip>
-      <Tooltip arrow title="Add User">
+      <Tooltip arrow title="Add Code Option">
         <IconButton color="primary" onClick={actions.createCodeOption}>
           <AddTwoTone />
         </IconButton>

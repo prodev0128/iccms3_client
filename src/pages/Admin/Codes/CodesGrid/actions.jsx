@@ -3,100 +3,90 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
-import { createUser, deleteUser, fetchUsers, resetPassword, updateUser } from '../../../../redux/actions/users';
+import { createCode, deleteCode, fetchCodes, updateCode } from '../../../../redux/actions/codes';
+import { useCodeOptions } from '../../../../redux/selectors';
 import { debounceTime } from '../../../../utils/utils';
-import UserDialog from '../Dialogs/CodeDialog';
+import CodeDialog from '../Dialogs/CodeDialog';
 
 const useActions = (paginationModel, filterModel, sortModel) => {
   const dispatch = useDispatch();
   const dialogs = useDialogs();
+  const { currentCodeOption } = useCodeOptions();
 
-  const debouncedFetchUsers = useDebounceCallback(
+  const debouncedFetchCodes = useDebounceCallback(
     useCallback(async () => {
+      if (!currentCodeOption) {
+        return;
+      }
       await dispatch(
-        fetchUsers({
+        fetchCodes(currentCodeOption.id, {
           ...paginationModel,
           filterModel: JSON.stringify(filterModel),
           sortModel: JSON.stringify(sortModel),
         }),
       );
-    }, [dispatch, paginationModel, filterModel, sortModel]),
+    }, [dispatch, currentCodeOption, paginationModel, filterModel, sortModel]),
     debounceTime,
   );
 
-  const handleCreateUser = useCallback(async () => {
-    const createdUser = await dialogs.open(UserDialog, { type: 'Create' });
-    if (!createdUser) {
+  const handleCreateCode = useCallback(async () => {
+    const createdCode = await dialogs.open(CodeDialog, { type: 'Create', option: currentCodeOption });
+    if (!createdCode) {
       return;
     }
-    await dispatch(createUser(createdUser));
-  }, [dispatch, dialogs]);
+    await dispatch(createCode({ optionID: currentCodeOption.id, ...createdCode }));
+  }, [dispatch, dialogs, currentCodeOption]);
 
-  const handleUpdateUser = useCallback(
+  const handleUpdateCode = useCallback(
     async (data) => {
-      const updatedUser = await dialogs.open(UserDialog, { data, type: 'Edit' });
-      if (!updatedUser) {
+      const updatedCode = await dialogs.open(CodeDialog, { type: 'Edit', option: currentCodeOption, data });
+      if (!updatedCode) {
         return;
       }
-      await dispatch(updateUser(data.id, updatedUser));
+      await dispatch(updateCode(data.id, updatedCode));
     },
-    [dispatch, dialogs],
+    [dispatch, dialogs, currentCodeOption],
   );
 
-  const handleDeleteUser = useCallback(
+  const handleDeleteCode = useCallback(
     async (data) => {
-      const confirm = await dialogs.confirm('Are you sure you want to delete this user?', {
+      const confirm = await dialogs.confirm('Are you sure you want to delete this code?', {
         cancelText: 'No',
         okText: 'Yes',
       });
       if (!confirm) {
         return;
       }
-      await dispatch(deleteUser(data.id));
+      await dispatch(deleteCode(data.id));
     },
     [dispatch, dialogs],
   );
 
-  const handleResetPassword = useCallback(
+  const handleAllowCode = useCallback(
     async (data) => {
-      const confirm = await dialogs.confirm('Are you sure you want to reset password for this user?', {
-        cancelText: 'Cancel',
-        okText: 'Yes',
-      });
-      if (!confirm) {
-        return;
-      }
-      await dispatch(resetPassword(data.id));
-    },
-    [dispatch, dialogs],
-  );
-
-  const handleAllowUser = useCallback(
-    async (data) => {
-      await dispatch(updateUser(data.id, { isActive: true }));
+      await dispatch(updateCode(data.id, { isActive: true }));
     },
     [dispatch],
   );
 
-  const handleDisallowUser = useCallback(
+  const handleDisallowCode = useCallback(
     async (data) => {
-      await dispatch(updateUser(data.id, { isActive: false }));
+      await dispatch(updateCode(data.id, { isActive: false }));
     },
     [dispatch],
   );
 
   useEffect(() => {
-    debouncedFetchUsers();
-  }, [debouncedFetchUsers]);
+    debouncedFetchCodes();
+  }, [debouncedFetchCodes]);
 
   return {
-    fetchUsers: debouncedFetchUsers,
-    createUser: handleCreateUser,
-    updateUser: handleUpdateUser,
-    deleteUser: handleDeleteUser,
-    resetPassword: handleResetPassword,
-    allowUser: handleAllowUser,
-    disallowUser: handleDisallowUser,
+    fetchCodes: debouncedFetchCodes,
+    createCode: handleCreateCode,
+    updateCode: handleUpdateCode,
+    deleteCode: handleDeleteCode,
+    allowCode: handleAllowCode,
+    disallowCode: handleDisallowCode,
   };
 };
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
 import CustomDataGrid from '../../../../components/CustomDataGrid';
@@ -8,7 +8,7 @@ import useColumns from './columns';
 import useRows from './rows';
 import useToolbar from './toolbar';
 
-const UsersGrid = () => {
+const CodesGrid = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialPagination = useRef({
@@ -35,7 +35,7 @@ const UsersGrid = () => {
 
   const actions = useActions(paginationModel, filterModel, sortModel);
   const columns = useColumns(actions);
-  const { status, totalCount, users } = useRows();
+  const { codes, status, totalCount } = useRows();
   const toolbar = useToolbar(actions);
 
   return (
@@ -44,9 +44,9 @@ const UsersGrid = () => {
         columns={columns}
         initialPagination={initialPagination}
         loading={status === 'loading'}
-        placeholder="User ID / Name"
+        placeholder="Name"
         rowCount={totalCount}
-        rows={users}
+        rows={codes}
         toolbar={toolbar}
         onFilterModelChange={setFilterModel}
         onPaginationModelChange={setPagination}
@@ -56,4 +56,4 @@ const UsersGrid = () => {
   );
 };
 
-export default UsersGrid;
+export default CodesGrid;

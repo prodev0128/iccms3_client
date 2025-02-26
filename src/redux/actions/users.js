@@ -22,7 +22,7 @@ export const createUser = (data) => {
 export const updateUser = (id, data) => {
   const apiInfo = {
     data,
-    method: 'PATCH',
+    method: 'PUT',
     url: `http://localhost:3128/users/${id}`,
   };
   return apiAction(usersSlice.actions.updateUser, apiInfo);
