@@ -101,7 +101,7 @@ const Logo = () => {
   const { t } = useTranslation();
 
   return (
-    <LogoWrapper to="/overview">
+    <LogoWrapper to="/">
       <LogoSignWrapper>
         <LogoSign>
           <LogoSignInner />
@@ -117,7 +117,7 @@ const Logo = () => {
           <Tooltip arrow placement="right" title={`${t('Version')} 3.0`}>
             <VersionBadge>3.0</VersionBadge>
           </Tooltip>
-          <LogoText>Tokyo</LogoText>
+          <LogoText>ICCMS</LogoText>
         </LogoTextWrapper>
       </Box>
     </LogoWrapper>

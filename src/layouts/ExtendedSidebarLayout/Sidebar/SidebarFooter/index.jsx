@@ -1,9 +1,10 @@
 import { EventTwoTone, PowerSettingsNewTwoTone, SmsTwoTone } from '@mui/icons-material';
 import { alpha, Badge, Box, IconButton, styled, Tooltip, tooltipClasses, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router';
 
-import { useAuth } from '../../../../redux/selectors';
+import { logout } from '../../../../redux/actions/auth';
 
 const LightTooltip = styled(({ className, ...props }) => <Tooltip {...props} classes={{ popper: className }} />)(
   ({ theme }) => ({
@@ -23,12 +24,12 @@ const LightTooltip = styled(({ className, ...props }) => <Tooltip {...props} cla
 const SidebarFooter = () => {
   const { t } = useTranslation();
   const theme = useTheme();
-  const { logout } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await logout();
+      dispatch(logout());
       navigate('/');
     } catch (error) {
       console.error(error);
@@ -47,7 +48,7 @@ const SidebarFooter = () => {
       <LightTooltip arrow placement="top" title={t('Events Calendar')}>
         <IconButton
           component={RouterLink}
-          to="/extended-sidebar/applications/calendar"
+          to="/censor/processing"
           sx={{
             '&:hover': {
               background: `${alpha(theme.colors.alpha.trueWhite[100], 0.2)}`,
@@ -81,7 +82,7 @@ const SidebarFooter = () => {
         >
           <IconButton
             component={RouterLink}
-            to="/extended-sidebar/applications/messenger"
+            to="/stat/people"
             sx={{
               '&:hover': {
                 background: `${alpha(theme.colors.alpha.trueWhite[100], 0.2)}`,

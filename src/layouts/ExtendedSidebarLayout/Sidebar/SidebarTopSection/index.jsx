@@ -22,22 +22,24 @@ import {
 } from '@mui/material';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { NavLink, useLocation, useNavigate } from 'react-router';
 
+import { logout } from '../../../../redux/actions/auth';
 import { useAuth } from '../../../../redux/selectors';
 
 const MenuUserBox = styled(Box)(
   ({ theme }) => `
     background: ${theme.colors.alpha.black[5]};
     padding: ${theme.spacing(2)};
-`,
+  `,
 );
 
 const UserBoxText = styled(Box)(
   ({ theme }) => `
     text-align: left;
     padding-left: ${theme.spacing(1)};
-`,
+  `,
 );
 
 const UserBoxLabel = styled(Typography)(
@@ -49,7 +51,7 @@ const UserBoxLabel = styled(Typography)(
     &.popoverTypo {
       color: ${theme.palette.secondary.main};
     }
-`,
+  `,
 );
 
 const UserBoxDescription = styled(Typography)(
@@ -59,16 +61,17 @@ const UserBoxDescription = styled(Typography)(
     &.popoverTypo {
       color: ${theme.palette.secondary.light};
     }
-`,
+  `,
 );
 
 const SidebarTopSection = () => {
   const { t } = useTranslation();
   const theme = useTheme();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { logout, user } = useAuth();
+  const { user } = useAuth();
 
   const ref = useRef(null);
   const [isOpen, setOpen] = useState(false);
@@ -84,7 +87,7 @@ const SidebarTopSection = () => {
   const handleLogout = async () => {
     try {
       handleClose();
-      await logout();
+      dispatch(logout());
       navigate('/');
     } catch (error) {
       console.error(error);
