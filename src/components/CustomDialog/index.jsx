@@ -14,6 +14,7 @@ const CustomDialog = ({ children, confirmWithoutSaving = false, draggable = fals
       return;
     }
     const confirmed = await dialogs.confirm('Are you discard the changes?', {
+      title: 'Confirm',
       okText: 'Discard',
       cancelText: 'Cancel',
     });

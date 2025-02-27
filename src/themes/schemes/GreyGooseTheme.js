@@ -320,7 +320,7 @@ export const GreyGooseTheme = createTheme({
             backdropFilter: 'blur(2px)',
             backgroundColor: 'transparent',
           },
-          backdropFilter: 'blur(2px)',
+          backdropFilter: 'none',
 
           backgroundColor: alpha(darken(themeColors.primaryAlt, 0.4), 0.2),
         },

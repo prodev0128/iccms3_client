@@ -2,10 +2,10 @@ import { useCallback, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
 import CustomDataGrid from '../../../../components/CustomDataGrid';
+import { useCodeOptions } from '../../../../redux/selectors';
 import { initialPaginationModel } from '../../../../utils/utils';
 import useActions from './actions';
 import useColumns from './columns';
-import useRows from './rows';
 import useToolbar from './toolbar';
 
 const CodeOptionsGrid = () => {
@@ -22,7 +22,7 @@ const CodeOptionsGrid = () => {
 
   const actions = useActions(paginationModel, filterModel, sortModel);
   const columns = useColumns(actions);
-  const { codeOptions, status, totalCount } = useRows();
+  const { codeOptions, status, totalCount } = useCodeOptions();
   const toolbar = useToolbar(actions);
 
   const setPagination = useCallback(

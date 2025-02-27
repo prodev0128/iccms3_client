@@ -52,6 +52,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
   const handleDeleteCodeOption = useCallback(
     async (data) => {
       const confirm = await dialogs.confirm('Are you sure you want to delete this CodeOption?', {
+        title: 'Confirm',
         cancelText: 'No',
         okText: 'Yes',
       });

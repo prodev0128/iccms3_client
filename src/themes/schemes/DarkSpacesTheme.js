@@ -320,7 +320,7 @@ export const DarkSpacesTheme = createTheme({
             backdropFilter: 'blur(2px)',
             backgroundColor: 'transparent',
           },
-          backdropFilter: 'blur(2px)',
+          backdropFilter: 'none',
 
           backgroundColor: alpha(darken('#1C1C1C', 0.5), 0.4),
         },

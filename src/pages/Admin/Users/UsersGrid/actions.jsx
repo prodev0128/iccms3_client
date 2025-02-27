@@ -2,6 +2,7 @@ import { useDialogs } from '@toolpad/core';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import PaperComponent from '../../../../components/CustomDialog/PageComponent';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { fetchIndividualCodes } from '../../../../redux/actions/codes';
 import { createUser, deleteUser, fetchUsers, resetPassword, updateUser } from '../../../../redux/actions/users';
@@ -47,6 +48,7 @@ const useActions = (paginationModel, filterModel, sortModel, individualCodes) =>
   const handleDeleteUser = useCallback(
     async (data) => {
       const confirm = await dialogs.confirm('Are you sure you want to delete this user?', {
+        title: 'Confirm',
         cancelText: 'No',
         okText: 'Yes',
       });
@@ -61,6 +63,7 @@ const useActions = (paginationModel, filterModel, sortModel, individualCodes) =>
   const handleResetPassword = useCallback(
     async (data) => {
       const confirm = await dialogs.confirm('Are you sure you want to reset password for this user?', {
+        title: 'Confirm',
         cancelText: 'Cancel',
         okText: 'Yes',
       });

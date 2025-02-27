@@ -320,7 +320,7 @@ export const GreenFieldsTheme = createTheme({
             backdropFilter: 'blur(2px)',
             backgroundColor: 'transparent',
           },
-          backdropFilter: 'blur(2px)',
+          backdropFilter: 'none',
 
           backgroundColor: alpha(darken('#141c23', 0.5), 0.4),
         },

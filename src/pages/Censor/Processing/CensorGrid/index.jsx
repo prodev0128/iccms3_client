@@ -2,27 +2,28 @@ import { useCallback, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
 import CustomDataGrid from '../../../../components/CustomDataGrid';
-import { useCodes } from '../../../../redux/selectors';
+import { useCodes, useInvoices } from '../../../../redux/selectors';
 import { initialPaginationModel } from '../../../../utils/utils';
 import useActions from './actions';
 import useColumns from './columns';
 import useToolbar from './toolbar';
 
-const CodesGrid = () => {
+const UsersGrid = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialPagination = useRef({
-    page: parseInt(searchParams.get('code_page')) || initialPaginationModel.page,
-    pageSize: parseInt(searchParams.get('code_page_size')) || initialPaginationModel.pageSize,
+    page: parseInt(searchParams.get('page')) || initialPaginationModel.page,
+    pageSize: parseInt(searchParams.get('page_size')) || initialPaginationModel.pageSize,
   }).current;
 
   const [paginationModel, setPaginationModel] = useState(initialPagination);
   const [filterModel, setFilterModel] = useState({ items: [] });
   const [sortModel, setSortModel] = useState([]);
 
-  const actions = useActions(paginationModel, filterModel, sortModel);
-  const columns = useColumns(actions);
-  const { codes, status, totalCount } = useCodes();
+  const { individualCodes } = useCodes();
+  const actions = useActions(paginationModel, filterModel, sortModel, individualCodes);
+  const columns = useColumns(actions, individualCodes);
+  const { invoices, status, totalCount } = useInvoices();
   const toolbar = useToolbar(actions);
 
   const setPagination = useCallback(
@@ -30,8 +31,8 @@ const CodesGrid = () => {
       setPaginationModel(pagination);
       setSearchParams((prev) => {
         const newParams = new URLSearchParams(prev);
-        newParams.set('code_page', pagination.page);
-        newParams.set('code_page_size', pagination.pageSize);
+        newParams.set('page', pagination.page);
+        newParams.set('page_size', pagination.pageSize);
         return newParams;
       });
     },
@@ -44,9 +45,9 @@ const CodesGrid = () => {
         columns={columns}
         initialPagination={initialPagination}
         loading={status === 'loading'}
-        placeholder="Name"
+        placeholder="User ID / Name"
         rowCount={totalCount}
-        rows={codes}
+        rows={invoices}
         toolbar={toolbar}
         onFilterModelChange={setFilterModel}
         onPaginationModelChange={setPagination}
@@ -56,4 +57,4 @@ const CodesGrid = () => {
   );
 };
 
-export default CodesGrid;
+export default UsersGrid;

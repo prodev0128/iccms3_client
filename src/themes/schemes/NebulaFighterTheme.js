@@ -322,7 +322,7 @@ export const NebulaFighterTheme = createTheme({
             backdropFilter: 'blur(2px)',
             backgroundColor: 'transparent',
           },
-          backdropFilter: 'blur(2px)',
+          backdropFilter: 'none',
 
           backgroundColor: alpha(darken('#070C27', 0.5), 0.4),
         },
