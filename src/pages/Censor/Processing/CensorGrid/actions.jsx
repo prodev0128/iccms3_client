@@ -38,7 +38,7 @@ const useActions = (paginationModel, filterModel, sortModel, individualCodes) =>
 
   const debouncedFetchIndividualCodes = useDebounceCallback(
     useCallback(async () => {
-      await dispatch(fetchIndividualCodes({ types: 'job,dep' }));
+      await dispatch(fetchIndividualCodes({ types: 'job,dep,status,cenFlag,fileType' }));
     }, [dispatch]),
     debounceTime,
   );

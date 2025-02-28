@@ -8,7 +8,7 @@ import useActions from './actions';
 import useColumns from './columns';
 import useToolbar from './toolbar';
 
-const UsersGrid = () => {
+const CensorGrid = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialPagination = useRef({
@@ -57,4 +57,4 @@ const UsersGrid = () => {
   );
 };
 
-export default UsersGrid;
+export default CensorGrid;

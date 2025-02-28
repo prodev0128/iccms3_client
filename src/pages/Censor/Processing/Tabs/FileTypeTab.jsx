@@ -3,16 +3,16 @@ import { useMemo, useState } from 'react';
 
 import { useCodes } from '../../../../redux/selectors';
 
-const StatusTab = () => {
+const FileTypeTab = () => {
   const { individualCodes } = useCodes();
-  const status = useMemo(() => individualCodes?.status?.filter((item) => item.isActive) || [], [individualCodes]);
+  const status = useMemo(() => individualCodes?.fileType?.filter((item) => item.isActive) || [], [individualCodes]);
   const tabs = useMemo(() => [{ name: 'All', value: 'ALL' }, ...status], [status]);
   const [currentTab, setCurrentTab] = useState('ALL');
 
   return (
     <Tabs
       centered
-      indicatorColor="primary"
+      indicatorColor="secondary"
       textColor="primary"
       value={currentTab}
       variant="fullWidth"
@@ -25,4 +25,4 @@ const StatusTab = () => {
   );
 };
 
-export default StatusTab;
+export default FileTypeTab;
