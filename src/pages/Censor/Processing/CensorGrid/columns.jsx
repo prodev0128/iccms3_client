@@ -1,4 +1,4 @@
-import { CheckTwoTone } from '@mui/icons-material';
+import { AppRegistrationTwoTone } from '@mui/icons-material';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
 import { useCodes } from '../../../../redux/selectors';
@@ -13,11 +13,11 @@ const useColumns = (actions) => {
       field: 'actions',
       getActions: ({ row }) => [
         <GridActionItem
-          icon={<CheckTwoTone />}
-          key="Allow"
-          label="Allow"
+          icon={<AppRegistrationTwoTone />}
+          key="Register"
+          label="Register"
           visible={!row.isActive}
-          onClick={() => actions.allowUser(row)}
+          onClick={() => actions.updateInvoicesStatus([row.id])}
         />,
       ],
       renderHeader: (params) => <MenuToolbar actions={actions} />,

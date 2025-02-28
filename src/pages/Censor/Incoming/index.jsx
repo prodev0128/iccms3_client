@@ -5,7 +5,6 @@ import PageTitleWrapper from '../../../components/PageTitleWrapper';
 import CensorGrid from './CensorGrid';
 import PageHeader from './PageHeader';
 import FileTypeTab from './Tabs/FileTypeTab';
-import StatusTab from './Tabs/StatusTab';
 
 const Processing = () => {
   return (

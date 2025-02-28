@@ -28,6 +28,15 @@ export const updateInvoice = (id, data) => {
   return apiAction(invoicesSlice.actions.updateInvoice, apiInfo);
 };
 
+export const updateInvoicesStatus = (ids, data) => {
+  const apiInfo = {
+    data,
+    method: 'PUT',
+    url: `http://localhost:3129/invoices/status`,
+  };
+  return apiAction(invoicesSlice.actions.updateInvoicesStatus, apiInfo);
+};
+
 export const setSelectedInvoices = (data) => (dispatch) => {
   dispatch(invoicesSlice.actions.setSelectedInvoices(data));
 };

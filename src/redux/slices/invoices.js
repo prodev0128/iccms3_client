@@ -34,6 +34,9 @@ const invoicesSlice = createSlice({
         state.invoices = state.invoices.map((invoice) => (invoice.id === data.id ? data : invoice));
       }
     },
+    updateInvoicesStatus: (state, { payload }) => {
+      state.status = payload.status;
+    },
     // deleteInvoice: (state, { payload }) => {
     //   const { data, status } = payload;
     //   state.status = status;

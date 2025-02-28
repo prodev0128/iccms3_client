@@ -6,8 +6,8 @@ import { useSearchParams } from 'react-router';
 import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { fetchIndividualCodes } from '../../../../redux/actions/codes';
-import { fetchInvoices /*updateInvoice*/ } from '../../../../redux/actions/invoices';
-import { useCodes } from '../../../../redux/selectors';
+import { fetchInvoices, updateInvoice, updateInvoicesStatus } from '../../../../redux/actions/invoices';
+// import { useCodes } from '../../../../redux/selectors';
 // import InvoiceDialog from '../Dialogs/InvoiceDialog';
 
 const useActions = (paginationModel, filterModel, sortModel) => {
@@ -33,16 +33,26 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     debounceTime,
   );
 
-  // const handleUpdateInvoice = useCallback(
+  // const handleRegister = useCallback(
   //   async (data) => {
-  //     // const updatedInvoice = await dialogs.open(InvoiceDialog, { type: 'Edit', data, individualCodes });
-  //     // if (!updatedInvoice) {
-  //     //   return;
-  //     // }
-  //     // await dispatch(updateInvoice(data.id, updatedInvoice));
+  //     await dispatch(updateInvoice(data.id));
   //   },
-  //   [dispatch, dialogs, individualCodes],
+  //   [dispatch],
   // );
+
+  const handleUpdateInvoice = useCallback(
+    async (data) => {
+      await dispatch(updateInvoice(data.id, data));
+    },
+    [dispatch],
+  );
+
+  const handleUpdateInvoicesStatus = useCallback(
+    async (ids, action) => {
+      await dispatch(updateInvoicesStatus(ids, action));
+    },
+    [dispatch],
+  );
 
   const debouncedFetchIndividualCodes = useDebounceCallback(
     useCallback(async () => {
@@ -61,7 +71,8 @@ const useActions = (paginationModel, filterModel, sortModel) => {
 
   return {
     fetchInvoices: debouncedFetchInvoices,
-    // updateInvoice: handleUpdateInvoice,
+    updateInvoice: handleUpdateInvoice,
+    updateInvoicesStatus: handleUpdateInvoicesStatus,
     fetchIndividualCodes: debouncedFetchIndividualCodes,
   };
 };
