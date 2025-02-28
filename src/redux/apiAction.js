@@ -1,4 +1,4 @@
-import axios from '../utils/axios';
+import axios from '../globals/axios';
 
 const apiAction = (sliceAction, params) => async (dispatch) => {
   dispatch(sliceAction({ status: 'loading' }));

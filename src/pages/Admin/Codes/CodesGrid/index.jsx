@@ -2,8 +2,8 @@ import { useCallback, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
 import CustomDataGrid from '../../../../components/CustomDataGrid';
+import { initialPaginationModel } from '../../../../globals/constants';
 import { useCodes } from '../../../../redux/selectors';
-import { initialPaginationModel } from '../../../../utils/utils';
 import useActions from './actions';
 import useColumns from './columns';
 import useToolbar from './toolbar';

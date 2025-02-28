@@ -8,13 +8,13 @@ import { useDispatch } from 'react-redux';
 import { useRoutes } from 'react-router';
 
 import Authenticated from './components/Authenticated';
+import { debounceTime } from './globals/constants';
 import useDebounceCallback from './hooks/useDebounceCallback';
 import SnackbarManager from './pages/SnackbarManager';
 import { fetchProfile, initialize } from './redux/actions/auth';
 import { useAuth } from './redux/selectors';
 import router from './router';
 import ThemeProvider from './themes/ThemeProvider';
-import { debounceTime } from './utils/utils';
 
 const App = () => {
   const dispatch = useDispatch();

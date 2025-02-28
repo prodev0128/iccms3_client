@@ -11,9 +11,12 @@ import { Chip } from '@mui/material';
 import { format } from 'date-fns';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
+import { useCodes } from '../../../../redux/selectors';
 
-const useColumns = (actions, individualCodes) => {
+const useColumns = (actions) => {
+  const { individualCodes } = useCodes();
   const { dep: deps = [], gender: genders = [], job: jobs = [] } = individualCodes;
+
   return [
     {
       field: 'actions',

@@ -1,9 +1,9 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
 import CustomDataGrid from '../../../../components/CustomDataGrid';
+import { initialPaginationModel } from '../../../../globals/constants';
 import { useCodes, useInvoices } from '../../../../redux/selectors';
-import { initialPaginationModel } from '../../../../utils/utils';
 import useActions from './actions';
 import useColumns from './columns';
 import useToolbar from './toolbar';
@@ -16,19 +16,23 @@ const CensorGrid = () => {
     pageSize: parseInt(searchParams.get('page_size')) || initialPaginationModel.pageSize,
   }).current;
 
-  const [paginationModel, setPaginationModel] = useState(initialPagination);
+  const paginationModel = useMemo(
+    () => ({
+      page: parseInt(searchParams.get('page')) || initialPaginationModel.page,
+      pageSize: parseInt(searchParams.get('page_size')) || initialPaginationModel.pageSize,
+    }),
+    [searchParams],
+  );
   const [filterModel, setFilterModel] = useState({ items: [] });
   const [sortModel, setSortModel] = useState([]);
 
-  const { individualCodes } = useCodes();
-  const actions = useActions(paginationModel, filterModel, sortModel, individualCodes);
-  const columns = useColumns(actions, individualCodes);
+  const actions = useActions(paginationModel, filterModel, sortModel);
+  const columns = useColumns(actions);
   const { invoices, status, totalCount } = useInvoices();
   const toolbar = useToolbar(actions);
 
   const setPagination = useCallback(
     (pagination) => {
-      setPaginationModel(pagination);
       setSearchParams((prev) => {
         const newParams = new URLSearchParams(prev);
         newParams.set('page', pagination.page);

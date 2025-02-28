@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { removeAccessToken, setAccessToken } from '../../utils/axios';
-import { verify } from '../../utils/jwt';
+import { removeAccessToken, setAccessToken } from '../../globals/axios';
+import { verify } from '../../globals/jwt';
 
 const initialUser = {
   avatar: '',

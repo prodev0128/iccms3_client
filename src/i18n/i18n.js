@@ -1,4 +1,4 @@
-import i18n, { use } from 'i18next';
+import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 import enJSON from './translations/en';
@@ -9,7 +9,7 @@ const resources = {
   kp: { translation: kpJSON },
 };
 
-use(initReactI18next).init({
+i18next.use(initReactI18next).init({
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false,
@@ -22,4 +22,4 @@ use(initReactI18next).init({
   resources,
 });
 
-export default i18n;
+export default i18next;

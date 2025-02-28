@@ -3,7 +3,7 @@ import { LicenseInfo } from '@mui/x-license';
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 
-import { pageSizes } from '../../utils/utils';
+import { pageSizes } from '../../globals/constants';
 import GridCustomToolbar from './GridCustomToolbar';
 
 LicenseInfo.setLicenseKey(

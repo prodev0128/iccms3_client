@@ -2,8 +2,8 @@ import { useCallback, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
 import CustomDataGrid from '../../../../components/CustomDataGrid';
-import { useCodes, useUsers } from '../../../../redux/selectors';
-import { initialPaginationModel } from '../../../../utils/utils';
+import { initialPaginationModel } from '../../../../globals/constants';
+import { useUsers } from '../../../../redux/selectors';
 import useActions from './actions';
 import useColumns from './columns';
 import useToolbar from './toolbar';
@@ -20,9 +20,8 @@ const UsersGrid = () => {
   const [filterModel, setFilterModel] = useState({ items: [] });
   const [sortModel, setSortModel] = useState([]);
 
-  const { individualCodes } = useCodes();
-  const actions = useActions(paginationModel, filterModel, sortModel, individualCodes);
-  const columns = useColumns(actions, individualCodes);
+  const actions = useActions(paginationModel, filterModel, sortModel);
+  const columns = useColumns(actions);
   const { status, totalCount, users } = useUsers();
   const toolbar = useToolbar(actions);
 

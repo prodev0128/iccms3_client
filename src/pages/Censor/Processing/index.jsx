@@ -7,7 +7,7 @@ import PageHeader from './PageHeader';
 import FileTypeTab from './Tabs/FileTypeTab';
 import StatusTab from './Tabs/StatusTab';
 
-const Receipt = () => {
+const Processing = () => {
   return (
     <>
       <Helmet>
@@ -29,4 +29,4 @@ const Receipt = () => {
   );
 };
 
-export default Receipt;
+export default Processing;

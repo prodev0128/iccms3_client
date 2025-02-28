@@ -2,14 +2,15 @@ import { useDialogs } from '@toolpad/core';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import PaperComponent from '../../../../components/CustomDialog/PageComponent';
+import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { fetchIndividualCodes } from '../../../../redux/actions/codes';
 import { createUser, deleteUser, fetchUsers, resetPassword, updateUser } from '../../../../redux/actions/users';
-import { debounceTime } from '../../../../utils/utils';
+import { useCodes } from '../../../../redux/selectors';
 import UserDialog from '../Dialogs/UserDialog';
 
-const useActions = (paginationModel, filterModel, sortModel, individualCodes) => {
+const useActions = (paginationModel, filterModel, sortModel) => {
+  const { individualCodes } = useCodes();
   const dispatch = useDispatch();
   const dialogs = useDialogs();
 

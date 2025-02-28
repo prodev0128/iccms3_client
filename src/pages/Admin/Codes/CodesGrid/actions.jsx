@@ -2,10 +2,10 @@ import { useDialogs } from '@toolpad/core';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { createCode, deleteCode, fetchCodes, updateCode } from '../../../../redux/actions/codes';
 import { useCodeOptions } from '../../../../redux/selectors';
-import { debounceTime } from '../../../../utils/utils';
 import CodeDialog from '../Dialogs/CodeDialog';
 
 const useActions = (paginationModel, filterModel, sortModel) => {
