@@ -27,3 +27,7 @@ export const updateInvoice = (id, data) => {
   };
   return apiAction(invoicesSlice.actions.updateInvoice, apiInfo);
 };
+
+export const setSelectedInvoices = (data) => (dispatch) => {
+  dispatch(invoicesSlice.actions.setSelectedInvoices(data));
+};

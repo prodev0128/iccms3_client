@@ -1,17 +1,14 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router';
 
 import CustomDataGrid from '../../../../components/CustomDataGrid';
 import { initialPaginationModel } from '../../../../globals/constants';
-import { setSelectedInvoices } from '../../../../redux/actions/invoices';
-import { useInvoices } from '../../../../redux/selectors';
+import { useCodes, useInvoices } from '../../../../redux/selectors';
 import useActions from './actions';
 import useColumns from './columns';
 import useToolbar from './toolbar';
 
 const CensorGrid = () => {
-  const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialPagination = useRef({
@@ -59,9 +56,6 @@ const CensorGrid = () => {
         onFilterModelChange={setFilterModel}
         onPaginationModelChange={setPagination}
         onSortModelChange={setSortModel}
-        onRowSelectionModelChange={(data, { api }) =>
-          dispatch(setSelectedInvoices(api.getSelectedRows().values().toArray()))
-        }
       />
     </>
   );

@@ -41,10 +41,10 @@ const CustomDataGrid = ({ columns, initialPagination, onRowClick, placeholder, t
     <>
       <DataGridPro
         checkboxSelection
+        disableRowSelectionOnClick
         pagination
         apiRef={apiRef}
         columns={newColumns}
-        disableRowSelectionOnClick={true}
         filterMode="server"
         pageSizeOptions={pageSizes}
         paginationMode="server"
@@ -60,8 +60,18 @@ const CustomDataGrid = ({ columns, initialPagination, onRowClick, placeholder, t
             variant: 'circular-progress',
           },
         }}
-        onRowClick={(params) => {
-          apiRef.current.setRowSelectionModel([params.id]);
+        onRowClick={(params, event) => {
+          if (event.ctrlKey || event.shiftKey) {
+            const selectedRows = new Set(apiRef.current.getSelectedRows().keys());
+            if (selectedRows.has(params.id)) {
+              selectedRows.delete(params.id);
+            } else {
+              selectedRows.add(params.id);
+            }
+            apiRef.current.setRowSelectionModel(Array.from(selectedRows));
+          } else {
+            apiRef.current.setRowSelectionModel([params.id]);
+          }
           onRowClick && onRowClick(params);
         }}
         {...props}

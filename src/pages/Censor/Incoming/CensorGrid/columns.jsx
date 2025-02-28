@@ -2,7 +2,6 @@ import { CheckTwoTone } from '@mui/icons-material';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
 import { useCodes } from '../../../../redux/selectors';
-import MenuToolbar from './MenuToolbar';
 
 const useColumns = (actions) => {
   const { individualCodes } = useCodes();
@@ -20,7 +19,6 @@ const useColumns = (actions) => {
           onClick={() => actions.allowUser(row)}
         />,
       ],
-      renderHeader: (params) => <MenuToolbar actions={actions} />,
       type: 'actions',
       width: 160,
     },

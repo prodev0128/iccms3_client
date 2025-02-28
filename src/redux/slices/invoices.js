@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   invoices: [],
+  selectedInvoices: [],
   status: 'idle',
   totalCount: 0,
 };
@@ -41,6 +42,10 @@ const invoicesSlice = createSlice({
     //     state.totalCount--;
     //   }
     // },
+    setSelectedInvoices: (state, { payload }) => {
+      state.status = 'success';
+      state.selectedInvoices = payload;
+    },
   },
 });
 
