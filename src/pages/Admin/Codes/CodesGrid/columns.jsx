@@ -14,38 +14,26 @@ const useColumns = (actions) => {
   return [
     {
       field: 'actions',
-      getActions: ({ row }) => [
-        <GridActionItem
-          icon={<CheckTwoTone />}
-          key="Allow"
-          label="Allow"
-          visible={!row.isActive}
-          onClick={() => actions.allowCode(row)}
-        />,
-        <GridActionItem
-          icon={<DoDisturbTwoTone />}
-          key="Disallow"
-          label="Disallow"
-          visible={row.isActive}
-          onClick={() => actions.disallowCode(row)}
-        />,
-        <GridActionItem
-          visible
-          icon={<EditTwoTone />}
-          key="Edit"
-          label="Edit"
-          onClick={() => actions.updateCode(row)}
-        />,
-        <GridActionItem
-          visible
-          icon={<DeleteTwoTone />}
-          key="Delete"
-          label="Delete"
-          onClick={() => actions.deleteCode(row)}
-        />,
-      ],
       type: 'actions',
       width: 125,
+      renderCell: ({ row }) => (
+        <>
+          <GridActionItem
+            icon={CheckTwoTone}
+            label="Allow"
+            visible={!row.isActive}
+            onClick={() => actions.allowCode(row)}
+          />
+          <GridActionItem
+            icon={DoDisturbTwoTone}
+            label="Disallow"
+            visible={row.isActive}
+            onClick={() => actions.disallowCode(row)}
+          />
+          <GridActionItem visible icon={EditTwoTone} label="Edit" onClick={() => actions.updateCode(row)} />
+          <GridActionItem visible icon={DeleteTwoTone} label="Delete" onClick={() => actions.deleteCode(row)} />
+        </>
+      ),
     },
     { field: 'name', headerName: 'Name', width: 150 },
     { field: 'value', headerName: 'Value', width: 150 },

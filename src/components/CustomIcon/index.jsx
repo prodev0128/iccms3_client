@@ -17,11 +17,11 @@ const CustomIcon = ({ cancel = false, color = 'inherit', icon: Icon }) => {
           sx={{
             position: 'absolute',
             top: '50%',
-            left: 0,
+            left: '50%',
             width: '100%',
             height: '2px',
-            backgroundColor: theme.palette[color]?.main || color,
-            transform: 'rotate(45deg)',
+            backgroundColor: theme.palette[color]?.main || theme.palette.text.primary,
+            transform: 'translate(-50%, -50%) rotate(45deg)',
           }}
         />
       )}

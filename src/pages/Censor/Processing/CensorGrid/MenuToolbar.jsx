@@ -34,7 +34,7 @@ const MenuToolbar = ({ actions }) => {
           icon={AppRegistrationTwoTone}
           label="Register"
           onClick={() => {
-            actions.updateInvoicesStatus(selectedInvoiceIds, { action: invoiceActions.REGISTER, work: true });
+            actions.updateInvoicesStatus({ ids: selectedInvoiceIds, action: invoiceActions.REGISTER });
             handleClose();
           }}
         />
@@ -44,7 +44,7 @@ const MenuToolbar = ({ actions }) => {
           icon={AppRegistrationTwoTone}
           label="Unregister"
           onClick={() => {
-            actions.updateInvoicesStatus(selectedInvoiceIds, { action: invoiceActions.UNREGISTER, work: true });
+            actions.updateInvoicesStatus({ ids: selectedInvoiceIds, action: invoiceActions.UNREGISTER });
             handleClose();
           }}
         />

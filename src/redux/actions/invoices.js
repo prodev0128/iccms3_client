@@ -28,9 +28,9 @@ export const updateInvoice = (id, data) => {
   return apiAction(invoicesSlice.actions.updateInvoice, apiInfo);
 };
 
-export const updateInvoicesStatus = (ids, event) => {
+export const updateInvoicesStatus = (data) => {
   const apiInfo = {
-    data: { ids, event },
+    data,
     method: 'PATCH',
     url: `http://localhost:3129/invoices/status`,
   };

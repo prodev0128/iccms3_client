@@ -12,30 +12,26 @@ const useColumns = (actions) => {
   return [
     {
       field: 'actions',
+      type: 'actions',
+      width: 160,
+      renderHeader: () => <MenuToolbar actions={actions} />,
       renderCell: ({ row }) => (
         <>
           <GridActionItem
             visible
             icon={AppRegistrationTwoTone}
-            key="Register"
             label="Register"
-            onClick={() => actions.updateInvoicesStatus([row.id], { action: invoiceActions.REGISTER, work: true })}
+            onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.REGISTER })}
           />
           <GridActionItem
             cancel
             visible
             icon={AppRegistrationTwoTone}
-            key="Unregister"
             label="Unregister"
-            onClick={() => actions.updateInvoicesStatus([row.id], { action: invoiceActions.UNREGISTER, work: true })}
+            onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.UNREGISTER })}
           />
         </>
       ),
-      renderHeader: (params) => <MenuToolbar actions={actions} />,
-      width: 160,
-      filterable: false,
-      editable: false,
-      sortable: false,
     },
     { field: 'name', headerName: 'Name', width: 150 },
     {

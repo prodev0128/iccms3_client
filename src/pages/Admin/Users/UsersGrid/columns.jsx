@@ -20,43 +20,25 @@ const useColumns = (actions) => {
   return [
     {
       field: 'actions',
-      getActions: ({ row }) => [
-        <GridActionItem
-          icon={<CheckTwoTone />}
-          key="Allow"
-          label="Allow"
-          visible={!row.isActive}
-          onClick={() => actions.allowUser(row)}
-        />,
-        <GridActionItem
-          icon={<DoDisturbTwoTone />}
-          key="Disallow"
-          label="Disallow"
-          visible={row.isActive}
-          onClick={() => actions.disallowUser(row)}
-        />,
-        <GridActionItem
-          visible
-          icon={<KeyTwoTone />}
-          key="Reset"
-          label="Reset Password"
-          onClick={() => actions.resetPassword(row)}
-        />,
-        <GridActionItem
-          visible
-          icon={<EditTwoTone />}
-          key="Edit"
-          label="Edit"
-          onClick={() => actions.updateUser(row)}
-        />,
-        <GridActionItem
-          visible
-          icon={<DeleteTwoTone />}
-          key="Delete"
-          label="Delete"
-          onClick={() => actions.deleteUser(row)}
-        />,
-      ],
+      renderCell: ({ row }) => (
+        <>
+          <GridActionItem
+            icon={CheckTwoTone}
+            label="Allow"
+            visible={!row.isActive}
+            onClick={() => actions.allowUser(row)}
+          />
+          <GridActionItem
+            icon={DoDisturbTwoTone}
+            label="Disallow"
+            visible={row.isActive}
+            onClick={() => actions.disallowUser(row)}
+          />
+          <GridActionItem visible icon={KeyTwoTone} label="Reset Password" onClick={() => actions.resetPassword(row)} />
+          <GridActionItem visible icon={EditTwoTone} label="Edit" onClick={() => actions.updateUser(row)} />
+          <GridActionItem visible icon={DeleteTwoTone} label="Delete" onClick={() => actions.deleteUser(row)} />
+        </>
+      ),
       type: 'actions',
       width: 160,
     },

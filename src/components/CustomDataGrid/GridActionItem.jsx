@@ -6,7 +6,7 @@ import CustomIcon from '../CustomIcon';
 const GridActionItem = ({ cancel = false, color = 'inherit', icon, label, onClick, visible }) => {
   return visible ? (
     <Tooltip title={label}>
-      <IconButton color="primary" onClick={onClick}>
+      <IconButton color={color} onClick={onClick}>
         <CustomIcon cancel={cancel} color={color} icon={icon} />
       </IconButton>
     </Tooltip>
