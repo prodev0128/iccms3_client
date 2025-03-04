@@ -87,14 +87,14 @@ const UserDialog = ({ onClose, open, payload }) => {
           </Grid2>
           <Grid2 size={{ sm: 6, xs: 12 }}>
             <SingleSelect
-              hideDisabled
+              haveDisableOption
               error={!!errors.gender}
               helperText={errors.gender}
               label="gender *"
               options={genders}
               value={data.gender}
               onBlur={() => validate('gender')}
-              onChange={(option) => updateData('gender', option.value)}
+              onChange={({ value }) => updateData('gender', value)}
             />
           </Grid2>
           <Grid2 size={{ sm: 6, xs: 12 }}>
@@ -113,24 +113,26 @@ const UserDialog = ({ onClose, open, payload }) => {
           </Grid2>
           <Grid2 size={{ sm: 6, xs: 12 }}>
             <SingleSelect
+              haveDisableOption
               error={!!errors.dep}
               helperText={errors.dep}
               label="dep *"
               options={deps}
               value={data.dep}
               onBlur={() => validate('dep')}
-              onChange={(option) => updateData('dep', option.value)}
+              onChange={({ value }) => updateData('dep', value)}
             />
           </Grid2>
           <Grid2 size={{ sm: 6, xs: 12 }}>
             <SingleSelect
+              haveDisableOption
               error={!!errors.job}
               helperText={errors.job}
               label="job *"
               options={jobs}
               value={data.job}
               onBlur={() => validate('job')}
-              onChange={(option) => updateData('job', option.value)}
+              onChange={({ value }) => updateData('job', value)}
             />
           </Grid2>
           <Grid2 size={{ sm: 6, xs: 12 }}>

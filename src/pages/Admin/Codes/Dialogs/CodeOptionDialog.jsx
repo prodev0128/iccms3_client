@@ -1,26 +1,37 @@
-import { Button, DialogActions, DialogContent, DialogTitle, Grid2, TextField } from '@mui/material';
+import { AddTwoTone, DeleteTwoTone } from '@mui/icons-material';
+import { Button, DialogActions, DialogContent, DialogTitle, Grid2, IconButton, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
 
 import CustomDialog from '../../../../components/CustomDialog';
+import SingleSelect from '../../../../components/CustomSelect/SingleSelect';
+import GroupBox from '../../../../components/GroupBox';
+import { useCodeOptions } from '../../../../redux/selectors';
 
 const schema = Yup.object({
   type: Yup.string().required('Type is required'),
   name: Yup.string().required('Name is required'),
 });
 
+const optionTypes = [
+  { name: 'Text', value: 'TEXT' },
+  { name: 'Boolean', value: 'BOOLEAN' },
+  { name: 'SingleSelect', value: 'SINGLE_SELECT' },
+];
+
 const CodeOptionDialog = ({ onClose, open, payload }) => {
+  const { codeOptions: originalCodeOptions } = useCodeOptions();
+  const codeOptions = useMemo(
+    () => originalCodeOptions.map((option) => ({ value: option.type, name: option.name })),
+    [originalCodeOptions],
+  );
+
   const [data, setData] = useState(payload.data || {});
   const [errors, setErrors] = useState({});
   const [confirmWithoutSaving, setConfirmWithoutSaving] = useState(false);
 
   const title = useMemo(() => `${payload.type} CodeOption`, [payload]);
-
-  const updateData = (key, value) => {
-    setConfirmWithoutSaving(true);
-    setData((prevData) => ({ ...prevData, [key]: value }));
-  };
 
   const validateAndSave = async () => {
     try {
@@ -36,6 +47,31 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
     }
   };
 
+  const updateData = (key, value) => {
+    setConfirmWithoutSaving(true);
+    setData((prevData) => ({ ...prevData, [key]: value }));
+  };
+
+  const handleAddOption = () => {
+    updateData('options', [...data.options, {}]);
+  };
+
+  const handleRemoveOption = (index) => {
+    setData((prevData) => {
+      const options = [...prevData.options];
+      options.splice(index, 1);
+      return { ...prevData, options: [...options] };
+    });
+  };
+
+  const updateOptionsData = (index, key, value) => {
+    setData((prevData) => {
+      const options = [...prevData.options];
+      const newOptions = options.map((option, i) => (index === i ? { ...option, [key]: value } : { ...option }));
+      return { ...prevData, options: newOptions };
+    });
+  };
+
   return (
     <CustomDialog confirmWithoutSaving={confirmWithoutSaving} draggable={true} open={open} onClose={() => onClose()}>
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
@@ -48,7 +84,7 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
               helperText={errors.type}
               label="type"
               placeholder="type"
-              value={data.type || ''}
+              value={data?.type || ''}
               onChange={(e) => updateData('type', e.target.value)}
             />
           </Grid2>
@@ -59,9 +95,62 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
               helperText={errors.name}
               label="name"
               placeholder="name"
-              value={data.name || ''}
+              value={data?.name || ''}
               onChange={(e) => updateData('name', e.target.value)}
             />
+          </Grid2>
+          <Grid2 size={12}>
+            <GroupBox
+              label="options"
+              toolbar={
+                <IconButton onClick={handleAddOption}>
+                  <AddTwoTone />
+                </IconButton>
+              }
+            >
+              <Grid2 container spacing={2}>
+                {data?.options?.map((option, index) => (
+                  <Grid2 key={index} size={12}>
+                    <Grid2 container columns={10} spacing={1}>
+                      <Grid2 size={3}>
+                        <TextField
+                          fullWidth
+                          error={!!errors.name}
+                          helperText={errors.name}
+                          label="name"
+                          placeholder="name"
+                          value={option?.name || ''}
+                          onChange={(e) => updateOptionsData(index, 'name', e.target.value)}
+                        />
+                      </Grid2>
+                      <Grid2 size={3}>
+                        <SingleSelect
+                          label="type"
+                          options={optionTypes}
+                          value={option?.type || ''}
+                          onChange={({ value }) => updateOptionsData(index, 'type', value)}
+                        />
+                      </Grid2>
+                      <Grid2 size={3}>
+                        {option?.type === 'SINGLE_SELECT' && (
+                          <SingleSelect
+                            label="code-option"
+                            options={codeOptions}
+                            value={option?.value || ''}
+                            onChange={({ value }) => updateOptionsData(index, 'value', value)}
+                          />
+                        )}
+                      </Grid2>
+                      <Grid2 size={1}>
+                        <IconButton color="error" onClick={() => handleRemoveOption(index)}>
+                          <DeleteTwoTone />
+                        </IconButton>
+                      </Grid2>
+                    </Grid2>
+                  </Grid2>
+                ))}
+              </Grid2>
+            </GroupBox>
           </Grid2>
         </Grid2>
       </DialogContent>
