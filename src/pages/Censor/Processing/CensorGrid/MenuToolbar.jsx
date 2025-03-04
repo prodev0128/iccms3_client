@@ -1,11 +1,16 @@
-import { DeleteTwoTone, EditTwoTone, ExpandMoreTwoTone, VisibilityTwoTone } from '@mui/icons-material';
-import { Divider, IconButton, Menu, MenuItem } from '@mui/material';
+import { AppRegistrationTwoTone, DeleteTwoTone, ExpandMoreTwoTone } from '@mui/icons-material';
+import { Divider, IconButton, Menu } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
-import Text from '../../../../components/Text';
+import CustomMenuItem from '../../../../components/CustomMenu/CustomMenuItem';
+import { invoiceActions } from '../../../../globals/constants';
+import { useInvoices } from '../../../../redux/selectors';
 
 const MenuToolbar = ({ actions }) => {
+  const { selectedInvoices } = useInvoices();
+  const selectedInvoiceIds = useMemo(() => selectedInvoices?.map((invoice) => invoice.id), [selectedInvoices]);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -24,40 +29,35 @@ const MenuToolbar = ({ actions }) => {
       </IconButton>
 
       <Menu anchorEl={anchorEl} open={open} sx={{ p: 0 }} onClose={handleClose}>
-        <MenuItem
+        <CustomMenuItem
+          color="primary"
+          icon={AppRegistrationTwoTone}
+          label="Register"
           onClick={() => {
-            actions.fetchInvoices();
+            actions.updateInvoicesStatus(selectedInvoiceIds, { action: invoiceActions.REGISTER, work: true });
             handleClose();
           }}
-        >
-          <VisibilityTwoTone color="primary" />
-          <Text color="primary" sx={{ pl: 1 }}>
-            View
-          </Text>
-        </MenuItem>
-        <MenuItem
+        />
+        <CustomMenuItem
+          cancel
+          color="primary"
+          icon={AppRegistrationTwoTone}
+          label="Unregister"
           onClick={() => {
-            actions.fetchInvoices();
+            actions.updateInvoicesStatus(selectedInvoiceIds, { action: invoiceActions.UNREGISTER, work: true });
             handleClose();
           }}
-        >
-          <EditTwoTone color="primary" />
-          <Text color="primary" sx={{ pl: 1 }}>
-            Edit
-          </Text>
-        </MenuItem>
+        />
         <Divider />
-        <MenuItem
+        <CustomMenuItem
+          color="error"
+          icon={DeleteTwoTone}
+          label="Remove"
           onClick={() => {
             actions.fetchInvoices();
             handleClose();
           }}
-        >
-          <DeleteTwoTone color="error" />
-          <Text color="error" sx={{ pl: 1 }}>
-            Remove
-          </Text>
-        </MenuItem>
+        />
       </Menu>
     </>
   );

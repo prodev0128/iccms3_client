@@ -1,17 +1,24 @@
-import { Tooltip } from '@mui/material';
-import { GridActionsCellItem } from '@mui/x-data-grid-pro';
+import { IconButton, Tooltip } from '@mui/material';
 import PropTypes from 'prop-types';
 
-const GridActionItem = ({ icon, label, onClick, visible }) => {
+import CustomIcon from '../CustomIcon';
+
+const GridActionItem = ({ cancel = false, color = 'inherit', icon, label, onClick, visible }) => {
   return visible ? (
-    <GridActionsCellItem icon={<Tooltip title={label}>{icon}</Tooltip>} label={label} onClick={onClick} />
+    <Tooltip title={label}>
+      <IconButton color="primary" onClick={onClick}>
+        <CustomIcon cancel={cancel} color={color} icon={icon} />
+      </IconButton>
+    </Tooltip>
   ) : (
     <></>
   );
 };
 
 GridActionItem.propTypes = {
-  icon: PropTypes.element.isRequired,
+  cancel: PropTypes.bool,
+  color: PropTypes.string,
+  icon: PropTypes.elementType.isRequired,
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
