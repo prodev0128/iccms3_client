@@ -33,6 +33,13 @@ const usersSlice = createSlice({
         state.users = state.users.map((user) => (user.id === data.id ? data : user));
       }
     },
+    updateUserRoles: (state, { payload }) => {
+      const { data, status } = payload;
+      state.status = status;
+      if (status === 'success') {
+        state.users = state.users.map((user) => (user.id === data.id ? data : user));
+      }
+    },
     deleteUser: (state, { payload }) => {
       const { data, status } = payload;
       state.status = status;

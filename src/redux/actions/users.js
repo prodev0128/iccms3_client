@@ -30,6 +30,15 @@ export const updateUser = (id, data) => {
   return apiAction(usersSlice.actions.updateUser, apiInfo);
 };
 
+export const updateUserRoles = (id, data) => {
+  const apiInfo = {
+    data,
+    method: 'PUT',
+    url: `${usersUrl}/roles/${id}`,
+  };
+  return apiAction(usersSlice.actions.updateUserRoles, apiInfo);
+};
+
 export const deleteUser = (id) => {
   const apiInfo = {
     method: 'DELETE',
