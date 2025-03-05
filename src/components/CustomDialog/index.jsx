@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 
 import PaperComponent from './PageComponent';
 
-const CustomDialog = ({ children, confirmWithoutSaving = false, draggable = false, onClose, open }) => {
+const CustomDialog = ({ children, confirmWithoutSaving = false, draggable = false, onClose, open, ...props }) => {
   const dialogs = useDialogs();
 
   const onConfirmClose = useCallback(async () => {
@@ -30,6 +30,7 @@ const CustomDialog = ({ children, confirmWithoutSaving = false, draggable = fals
       open={open}
       PaperComponent={draggable ? PaperComponent : null}
       onClose={onConfirmClose}
+      {...props}
     >
       {children}
     </Dialog>

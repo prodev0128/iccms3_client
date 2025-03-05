@@ -7,6 +7,8 @@ import * as Yup from 'yup';
 import CustomDialog from '../../../../components/CustomDialog';
 import SingleSelect from '../../../../components/CustomSelect/SingleSelect';
 import GroupBox from '../../../../components/GroupBox';
+import { codeOptionTypes } from '../../../../globals/constants';
+import { getCodeOptionTypesToArray } from '../../../../globals/utils';
 import { useCodeOptions } from '../../../../redux/selectors';
 
 const schema = Yup.object({
@@ -14,11 +16,7 @@ const schema = Yup.object({
   name: Yup.string().required('Name is required'),
 });
 
-const optionTypes = [
-  { name: 'Text', value: 'TEXT' },
-  { name: 'Boolean', value: 'BOOLEAN' },
-  { name: 'SingleSelect', value: 'SINGLE_SELECT' },
-];
+const optionTypes = getCodeOptionTypesToArray();
 
 const CodeOptionDialog = ({ onClose, open, payload }) => {
   const { codeOptions: originalCodeOptions } = useCodeOptions();
@@ -73,7 +71,13 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
   };
 
   return (
-    <CustomDialog confirmWithoutSaving={confirmWithoutSaving} draggable={true} open={open} onClose={() => onClose()}>
+    <CustomDialog
+      confirmWithoutSaving={confirmWithoutSaving}
+      draggable={true}
+      maxWidth="lg"
+      open={open}
+      onClose={() => onClose()}
+    >
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent>
         <Grid2 container spacing={2} sx={{ pt: 2 }}>
@@ -111,12 +115,19 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
               <Grid2 container spacing={2}>
                 {data?.options?.map((option, index) => (
                   <Grid2 key={index} size={12}>
-                    <Grid2 container columns={10} spacing={1}>
+                    <Grid2 container columns={13} spacing={2}>
                       <Grid2 size={3}>
                         <TextField
                           fullWidth
-                          error={!!errors.name}
-                          helperText={errors.name}
+                          label="key"
+                          placeholder="key"
+                          value={option?.key || ''}
+                          onChange={(e) => updateOptionsData(index, 'key', e.target.value)}
+                        />
+                      </Grid2>
+                      <Grid2 size={3}>
+                        <TextField
+                          fullWidth
                           label="name"
                           placeholder="name"
                           value={option?.name || ''}
@@ -132,7 +143,9 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
                         />
                       </Grid2>
                       <Grid2 size={3}>
-                        {option?.type === 'SINGLE_SELECT' && (
+                        {[codeOptionTypes.SINGLE_SELECT.value, codeOptionTypes.MULTI_SELECT.value].includes(
+                          option?.type,
+                        ) && (
                           <SingleSelect
                             label="code-option"
                             options={codeOptions}

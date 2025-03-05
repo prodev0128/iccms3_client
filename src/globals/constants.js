@@ -36,3 +36,10 @@ export const invoiceActions = {
   COMPLETE: 'COMPLETE',
   UNCOMPLETE: 'UNCOMPLETE',
 };
+
+export const codeOptionTypes = {
+  TEXT: { name: 'Text', value: 'TEXT' },
+  BOOLEAN: { name: 'Boolean', value: 'BOOLEAN' },
+  SINGLE_SELECT: { name: 'SingleSelect', value: 'SINGLE_SELECT' },
+  MULTI_SELECT: { name: 'MultiSelect', value: 'MULTI_SELECT' },
+};

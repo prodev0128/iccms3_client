@@ -28,7 +28,6 @@ const UserDialog = ({ onClose, open, payload }) => {
   const title = useMemo(() => `${payload.type} User`, [payload]);
 
   const updateData = (key, value) => {
-    console.log('key', key, 'value', value, parseISO('2003-01-28T00:00:00.000Z', 'yyyy-MM-dd', new Date()));
     setConfirmWithoutSaving(true);
     setData((prevData) => ({ ...prevData, [key]: value }));
   };

@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import CustomIcon from '../CustomIcon';
 import Text from '../Text';
 
-const CustomMenuItem = ({ cancel = false, color, icon, label, onClick }) => {
+const CustomMenuItem = ({ cancel = false, color, icon, label, onClick, ...props }) => {
   return (
-    <MenuItem onClick={onClick}>
+    <MenuItem onClick={onClick} {...props}>
       <CustomIcon cancel={cancel} color={color} icon={icon} />
       <Text color={color} sx={{ pl: 1 }}>
         {label}

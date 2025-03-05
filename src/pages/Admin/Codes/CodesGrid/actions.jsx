@@ -2,9 +2,9 @@ import { useDialogs } from '@toolpad/core';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { debounceTime } from '../../../../globals/constants';
+import { codeOptionTypes, debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
-import { createCode, deleteCode, fetchCodes, updateCode } from '../../../../redux/actions/codes';
+import { createCode, deleteCode, fetchCodes, fetchIndividualCodes, updateCode } from '../../../../redux/actions/codes';
 import { useCodeOptions } from '../../../../redux/selectors';
 import CodeDialog from '../Dialogs/CodeDialog';
 
@@ -12,6 +12,22 @@ const useActions = (paginationModel, filterModel, sortModel) => {
   const dispatch = useDispatch();
   const dialogs = useDialogs();
   const { currentCodeOption } = useCodeOptions();
+
+  const debouncedFetchIndividualCodes = useDebounceCallback(
+    useCallback(async () => {
+      if (!currentCodeOption) {
+        return;
+      }
+      const optionArray = currentCodeOption.options
+        .filter((option) =>
+          [codeOptionTypes.SINGLE_SELECT.value, codeOptionTypes.MULTI_SELECT.value].includes(option.type),
+        )
+        .map((option) => option.value);
+      const optionUniqueArray = [...new Set(optionArray)].join(',');
+      await dispatch(fetchIndividualCodes({ types: optionUniqueArray }));
+    }, [dispatch, currentCodeOption]),
+    debounceTime,
+  );
 
   const debouncedFetchCodes = useDebounceCallback(
     useCallback(async () => {
@@ -30,7 +46,10 @@ const useActions = (paginationModel, filterModel, sortModel) => {
   );
 
   const handleCreateCode = useCallback(async () => {
-    const createdCode = await dialogs.open(CodeDialog, { type: 'Create', option: currentCodeOption });
+    const createdCode = await dialogs.open(CodeDialog, {
+      type: 'Create',
+      option: currentCodeOption,
+    });
     if (!createdCode) {
       return;
     }
@@ -39,7 +58,11 @@ const useActions = (paginationModel, filterModel, sortModel) => {
 
   const handleUpdateCode = useCallback(
     async (data) => {
-      const updatedCode = await dialogs.open(CodeDialog, { type: 'Edit', option: currentCodeOption, data });
+      const updatedCode = await dialogs.open(CodeDialog, {
+        type: 'Edit',
+        option: currentCodeOption,
+        data,
+      });
       if (!updatedCode) {
         return;
       }
@@ -81,6 +104,10 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     debouncedFetchCodes();
   }, [debouncedFetchCodes]);
 
+  useEffect(() => {
+    debouncedFetchIndividualCodes();
+  }, [debouncedFetchIndividualCodes]);
+
   return {
     fetchCodes: debouncedFetchCodes,
     createCode: handleCreateCode,
@@ -88,6 +115,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     deleteCode: handleDeleteCode,
     allowCode: handleAllowCode,
     disallowCode: handleDisallowCode,
+    fetchIndividualCodes: debouncedFetchIndividualCodes,
   };
 };
 

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
 
+import CodeItem from '../../../../components/CodeOption/Codetem';
 import CustomDialog from '../../../../components/CustomDialog';
+import { useCodeOptions, useCodes } from '../../../../redux/selectors';
 
 const schema = Yup.object({
   name: Yup.string().required('Name is required'),
@@ -11,6 +13,9 @@ const schema = Yup.object({
 });
 
 const CodeDialog = ({ onClose, open, payload }) => {
+  const { currentCodeOption } = useCodeOptions();
+  const { individualCodes } = useCodes();
+
   const [data, setData] = useState(payload.data || {});
   const [errors, setErrors] = useState({});
   const [confirmWithoutSaving, setConfirmWithoutSaving] = useState(false);
@@ -34,6 +39,14 @@ const CodeDialog = ({ onClose, open, payload }) => {
       });
       setErrors(newErrors);
     }
+  };
+
+  const updateOptionData = async (key, value) => {
+    setData((prevData) => {
+      const options = { ...prevData.options };
+      options[key] = value;
+      return { ...prevData, options: { ...options } };
+    });
   };
 
   return payload.option ? (
@@ -65,6 +78,20 @@ const CodeDialog = ({ onClose, open, payload }) => {
               value={data.value || ''}
               onChange={(e) => updateData('value', e.target.value)}
             />
+          </Grid2>
+          <Grid2 size={12}>
+            <Grid2 container spacing={2}>
+              {currentCodeOption?.options?.map((option, index) => (
+                <Grid2 key={index} size={6}>
+                  <CodeItem
+                    individualCodes={individualCodes}
+                    option={option}
+                    value={data?.options?.[option?.key]}
+                    onChange={(value) => updateOptionData(option?.key, value)}
+                  />
+                </Grid2>
+              ))}
+            </Grid2>
           </Grid2>
         </Grid2>
       </DialogContent>

@@ -7,10 +7,27 @@ import {
   InfoTwoTone,
 } from '@mui/icons-material';
 import { Chip } from '@mui/material';
+import { useMemo } from 'react';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
+import { useCodeOptions, useCodes } from '../../../../redux/selectors';
 
 const useColumns = (actions) => {
+  const { currentCodeOption } = useCodeOptions();
+  const { individualCodes } = useCodes();
+
+  const extraOptions = useMemo(
+    () =>
+      currentCodeOption?.options?.map((option) => ({
+        field: `options.${option?.key}`,
+        headerName: option?.name,
+        width: 150,
+        valueGetter: (value, row) => row?.options?.[option?.key] || '',
+      })) || [],
+    [currentCodeOption],
+  );
+  console.log('extraOptions', extraOptions);
+
   return [
     {
       field: 'actions',
@@ -49,6 +66,7 @@ const useColumns = (actions) => {
         return <Chip color={color} icon={icon} label={label} sx={{ fontWeight: 'bold' }} variant="outlined" />;
       },
     },
+    ...extraOptions,
   ];
 };
 
