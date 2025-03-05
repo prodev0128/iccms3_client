@@ -1,4 +1,4 @@
-import { DataGridPro, useGridApiRef } from '@mui/x-data-grid-pro';
+import { DataGridPro, GRID_CHECKBOX_SELECTION_COL_DEF, useGridApiRef } from '@mui/x-data-grid-pro';
 import { LicenseInfo } from '@mui/x-license';
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
@@ -52,7 +52,7 @@ const CustomDataGrid = ({ columns, initialPagination, onRowClick, placeholder, t
         sortingMode="server"
         initialState={{
           pagination: { paginationModel: initialPagination },
-          pinnedColumns: { left: ['no'] },
+          pinnedColumns: { left: ['no', GRID_CHECKBOX_SELECTION_COL_DEF.field, 'actions'] },
         }}
         slotProps={{
           loadingOverlay: {

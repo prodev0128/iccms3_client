@@ -2,6 +2,7 @@ import {
   CheckTwoTone,
   DeleteTwoTone,
   DoDisturbTwoTone,
+  EditNoteTwoTone,
   EditTwoTone,
   ErrorTwoTone,
   InfoTwoTone,
@@ -35,12 +36,18 @@ const useColumns = (actions) => {
             onClick={() => actions.disallowUser(row)}
           />
           <GridActionItem visible icon={KeyTwoTone} label="Reset Password" onClick={() => actions.resetPassword(row)} />
+          <GridActionItem
+            visible
+            icon={EditNoteTwoTone}
+            label="Edit Roles"
+            onClick={() => actions.updateUserRoles(row.roles)}
+          />
           <GridActionItem visible icon={EditTwoTone} label="Edit" onClick={() => actions.updateUser(row)} />
           <GridActionItem visible icon={DeleteTwoTone} label="Delete" onClick={() => actions.deleteUser(row)} />
         </>
       ),
       type: 'actions',
-      width: 160,
+      width: 220,
     },
     { field: 'userID', headerName: 'User ID', width: 150 },
     { field: 'name', headerName: 'Name', width: 150 },

@@ -71,13 +71,7 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
   };
 
   return (
-    <CustomDialog
-      confirmWithoutSaving={confirmWithoutSaving}
-      draggable={true}
-      maxWidth="lg"
-      open={open}
-      onClose={() => onClose()}
-    >
+    <CustomDialog draggable confirmWithoutSaving={confirmWithoutSaving} maxWidth="lg" open={open} onClose={onClose}>
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent>
         <Grid2 container spacing={2} sx={{ pt: 2 }}>

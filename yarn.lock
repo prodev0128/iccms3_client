@@ -2100,6 +2100,34 @@
     "@mui/utils" "^5.16.6 || ^6.0.0"
     "@mui/x-internals" "7.26.0"
 
+"@mui/x-tree-view-pro@^7.26.0":
+  version "7.26.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-tree-view-pro/-/x-tree-view-pro-7.26.0.tgz#4f6de413f3be516c501b080a17491c9579be0c0b"
+  integrity sha512-yHT9Y3WnZiAkgNkXtgpFvkXYH3C9DuXTA5Z4GovWqgzCtTmL0p45X+O5r2l2h+O6nsq0HhvZwKbomW9CtkXq4Q==
+  dependencies:
+    "@babel/runtime" "^7.25.7"
+    "@mui/utils" "^5.16.6 || ^6.0.0"
+    "@mui/x-internals" "7.26.0"
+    "@mui/x-license" "7.26.0"
+    "@mui/x-tree-view" "7.26.0"
+    "@types/react-transition-group" "^4.4.11"
+    clsx "^2.1.1"
+    prop-types "^15.8.1"
+    react-transition-group "^4.4.5"
+
+"@mui/x-tree-view@7.26.0":
+  version "7.26.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-tree-view/-/x-tree-view-7.26.0.tgz#87e05acf6a61632ddf9348c626ba8bd7bb804ace"
+  integrity sha512-adZwVj6/edNowi2RIeyGPTcfdP4EXtMGo0mk2LQogG8m8bZkZRjOQoQ7pkBF0UPMaIAwzCadq2OWj3MPH4DP5A==
+  dependencies:
+    "@babel/runtime" "^7.25.7"
+    "@mui/utils" "^5.16.6 || ^6.0.0"
+    "@mui/x-internals" "7.26.0"
+    "@types/react-transition-group" "^4.4.11"
+    clsx "^2.1.1"
+    prop-types "^15.8.1"
+    react-transition-group "^4.4.5"
+
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/eslint-scope-5-internals/-/eslint-scope-5-internals-5.1.1-v1.tgz#dbf733a965ca47b1973177dc0bb6c889edcfb129"
