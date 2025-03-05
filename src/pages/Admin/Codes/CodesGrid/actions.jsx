@@ -20,9 +20,9 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       }
       const optionArray = currentCodeOption.options
         .filter((option) =>
-          [codeOptionTypes.SINGLE_SELECT.value, codeOptionTypes.MULTI_SELECT.value].includes(option.type),
+          [codeOptionTypes.SINGLE_SELECT.value, codeOptionTypes.MULTI_SELECT.value].includes(option?.type),
         )
-        .map((option) => option.value);
+        .map((option) => option?.value);
       const optionUniqueArray = [...new Set(optionArray)].join(',');
       await dispatch(fetchIndividualCodes({ types: optionUniqueArray }));
     }, [dispatch, currentCodeOption]),

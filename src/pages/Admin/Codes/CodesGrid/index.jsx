@@ -23,7 +23,6 @@ const CodesGrid = () => {
   const actions = useActions(paginationModel, filterModel, sortModel);
   const columns = useColumns(actions);
   const { codes, status, totalCount } = useCodes();
-  console.log('codes', codes);
   const toolbar = useToolbar(actions);
 
   const setPagination = useCallback(

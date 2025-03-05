@@ -9,8 +9,8 @@ const CodeItem = ({ individualCodes, onChange, option, value }) => {
   const { name = '', type = '' } = option;
 
   const options = useMemo(() => {
-    if ([codeOptionTypes.SINGLE_SELECT.value, codeOptionTypes.MULTI_SELECT.value].includes(option.type)) {
-      return individualCodes[option.value] || [];
+    if ([codeOptionTypes.SINGLE_SELECT.value, codeOptionTypes.MULTI_SELECT.value].includes(option?.type)) {
+      return individualCodes[option?.value] || [];
     }
     return [];
   }, [option, individualCodes]);

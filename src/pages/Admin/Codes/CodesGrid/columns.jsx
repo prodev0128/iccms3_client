@@ -10,6 +10,7 @@ import { Chip } from '@mui/material';
 import { useMemo } from 'react';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
+import { codeOptionTypes } from '../../../../globals/constants';
 import { useCodeOptions, useCodes } from '../../../../redux/selectors';
 
 const useColumns = (actions) => {
@@ -18,15 +19,21 @@ const useColumns = (actions) => {
 
   const extraOptions = useMemo(
     () =>
-      currentCodeOption?.options?.map((option) => ({
-        field: `options.${option?.key}`,
-        headerName: option?.name,
-        width: 150,
-        valueGetter: (value, row) => row?.options?.[option?.key] || '',
-      })) || [],
-    [currentCodeOption],
+      currentCodeOption?.options?.map((option) => {
+        const column = {
+          field: `options.${option?.key}`,
+          headerName: option?.name,
+          width: 150,
+          valueGetter: (value, row) => row?.options?.[option?.key] || '',
+        };
+        if (option?.type === codeOptionTypes.SINGLE_SELECT.value) {
+          column.valueFormatter = (value) =>
+            individualCodes?.[option?.value]?.find((item) => item?.value === value)?.name || '';
+        }
+        return column;
+      }) || [],
+    [currentCodeOption, individualCodes],
   );
-  console.log('extraOptions', extraOptions);
 
   return [
     {

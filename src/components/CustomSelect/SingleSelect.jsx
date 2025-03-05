@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 
 const SingleSelect = ({ error, haveDisableOption, helperText, label, onBlur, onChange, options, value, ...props }) => {
-  const selectedOption = useMemo(() => options.find((option) => option.value === value) || null, [options, value]);
+  const selectedOption = useMemo(() => options.find((option) => option?.value === value) || null, [options, value]);
 
   return (
     <Autocomplete
