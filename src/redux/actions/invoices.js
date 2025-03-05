@@ -1,11 +1,13 @@
 import apiAction from '../apiAction';
 import invoicesSlice from '../slices/invoices';
 
+const invoicesUrl = `http://localhost:${process.env.REACT_APP_CENSOR_PORT}/invoices`;
+
 export const fetchInvoices = (params) => {
   const apiInfo = {
     method: 'GET',
     params,
-    url: `http://localhost:3129/invoices/`,
+    url: `${invoicesUrl}`,
   };
   return apiAction(invoicesSlice.actions.fetchInvoices, apiInfo);
 };
@@ -23,7 +25,7 @@ export const updateInvoice = (id, data) => {
   const apiInfo = {
     data,
     method: 'PUT',
-    url: `http://localhost:3129/invoices/${id}`,
+    url: `${invoicesUrl}/${id}`,
   };
   return apiAction(invoicesSlice.actions.updateInvoice, apiInfo);
 };
@@ -32,7 +34,7 @@ export const updateInvoicesStatus = (data) => {
   const apiInfo = {
     data,
     method: 'PATCH',
-    url: `http://localhost:3129/invoices/status`,
+    url: `${invoicesUrl}/status`,
   };
   return apiAction(invoicesSlice.actions.updateInvoicesStatus, apiInfo);
 };

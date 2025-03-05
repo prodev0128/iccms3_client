@@ -18,7 +18,7 @@ export default [
     files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
     languageOptions: {
       ecmaVersion: 'latest',
-      globals: globals.browser,
+      globals: { ...globals.browser, ...globals.node, ...globals.es2025 },
       sourceType: 'module',
     },
     plugins: {

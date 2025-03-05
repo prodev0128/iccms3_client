@@ -1,11 +1,13 @@
 import apiAction from '../apiAction';
 import usersSlice from '../slices/users';
 
+const usersUrl = `http://localhost:${process.env.REACT_APP_ADMIN_PORT}/users`;
+
 export const fetchUsers = (params) => {
   const apiInfo = {
     method: 'GET',
     params,
-    url: 'http://localhost:3128/users',
+    url: `${usersUrl}`,
   };
   return apiAction(usersSlice.actions.fetchUsers, apiInfo);
 };
@@ -14,7 +16,7 @@ export const createUser = (data) => {
   const apiInfo = {
     data,
     method: 'POST',
-    url: `http://localhost:3128/users`,
+    url: `${usersUrl}`,
   };
   return apiAction(usersSlice.actions.createUser, apiInfo);
 };
@@ -23,7 +25,7 @@ export const updateUser = (id, data) => {
   const apiInfo = {
     data,
     method: 'PUT',
-    url: `http://localhost:3128/users/${id}`,
+    url: `${usersUrl}/${id}`,
   };
   return apiAction(usersSlice.actions.updateUser, apiInfo);
 };
@@ -31,7 +33,7 @@ export const updateUser = (id, data) => {
 export const deleteUser = (id) => {
   const apiInfo = {
     method: 'DELETE',
-    url: `http://localhost:3128/users/${id}`,
+    url: `${usersUrl}/${id}`,
   };
   return apiAction(usersSlice.actions.deleteUser, apiInfo);
 };
@@ -39,7 +41,7 @@ export const deleteUser = (id) => {
 export const resetPassword = (id) => {
   const apiInfo = {
     method: 'POST',
-    url: `http://localhost:3128/users/reset-password/${id}`,
+    url: `${usersUrl}/reset-password/${id}`,
   };
   return apiAction(usersSlice.actions.resetPassword, apiInfo);
 };
