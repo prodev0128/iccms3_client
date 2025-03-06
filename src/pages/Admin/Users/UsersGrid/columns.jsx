@@ -40,7 +40,7 @@ const useColumns = (actions) => {
             visible
             icon={EditNoteTwoTone}
             label="Edit Roles"
-            onClick={() => actions.updateUserRoles(row.roles)}
+            onClick={() => actions.updateUserRoles(row)}
           />
           <GridActionItem visible icon={EditTwoTone} label="Edit" onClick={() => actions.updateUser(row)} />
           <GridActionItem visible icon={DeleteTwoTone} label="Delete" onClick={() => actions.deleteUser(row)} />

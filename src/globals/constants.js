@@ -44,7 +44,13 @@ export const codeOptionTypes = {
   MULTI_SELECT: { name: 'MultiSelect', value: 'MULTI_SELECT' },
 };
 
-export const userRoles = [
+export const userRoles = {
+  USERS_CREATE: 'USERS_CREATE',
+  USERS_EDIT: 'USERS_EDIT',
+  USERS_DELETE: 'USERS_DELETE',
+};
+
+export const userRolesArray = [
   {
     id: 'ADMIN',
     label: 'Admin',
@@ -54,19 +60,19 @@ export const userRoles = [
         label: 'Users',
         children: [
           {
-            id: 'CREATE',
-            label: 'Create',
-            value: 'CREATE',
+            id: userRoles.USERS_CREATE,
+            label: 'Users Create',
+            role: userRoles.USERS_CREATE,
           },
           {
-            id: 'EDIT',
-            label: 'Edit',
-            value: 'EDIT',
+            id: userRoles.USERS_EDIT,
+            label: 'Users Edit',
+            role: userRoles.USERS_EDIT,
           },
           {
-            id: 'DELETE',
-            label: 'Delete',
-            value: 'DELETE',
+            id: userRoles.USERS_DELETE,
+            label: 'Users Delete',
+            role: userRoles.USERS_DELETE,
           },
         ],
       },

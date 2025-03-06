@@ -33,7 +33,7 @@ export const updateUser = (id, data) => {
 export const updateUserRoles = (id, data) => {
   const apiInfo = {
     data,
-    method: 'PUT',
+    method: 'PATCH',
     url: `${usersUrl}/roles/${id}`,
   };
   return apiAction(usersSlice.actions.updateUserRoles, apiInfo);

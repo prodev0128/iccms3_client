@@ -4,44 +4,33 @@ import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
 import CustomDialog from '../../../../components/CustomDialog';
-import { userRoles } from '../../../../globals/constants';
-import { getAllCategoriesOfUserRoles } from '../../../../globals/utils';
+import { userRoles, userRolesArray } from '../../../../globals/constants';
+import { getUserRolesCategories } from '../../../../globals/utils';
 
 const RolesDialog = ({ onClose, open, payload }) => {
-  const [data, setData] = useState(payload.data || {});
+  const [data, setData] = useState([]);
   const [confirmWithoutSaving, setConfirmWithoutSaving] = useState(false);
-  const [expandedItems, setExpandedItems] = useState([]);
-  const [selectedPermissions, setSelectedPermissions] = useState([]);
-  console.log('selectedPermissions', selectedPermissions);
+
+  const [selection, setSelection] = useState(payload.data || []);
+  const [expandedItems, setExpandedItems] = useState(getUserRolesCategories() || []);
 
   const apiRef = useTreeViewApiRef();
 
   useEffect(() => {
-    setExpandedItems(() => getAllCategoriesOfUserRoles());
-  }, []);
+    setData(selection.filter((item) => Object.values(userRoles).find((role) => role === item)));
+  }, [selection]);
 
   const handleExpandedItemsChange = (event, itemIds) => {
     setExpandedItems(itemIds);
   };
 
-  const handleSelectionChange = (event, selectedItems) => {
-    setSelectedPermissions(selectedItems);
-  };
-
   const handleNodeClick = (event, nodeId) => {
-    setSelectedPermissions((prevSelected) => {
-      const newSelected = new Set(prevSelected);
-      if (newSelected.has(nodeId)) {
-        newSelected.delete(nodeId);
-      } else {
-        newSelected.add(nodeId);
-      }
-      return Array.from(newSelected);
-    });
+    apiRef.current.selectItem(event, nodeId);
   };
 
-  const updateData = (key, value) => {
-    setData((prevData) => ({ ...prevData, [key]: value }));
+  const handleSelectedItemsChange = (event, selectedItems) => {
+    setConfirmWithoutSaving(true);
+    setSelection(selectedItems);
   };
 
   const title = useMemo(() => `${payload.type} Roles`, [payload]);
@@ -52,19 +41,17 @@ const RolesDialog = ({ onClose, open, payload }) => {
       <DialogContent>
         <RichTreeViewPro
           checkboxSelection
-          collapsed
           disableSelectionOnClick
           multiSelect
           apiRef={apiRef}
           expandedItems={expandedItems}
-          items={userRoles}
-          selectedItems={selectedPermissions}
+          items={userRolesArray}
           onExpandedItemsChange={handleExpandedItemsChange}
-          onItemClick={handleNodeClick}
-          onSelectedItemsChange={handleSelectionChange}
+          onNodeClick={handleNodeClick}
+          onSelectedItemsChange={handleSelectedItemsChange}
         />
         <div className="mt-4">
-          <strong>Selected Permissions:</strong> {JSON.stringify(selectedPermissions)}
+          <strong>Selected Permissions:</strong> {JSON.stringify(data)}
         </div>
       </DialogContent>
       <DialogActions>

@@ -56,13 +56,13 @@ const useActions = (paginationModel, filterModel, sortModel) => {
 
   const handleUpdateUserRoles = useCallback(
     async (data) => {
-      const roles = await dialogs.open(RolesDialog, { type: 'Edit', data });
+      const roles = await dialogs.open(RolesDialog, { type: 'Edit', data: data.roles });
       if (!roles) {
         return;
       }
-      await dispatch(updateUserRoles(data.id, roles));
+      await dispatch(updateUserRoles(data.id, { roles }));
     },
-    [dispatch, dialogs, individualCodes],
+    [dispatch, dialogs],
   );
 
   const handleDeleteUser = useCallback(

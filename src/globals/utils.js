@@ -1,4 +1,4 @@
-import { codeOptionTypes, userRoles } from './constants';
+import { codeOptionTypes, userRolesArray } from './constants';
 
 export const delay = (time) => new Promise((res) => setTimeout(res, time));
 
@@ -6,10 +6,7 @@ export const getCodeOptionTypesToArray = () => {
   return Object.keys(codeOptionTypes).map((key) => codeOptionTypes[key]);
 };
 
-// export const getUserRolesToArray = (roles) => {
-//   return Object.entries(roles).map(([key, value]) => );
-// };
-export const getAllCategoriesOfUserRoles = () => {
+export const getUserRolesCategories = () => {
   const itemIds = [];
   const registerItemId = (item) => {
     if (item.children?.length) {
@@ -17,6 +14,6 @@ export const getAllCategoriesOfUserRoles = () => {
       item.children.forEach(registerItemId);
     }
   };
-  userRoles.forEach(registerItemId);
+  userRolesArray.forEach(registerItemId);
   return itemIds;
 };
