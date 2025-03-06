@@ -1,36 +1,43 @@
-import { Button, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { ContentPasteTwoTone, CopyAllTwoTone } from '@mui/icons-material';
+import { Box, Button, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { RichTreeViewPro, useTreeViewApiRef } from '@mui/x-tree-view-pro';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
 import CustomDialog from '../../../../components/CustomDialog';
-import { userRoles, userRolesArray } from '../../../../globals/constants';
-import { getUserRolesCategories } from '../../../../globals/utils';
+import Text from '../../../../components/Text';
+import { roleObjectArray } from '../../../../globals/constants';
+import { getRolesByData, getRolesById, getRolesCategories } from '../../../../globals/utils';
 
 const RolesDialog = ({ onClose, open, payload }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(payload.data || []);
   const [confirmWithoutSaving, setConfirmWithoutSaving] = useState(false);
 
-  const [selection, setSelection] = useState(payload.data || []);
-  const [expandedItems, setExpandedItems] = useState(getUserRolesCategories() || []);
+  const [selectedItems, setSelectedItems] = useState();
 
   const apiRef = useTreeViewApiRef();
 
   useEffect(() => {
-    setData(selection.filter((item) => Object.values(userRoles).find((role) => role === item)));
-  }, [selection]);
+    const foundRoles = getRolesByData(data);
+    setSelectedItems(foundRoles.concat(data));
+  }, [data]);
 
-  const handleExpandedItemsChange = (event, itemIds) => {
-    setExpandedItems(itemIds);
-  };
-
-  const handleNodeClick = (event, nodeId) => {
-    apiRef.current.selectItem(event, nodeId);
-  };
-
-  const handleSelectedItemsChange = (event, selectedItems) => {
+  const handleItemSelectionToggle = (event, itemId, isSelected) => {
     setConfirmWithoutSaving(true);
-    setSelection(selectedItems);
+    const foundRoles = getRolesById(itemId);
+    if (isSelected) {
+      setData((prevData) => [...new Set(prevData.concat(foundRoles))]);
+    } else {
+      setData((prevData) => prevData.filter((item) => !foundRoles.includes(item)));
+    }
+  };
+
+  const handleCopy = () => {
+    localStorage.setItem('roles', JSON.stringify(data));
+  };
+
+  const handlePaste = () => {
+    setData(JSON.parse(localStorage.getItem('roles')));
   };
 
   const title = useMemo(() => `${payload.type} Roles`, [payload]);
@@ -39,20 +46,34 @@ const RolesDialog = ({ onClose, open, payload }) => {
     <CustomDialog draggable confirmWithoutSaving={confirmWithoutSaving} open={open} onClose={onClose}>
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent>
+        <Box
+          sx={{
+            p: 1,
+            display: 'flex',
+            justifyContent: 'end',
+          }}
+        >
+          <Button startIcon={<CopyAllTwoTone />} variant="contained" onClick={handleCopy}>
+            Copy
+          </Button>
+          <Button startIcon={<ContentPasteTwoTone />} sx={{ ml: 1 }} variant="contained" onClick={handlePaste}>
+            Paste
+          </Button>
+        </Box>
         <RichTreeViewPro
           checkboxSelection
-          disableSelectionOnClick
           multiSelect
           apiRef={apiRef}
-          expandedItems={expandedItems}
-          items={userRolesArray}
-          onExpandedItemsChange={handleExpandedItemsChange}
-          onNodeClick={handleNodeClick}
-          onSelectedItemsChange={handleSelectedItemsChange}
+          defaultExpandedItems={getRolesCategories()}
+          items={roleObjectArray}
+          selectedItems={selectedItems}
+          onItemSelectionToggle={handleItemSelectionToggle}
         />
-        <div className="mt-4">
-          <strong>Selected Permissions:</strong> {JSON.stringify(data)}
-        </div>
+        <Box sx={{ p: 1 }}>
+          <Text>
+            <b>{data.length} Selected Permissions</b>
+          </Text>
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button color="primary" variant="contained" onClick={() => onClose(data)}>
