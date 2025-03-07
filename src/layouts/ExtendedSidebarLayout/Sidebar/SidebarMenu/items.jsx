@@ -17,7 +17,7 @@ import {
 
 const menuItems = [
   {
-    heading: 'Censor Pages',
+    heading: 'Main Pages',
     items: [
       {
         icon: HomeTwoTone,

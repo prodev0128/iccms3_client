@@ -1,4 +1,4 @@
-import { ContentPasteTwoTone, CopyAllTwoTone } from '@mui/icons-material';
+import { ContentCopyTwoTone, ContentPasteTwoTone } from '@mui/icons-material';
 import { Box, Button, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { RichTreeViewPro, useTreeViewApiRef } from '@mui/x-tree-view-pro';
 import PropTypes from 'prop-types';
@@ -53,7 +53,7 @@ const RolesDialog = ({ onClose, open, payload }) => {
             justifyContent: 'end',
           }}
         >
-          <Button startIcon={<CopyAllTwoTone />} variant="contained" onClick={handleCopy}>
+          <Button startIcon={<ContentCopyTwoTone />} variant="contained" onClick={handleCopy}>
             Copy
           </Button>
           <Button startIcon={<ContentPasteTwoTone />} sx={{ ml: 1 }} variant="contained" onClick={handlePaste}>

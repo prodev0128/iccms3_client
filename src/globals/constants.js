@@ -45,10 +45,30 @@ export const codeOptionTypes = {
 };
 
 export const roles = {
+  // ADMIN
   USERS_CREATE: 'USERS_CREATE',
   USERS_EDIT: 'USERS_EDIT',
   USERS_DELETE: 'USERS_DELETE',
-  CENSOR_CREATE: 'CENSOR_CREATE',
+
+  // CENSOR
+  PROCESSING_TRANSFER: 'PROCESSING_TRANSFER',
+  PROCESSING_ASSIGN: 'PROCESSING_ASSIGN',
+  PROCESSING_CENSOR: 'PROCESSING_CENSOR',
+  PROCESSING_CHECK: 'PROCESSING_CHECK',
+  PROCESSING_RECEIVE: 'PROCESSING_RECEIVE',
+  PROCESSING_OUT: 'PROCESSING_OUT',
+  PROCESSING_COMPLETE: 'PROCESSING_COMPLETE',
+
+  INCOMING_REGISTER: 'INCOMING_REGISTER',
+  INCOMING_VIEW: 'INCOMING_VIEW',
+
+  OUTGOING_COMPLETE: 'OUTGOING_COMPLETE',
+  OUTGOING_VIEW: 'OUTGOING_VIEW',
+
+  // STATISTIC
+  PEOPLE_VIEW: 'PEOPLE_VIEW',
+  PUB_VIEW: 'PUB_VIEW',
+  FLOW_VIEW: 'FLOW_VIEW',
 };
 
 export const roleObjectArray = [
@@ -88,9 +108,9 @@ export const roleObjectArray = [
         label: 'Process',
         children: [
           {
-            id: roles.CENSOR_CREATE,
+            id: roles.PROCESSING_ASSIGN,
             label: 'Censor Create',
-            role: roles.CENSOR_CREATE,
+            role: roles.PROCESSING_ASSIGN,
           },
         ],
       },
