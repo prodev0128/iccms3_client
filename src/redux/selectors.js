@@ -8,6 +8,8 @@ export const useCodeOptions = () => useSelector((state) => state.codeOptions);
 
 export const useCodes = () => useSelector((state) => state.codes);
 
+export const useSettings = () => useSelector((state) => state.settings);
+
 export const useNotification = () => useSelector((state) => state.notification);
 
 export const useInvoices = () => useSelector((state) => state.invoices);

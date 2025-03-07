@@ -44,6 +44,12 @@ export const codeOptionTypes = {
   MULTI_SELECT: { name: 'MultiSelect', value: 'MULTI_SELECT' },
 };
 
+export const settingTypes = {
+  TEXT: { name: 'Text', value: 'TEXT' },
+  NUMBER: { name: 'Number', value: 'NUMBER' },
+  BOOLEAN: { name: 'Boolean', value: 'BOOLEAN' },
+};
+
 export const roles = {
   // ADMIN
   USERS_CREATE: 'USERS_CREATE',
