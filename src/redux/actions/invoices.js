@@ -42,3 +42,7 @@ export const updateInvoicesStatus = (data) => {
 export const setSelectedInvoices = (data) => (dispatch) => {
   dispatch(invoicesSlice.actions.setSelectedInvoices(data));
 };
+
+export const setSelectedTab = (data) => (dispatch) => {
+  dispatch(invoicesSlice.actions.setSelectedTab(data));
+};

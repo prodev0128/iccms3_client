@@ -1,14 +1,23 @@
 import { Tab, Tabs } from '@mui/material';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router';
 
+import { setSelectedTab } from '../../../../redux/actions/invoices';
 import { useCodes } from '../../../../redux/selectors';
 
 const FileTypeTab = () => {
+  const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const { individualCodes } = useCodes();
-  const status = useMemo(() => individualCodes?.fileType?.filter((item) => item.isActive) || [], [individualCodes]);
-  const tabs = useMemo(() => [{ name: 'All', value: 'ALL' }, ...status], [status]);
+  const fileTypes = useMemo(
+    () =>
+      individualCodes?.fileType
+        ?.filter((item) => item.isActive)
+        ?.map((item) => ({ name: item.name, value: item.value })) || [],
+    [individualCodes],
+  );
+  const tabs = useMemo(() => [{ name: 'All', value: 'ALL' }, ...fileTypes], [fileTypes]);
 
   const setFileType = useCallback(
     (value) => {
@@ -22,6 +31,13 @@ const FileTypeTab = () => {
   );
 
   const currentTab = useMemo(() => searchParams.get('file_type') || 'ALL', [searchParams]);
+
+  useEffect(() => {
+    const foundTab = tabs.find((tab) => tab.value === currentTab);
+    if (foundTab) {
+      dispatch(setSelectedTab({ fileType: foundTab }));
+    }
+  }, [dispatch, tabs, currentTab]);
 
   return (
     <Tabs

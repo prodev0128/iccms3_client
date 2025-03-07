@@ -1,17 +1,23 @@
 import { Tab, Tabs } from '@mui/material';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router';
 
 import { invoiceStatus } from '../../../../globals/constants';
+import { setSelectedTab } from '../../../../redux/actions/invoices';
 
 const StatusTab = () => {
+  const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const tabs = [
-    { name: 'All', value: 'ALL', min: invoiceStatus.UNDEFINED, max: invoiceStatus.COMPLETED },
-    { name: 'Checking', value: 'CHECKING', min: invoiceStatus.UNDEFINED, max: invoiceStatus.OUTED },
-    { name: 'Completed', value: 'COMPLETED', min: invoiceStatus.COMPLETED, max: invoiceStatus.COMPLETED },
-  ];
+  const tabs = useMemo(
+    () => [
+      { name: 'All', value: 'ALL', min: invoiceStatus.UNDEFINED, max: invoiceStatus.COMPLETED },
+      { name: 'Checking', value: 'CHECKING', min: invoiceStatus.UNDEFINED, max: invoiceStatus.OUTED },
+      { name: 'Completed', value: 'COMPLETED', min: invoiceStatus.COMPLETED, max: invoiceStatus.COMPLETED },
+    ],
+    [],
+  );
 
   const setStatus = useCallback(
     (value) => {
@@ -25,6 +31,13 @@ const StatusTab = () => {
   );
 
   const currentTab = useMemo(() => searchParams.get('status') || 'ALL', [searchParams]);
+
+  useEffect(() => {
+    const foundTab = tabs.find((tab) => tab.value === currentTab);
+    if (foundTab) {
+      dispatch(setSelectedTab({ status: foundTab }));
+    }
+  }, [dispatch, tabs, currentTab]);
 
   return (
     <Tabs

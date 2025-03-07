@@ -1,9 +1,4 @@
-import {
-  DocumentScannerTwoTone,
-  FindInPageTwoTone,
-  KeyboardArrowDownTwoTone,
-  VerifiedUserTwoTone,
-} from '@mui/icons-material';
+import { DocumentScannerTwoTone, FindInPageTwoTone, KeyboardArrowDownTwoTone } from '@mui/icons-material';
 import { alpha, Avatar, Box, Button, lighten, Menu, MenuItem, styled, Typography } from '@mui/material';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
