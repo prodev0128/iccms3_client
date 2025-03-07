@@ -1,4 +1,4 @@
-import { AssignmentIndTwoTone, DocumentScannerTwoTone, KeyboardArrowDownTwoTone } from '@mui/icons-material';
+import { DocumentScannerTwoTone, KeyboardArrowDownTwoTone, VerifiedUserTwoTone } from '@mui/icons-material';
 import { alpha, Avatar, Box, Button, lighten, Menu, MenuItem, styled, Typography } from '@mui/material';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -55,7 +55,7 @@ const PageHeader = () => {
     >
       <Box alignItems="center" display="flex">
         <AvatarPageTitle variant="rounded">
-          <AssignmentIndTwoTone fontSize="large" />
+          <VerifiedUserTwoTone fontSize="large" />
         </AvatarPageTitle>
         <Box>
           <Typography gutterBottom component="h3" variant="h3">

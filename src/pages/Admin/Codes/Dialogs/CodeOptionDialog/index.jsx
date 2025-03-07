@@ -1,30 +1,19 @@
-import { AddTwoTone, DeleteTwoTone } from '@mui/icons-material';
+import { AddTwoTone } from '@mui/icons-material';
 import { Button, DialogActions, DialogContent, DialogTitle, Grid2, IconButton, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
 
-import CustomDialog from '../../../../components/CustomDialog';
-import SingleSelect from '../../../../components/CustomSelect/SingleSelect';
-import GroupBox from '../../../../components/GroupBox';
-import { codeOptionTypes } from '../../../../globals/constants';
-import { getCodeOptionTypesToArray } from '../../../../globals/utils';
-import { useCodeOptions } from '../../../../redux/selectors';
+import CustomDialog from '../../../../../components/CustomDialog';
+import GroupBox from '../../../../../components/GroupBox';
+import ExtraOptionItem from './ExtraOptionItem';
 
 const schema = Yup.object({
   type: Yup.string().required('Type is required'),
   name: Yup.string().required('Name is required'),
 });
 
-const optionTypes = getCodeOptionTypesToArray();
-
 const CodeOptionDialog = ({ onClose, open, payload }) => {
-  const { codeOptions: originalCodeOptions } = useCodeOptions();
-  const codeOptions = useMemo(
-    () => originalCodeOptions.map((option) => ({ value: option.type, name: option.name })),
-    [originalCodeOptions],
-  );
-
   const [data, setData] = useState(payload.data || {});
   const [errors, setErrors] = useState({});
   const [confirmWithoutSaving, setConfirmWithoutSaving] = useState(false);
@@ -109,51 +98,12 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
               <Grid2 container spacing={2}>
                 {data?.options?.map((option, index) => (
                   <Grid2 key={index} size={12}>
-                    <Grid2 container columns={13} spacing={2}>
-                      <Grid2 size={3}>
-                        <TextField
-                          fullWidth
-                          label="key"
-                          placeholder="key"
-                          value={option?.key || ''}
-                          onChange={(e) => updateOptionsData(index, 'key', e.target.value)}
-                        />
-                      </Grid2>
-                      <Grid2 size={3}>
-                        <TextField
-                          fullWidth
-                          label="name"
-                          placeholder="name"
-                          value={option?.name || ''}
-                          onChange={(e) => updateOptionsData(index, 'name', e.target.value)}
-                        />
-                      </Grid2>
-                      <Grid2 size={3}>
-                        <SingleSelect
-                          label="type"
-                          options={optionTypes}
-                          value={option?.type || ''}
-                          onChange={({ value }) => updateOptionsData(index, 'type', value)}
-                        />
-                      </Grid2>
-                      <Grid2 size={3}>
-                        {[codeOptionTypes.SINGLE_SELECT.value, codeOptionTypes.MULTI_SELECT.value].includes(
-                          option?.type,
-                        ) && (
-                          <SingleSelect
-                            label="code-option"
-                            options={codeOptions}
-                            value={option?.value || ''}
-                            onChange={({ value }) => updateOptionsData(index, 'value', value)}
-                          />
-                        )}
-                      </Grid2>
-                      <Grid2 size={1}>
-                        <IconButton color="error" onClick={() => handleRemoveOption(index)}>
-                          <DeleteTwoTone />
-                        </IconButton>
-                      </Grid2>
-                    </Grid2>
+                    <ExtraOptionItem
+                      handleRemoveOption={handleRemoveOption}
+                      index={index}
+                      option={option}
+                      updateOptionsData={updateOptionsData}
+                    />
                   </Grid2>
                 ))}
               </Grid2>

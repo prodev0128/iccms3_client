@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
 
-import CodeItem from '../../../../components/CodeOption/Codetem';
 import CustomDialog from '../../../../components/CustomDialog';
+import DynamicFormField from '../../../../components/DynamicFormField';
 import { useCodeOptions, useCodes } from '../../../../redux/selectors';
 
 const schema = Yup.object({
@@ -83,7 +83,7 @@ const CodeDialog = ({ onClose, open, payload }) => {
             <Grid2 container spacing={2}>
               {currentCodeOption?.options?.map((option, index) => (
                 <Grid2 key={index} size={6}>
-                  <CodeItem
+                  <DynamicFormField
                     individualCodes={individualCodes}
                     option={option}
                     value={data?.options?.[option?.key]}

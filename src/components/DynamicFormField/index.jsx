@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import { codeOptionTypes } from '../../globals/constants';
 import SingleSelect from '../CustomSelect/SingleSelect';
 
-const CodeItem = ({ individualCodes, onChange, option, value }) => {
+const DynamicFormField = ({ individualCodes, onChange, option, value }) => {
   const { name = '', type = '' } = option;
 
   const options = useMemo(() => {
@@ -35,11 +35,11 @@ const CodeItem = ({ individualCodes, onChange, option, value }) => {
   }
 };
 
-CodeItem.propTypes = {
-  individualCodes: PropTypes.array.isRequired,
+DynamicFormField.propTypes = {
+  individualCodes: PropTypes.array,
   onChange: PropTypes.func.isRequired,
   option: PropTypes.object.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.array, PropTypes.number]).isRequired,
 };
 
-export default CodeItem;
+export default DynamicFormField;
