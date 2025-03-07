@@ -22,7 +22,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
         .filter((option) =>
           [codeOptionTypes.SINGLE_SELECT.value, codeOptionTypes.MULTI_SELECT.value].includes(option?.type),
         )
-        .map((option) => option?.value);
+        .map((option) => option?.ref);
       const optionUniqueArray = [...new Set(optionArray)].join(',');
       await dispatch(fetchIndividualCodes({ types: optionUniqueArray }));
     }, [dispatch, currentCodeOption]),

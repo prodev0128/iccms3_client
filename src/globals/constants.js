@@ -37,17 +37,16 @@ export const invoiceActions = {
   UNCOMPLETE: 'UNCOMPLETE',
 };
 
-export const codeOptionTypes = {
-  TEXT: { name: 'Text', value: 'TEXT' },
-  BOOLEAN: { name: 'Boolean', value: 'BOOLEAN' },
-  SINGLE_SELECT: { name: 'SingleSelect', value: 'SINGLE_SELECT' },
-  MULTI_SELECT: { name: 'MultiSelect', value: 'MULTI_SELECT' },
-};
-
 export const settingTypes = {
   TEXT: { name: 'Text', value: 'TEXT' },
   NUMBER: { name: 'Number', value: 'NUMBER' },
   BOOLEAN: { name: 'Boolean', value: 'BOOLEAN' },
+};
+
+export const codeOptionTypes = {
+  ...settingTypes,
+  SINGLE_SELECT: { name: 'SingleSelect', value: 'SINGLE_SELECT' },
+  MULTI_SELECT: { name: 'MultiSelect', value: 'MULTI_SELECT' },
 };
 
 export const roles = {

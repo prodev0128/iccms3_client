@@ -8,7 +8,7 @@ import { codeOptionTypes } from '../../../../../globals/constants';
 import { getCodeOptionTypesToArray } from '../../../../../globals/utils';
 import { useCodeOptions } from '../../../../../redux/selectors';
 
-const ExtraOptionItem = ({ handleRemoveOption, index, option, updateOptionsData }) => {
+const ExtraOptionItem = ({ handleRemoveOption, option, updateOptionsData }) => {
   const { codeOptions: originalCodeOptions } = useCodeOptions();
   const codeOptions = useMemo(
     () => originalCodeOptions.map((option) => ({ value: option.type, name: option.name })),
@@ -23,7 +23,7 @@ const ExtraOptionItem = ({ handleRemoveOption, index, option, updateOptionsData 
           label="key"
           placeholder="key"
           value={option?.key || ''}
-          onChange={(e) => updateOptionsData(index, 'key', e.target.value)}
+          onChange={(e) => updateOptionsData(e.target.value)}
         />
       </Grid2>
       <Grid2 size={3}>
@@ -32,7 +32,7 @@ const ExtraOptionItem = ({ handleRemoveOption, index, option, updateOptionsData 
           label="name"
           placeholder="name"
           value={option?.name || ''}
-          onChange={(e) => updateOptionsData(index, 'name', e.target.value)}
+          onChange={(e) => updateOptionsData(e.target.value)}
         />
       </Grid2>
       <Grid2 size={3}>
@@ -40,7 +40,7 @@ const ExtraOptionItem = ({ handleRemoveOption, index, option, updateOptionsData 
           label="type"
           options={getCodeOptionTypesToArray()}
           value={option?.type || ''}
-          onChange={({ value }) => updateOptionsData(index, 'type', value)}
+          onChange={({ value }) => updateOptionsData(value)}
         />
       </Grid2>
       <Grid2 size={3}>
@@ -48,13 +48,13 @@ const ExtraOptionItem = ({ handleRemoveOption, index, option, updateOptionsData 
           <SingleSelect
             label="code-option"
             options={codeOptions}
-            value={option?.value || ''}
-            onChange={({ value }) => updateOptionsData(index, 'value', value)}
+            value={option?.ref || ''}
+            onChange={({ value }) => updateOptionsData(value)}
           />
         )}
       </Grid2>
       <Grid2 size={1}>
-        <IconButton color="error" onClick={() => handleRemoveOption(index)}>
+        <IconButton color="error" onClick={handleRemoveOption}>
           <DeleteTwoTone />
         </IconButton>
       </Grid2>
@@ -64,7 +64,6 @@ const ExtraOptionItem = ({ handleRemoveOption, index, option, updateOptionsData 
 
 ExtraOptionItem.propTypes = {
   handleRemoveOption: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
   option: PropTypes.object.isRequired,
   updateOptionsData: PropTypes.func.isRequired,
 };

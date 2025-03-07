@@ -99,10 +99,9 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
                 {data?.options?.map((option, index) => (
                   <Grid2 key={index} size={12}>
                     <ExtraOptionItem
-                      handleRemoveOption={handleRemoveOption}
-                      index={index}
+                      handleRemoveOption={() => handleRemoveOption(index)}
                       option={option}
-                      updateOptionsData={updateOptionsData}
+                      updateOptionsData={(value) => updateOptionsData(index, 'key', value)}
                     />
                   </Grid2>
                 ))}

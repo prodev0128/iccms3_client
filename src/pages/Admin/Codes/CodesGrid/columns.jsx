@@ -28,7 +28,7 @@ const useColumns = (actions) => {
         };
         if (option?.type === codeOptionTypes.SINGLE_SELECT.value) {
           column.valueFormatter = (value) =>
-            individualCodes?.[option?.value]?.find((item) => item?.value === value)?.name || '';
+            individualCodes?.[option?.ref]?.find((item) => item?.value === value)?.name || '';
         }
         return column;
       }) || [],

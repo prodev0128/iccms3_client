@@ -3,12 +3,17 @@ import { Box, Grid2, IconButton, Tooltip } from '@mui/material';
 import PropTypes from 'prop-types';
 
 import DynamicFormField from '../../../../components/DynamicFormField';
+import { settingTypes } from '../../../../globals/constants';
 
 const SettingItem = ({ actions, setting }) => {
   return (
     <Grid2 container>
       <Grid2 size={10}>
-        <DynamicFormField option={{}} value={setting.value} onChange={() => {}} />
+        {Object.keys(settingTypes).includes(setting.type) ? (
+          <DynamicFormField label={setting.name} type={setting.type} value={setting.value} onChange={() => {}} />
+        ) : (
+          <>Unknown Component</>
+        )}
       </Grid2>
       <Grid2 size={2}>
         <Box sx={{ p: 2, display: 'flex', justifyContent: 'end' }}>

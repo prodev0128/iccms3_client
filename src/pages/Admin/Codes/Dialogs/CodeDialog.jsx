@@ -84,8 +84,9 @@ const CodeDialog = ({ onClose, open, payload }) => {
               {currentCodeOption?.options?.map((option, index) => (
                 <Grid2 key={index} size={6}>
                   <DynamicFormField
-                    individualCodes={individualCodes}
-                    option={option}
+                    label={option?.name}
+                    options={individualCodes?.[option?.ref]}
+                    type={option?.type}
                     value={data?.options?.[option?.key]}
                     onChange={(value) => updateOptionData(option?.key, value)}
                   />
