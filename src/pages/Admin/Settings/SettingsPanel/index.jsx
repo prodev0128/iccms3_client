@@ -1,5 +1,5 @@
 import { AddTwoTone, RefreshTwoTone } from '@mui/icons-material';
-import { Box, Grid2, IconButton, Tooltip } from '@mui/material';
+import { Box, Card, Grid2, IconButton, Tooltip } from '@mui/material';
 
 import { useSettings } from '../../../../redux/selectors';
 import useActions from './actions';
@@ -10,8 +10,8 @@ const SettingsPanel = () => {
   const actions = useActions();
 
   return (
-    <Box sx={{ p: 2 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+    <Card sx={{ m: 2, p: 2 }}>
+      <Box sx={{ p: 2, display: 'flex', justifyContent: 'end' }}>
         <Tooltip arrow title="Add">
           <IconButton color="primary" onClick={actions.createSetting}>
             <AddTwoTone />
@@ -23,14 +23,16 @@ const SettingsPanel = () => {
           </IconButton>
         </Tooltip>
       </Box>
-      <Grid2 container spacing={2} sx={{ height: 500 }}>
-        {settings.map((setting, index) => (
-          <Grid2 key={index} size={12}>
-            <SettingItem actions={actions} setting={setting} />
-          </Grid2>
-        ))}
-      </Grid2>
-    </Box>
+      <Box sx={{ height: 500 }}>
+        <Grid2 container spacing={2}>
+          {settings.map((setting, index) => (
+            <Grid2 key={index} size={12}>
+              <SettingItem actions={actions} setting={setting} />
+            </Grid2>
+          ))}
+        </Grid2>
+      </Box>
+    </Card>
   );
 };
 
