@@ -23,7 +23,7 @@ const ExtraOptionItem = ({ handleRemoveOption, option, updateOptionsData }) => {
           label="key"
           placeholder="key"
           value={option?.key || ''}
-          onChange={(e) => updateOptionsData(e.target.value)}
+          onChange={(e) => updateOptionsData('key', e.target.value)}
         />
       </Grid2>
       <Grid2 size={3}>
@@ -32,7 +32,7 @@ const ExtraOptionItem = ({ handleRemoveOption, option, updateOptionsData }) => {
           label="name"
           placeholder="name"
           value={option?.name || ''}
-          onChange={(e) => updateOptionsData(e.target.value)}
+          onChange={(e) => updateOptionsData('name', e.target.value)}
         />
       </Grid2>
       <Grid2 size={3}>
@@ -40,7 +40,7 @@ const ExtraOptionItem = ({ handleRemoveOption, option, updateOptionsData }) => {
           label="type"
           options={getCodeOptionTypesToArray()}
           value={option?.type || ''}
-          onChange={({ value }) => updateOptionsData(value)}
+          onChange={({ value }) => updateOptionsData('type', value)}
         />
       </Grid2>
       <Grid2 size={3}>
@@ -49,7 +49,7 @@ const ExtraOptionItem = ({ handleRemoveOption, option, updateOptionsData }) => {
             label="code-option"
             options={codeOptions}
             value={option?.ref || ''}
-            onChange={({ value }) => updateOptionsData(value)}
+            onChange={({ value }) => updateOptionsData('ref', value)}
           />
         )}
       </Grid2>

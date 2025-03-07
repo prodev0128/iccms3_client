@@ -7,11 +7,11 @@ import PageHeader from './PageHeader';
 import FileTypeTab from './Tabs/FileTypeTab';
 import StatusTab from './Tabs/StatusTab';
 
-const Processing = () => {
+const Receipt = () => {
   return (
     <>
       <Helmet>
-        <title>Censor Page</title>
+        <title>Receipt Page</title>
       </Helmet>
       <PageTitleWrapper>
         <PageHeader />
@@ -29,4 +29,4 @@ const Processing = () => {
   );
 };
 
-export default Processing;
+export default Receipt;

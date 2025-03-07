@@ -101,7 +101,7 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
                     <ExtraOptionItem
                       handleRemoveOption={() => handleRemoveOption(index)}
                       option={option}
-                      updateOptionsData={(value) => updateOptionsData(index, 'key', value)}
+                      updateOptionsData={(key, value) => updateOptionsData(index, key, value)}
                     />
                   </Grid2>
                 ))}

@@ -59,9 +59,9 @@ const PageHeader = () => {
         </AvatarPageTitle>
         <Box>
           <Typography gutterBottom component="h3" variant="h3">
-            {t('Processing')}
+            {t('Dep')}
           </Typography>
-          <Typography variant="subtitle2">{t('Processing data in this page')}</Typography>
+          <Typography variant="subtitle2">{t('Dep data in this page')}</Typography>
         </Box>
       </Box>
       <Box mt={{ md: 0, xs: 3 }}>

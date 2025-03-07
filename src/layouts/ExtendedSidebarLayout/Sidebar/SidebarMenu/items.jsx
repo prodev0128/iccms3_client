@@ -6,7 +6,7 @@ import {
   BarChartTwoTone,
   DataSaverOnTwoTone,
   DesignServicesTwoTone,
-  ForwardToInboxTwoTone,
+  FindInPageTwoTone,
   HomeTwoTone,
   InstallDesktopTwoTone,
   LocalPoliceTwoTone,
@@ -52,19 +52,19 @@ const menuItems = [
         icon: LocalPoliceTwoTone,
         items: [
           {
-            name: 'Processing',
-            link: '/censor/processing',
-            icon: VerifiedUserTwoTone,
-          },
-          {
-            name: 'Incoming',
-            link: '/censor/incoming',
+            name: 'Receipt',
+            link: '/censor/receipt',
             icon: InstallDesktopTwoTone,
           },
           {
-            name: 'Outgoing',
-            link: '/censor/outgoing',
-            icon: ForwardToInboxTwoTone,
+            name: 'Dep',
+            link: '/censor/dep',
+            icon: VerifiedUserTwoTone,
+          },
+          {
+            name: 'Total',
+            link: '/censor/total',
+            icon: FindInPageTwoTone,
           },
         ],
       },

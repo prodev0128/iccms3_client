@@ -3,22 +3,32 @@ import { Navigate } from 'react-router';
 
 import ComponentLoader from '../components/ComponentLoader';
 
-const Processing = ComponentLoader(lazy(() => import('../pages/Censor/Processing')));
+const Receipt = ComponentLoader(lazy(() => import('../pages/Censor/Receipt')));
+const Dep = ComponentLoader(lazy(() => import('../pages/Censor/Dep')));
+const Total = ComponentLoader(lazy(() => import('../pages/Censor/Total')));
 
 const router = [
   {
     path: '',
-    element: <Navigate replace to="users" />,
+    element: <Navigate replace to="dep" />,
   },
   {
     children: [
       {
-        path: 'processing',
-        element: <Processing />,
+        path: 'receipt',
+        element: <Receipt />,
+      },
+      {
+        path: 'dep',
+        element: <Dep />,
+      },
+      {
+        path: 'total',
+        element: <Total />,
       },
       {
         path: '*',
-        element: <Navigate replace to="/censor/processing" />,
+        element: <Navigate replace to="/censor/dep" />,
       },
     ],
   },
