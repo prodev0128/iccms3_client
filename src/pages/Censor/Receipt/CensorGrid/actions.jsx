@@ -15,8 +15,8 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     useCallback(async () => {
       await dispatch(
         fetchInvoices({
-          minStatus: selectedTab.status.min,
-          maxStatus: selectedTab.status.max,
+          minStatus: selectedTab.status.min || selectedTab.status.value,
+          maxStatus: selectedTab.status.max || selectedTab.status.value,
           fileType: selectedTab.fileType.value,
           ...paginationModel,
           filterModel: JSON.stringify(filterModel),

@@ -1,30 +1,31 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useSearchParams } from 'react-router';
 
 import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { fetchIndividualCodes } from '../../../../redux/actions/codes';
 import { fetchInvoices, updateInvoice, updateInvoicesStatus } from '../../../../redux/actions/invoices';
+import { useAuth, useInvoices } from '../../../../redux/selectors';
 
 const useActions = (paginationModel, filterModel, sortModel) => {
-  const [searchParams] = useSearchParams();
+  const { user } = useAuth();
+  const { selectedTab } = useInvoices();
   const dispatch = useDispatch();
 
   const debouncedFetchInvoices = useDebounceCallback(
     useCallback(async () => {
-      const status = searchParams.get('status');
-      const fileType = searchParams.get('file_type');
       await dispatch(
         fetchInvoices({
-          status,
-          fileType,
+          category: user.roles.includes('Dep') ? 'Dep' : 'Me',
+          minStatus: selectedTab.status.min || selectedTab.status.value,
+          maxStatus: selectedTab.status.max || selectedTab.status.value,
+          fileType: selectedTab.fileType.value,
           ...paginationModel,
           filterModel: JSON.stringify(filterModel),
           sortModel: JSON.stringify(sortModel),
         }),
       );
-    }, [dispatch, paginationModel, filterModel, sortModel, searchParams]),
+    }, [dispatch, paginationModel, filterModel, sortModel, selectedTab, user]),
     debounceTime,
   );
 
