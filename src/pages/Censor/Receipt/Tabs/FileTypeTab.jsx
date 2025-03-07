@@ -2,14 +2,13 @@ import { Tab, Tabs } from '@mui/material';
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router';
 
-import { initialTab } from '../../../../globals/constants';
 import { useCodes } from '../../../../redux/selectors';
 
 const FileTypeTab = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { individualCodes } = useCodes();
   const status = useMemo(() => individualCodes?.fileType?.filter((item) => item.isActive) || [], [individualCodes]);
-  const tabs = useMemo(() => [initialTab, ...status], [status]);
+  const tabs = useMemo(() => [{ name: 'All', value: 'ALL' }, ...status], [status]);
 
   const setFileType = useCallback(
     (value) => {
@@ -22,7 +21,7 @@ const FileTypeTab = () => {
     [setSearchParams],
   );
 
-  const currentTab = useMemo(() => searchParams.get('file_type') || initialTab.value, [searchParams]);
+  const currentTab = useMemo(() => searchParams.get('file_type') || 'ALL', [searchParams]);
 
   return (
     <Tabs

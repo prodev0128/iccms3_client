@@ -2,14 +2,17 @@ import { Tab, Tabs } from '@mui/material';
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router';
 
-import { initialTab } from '../../../../globals/constants';
-import { useCodes } from '../../../../redux/selectors';
+import { invoiceStatus } from '../../../../globals/constants';
 
 const StatusTab = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { individualCodes } = useCodes();
-  const status = useMemo(() => individualCodes?.status?.filter((item) => item.isActive) || [], [individualCodes]);
-  const tabs = useMemo(() => [initialTab, ...status], [status]);
+  const tabs = [
+    { name: 'All', value: 'ALL', min: invoiceStatus.UNDEFINED, max: invoiceStatus.RECEIVED },
+    { name: 'Undefined', value: 'UNDEFINED', min: invoiceStatus.UNDEFINED, max: invoiceStatus.UNDEFINED },
+    { name: 'Registered', value: 'REGISTERED', min: invoiceStatus.REGISTERED, max: invoiceStatus.REGISTERED },
+    { name: 'Checking', value: 'CHECKING', min: invoiceStatus.TRANSFERRED, max: invoiceStatus.CHECKED },
+    { name: 'Received', value: 'RECEIVED', min: invoiceStatus.RECEIVED, max: invoiceStatus.RECEIVED },
+  ];
 
   const setStatus = useCallback(
     (value) => {
@@ -22,7 +25,7 @@ const StatusTab = () => {
     [setSearchParams],
   );
 
-  const currentTab = useMemo(() => searchParams.get('status') || initialTab.value, [searchParams]);
+  const currentTab = useMemo(() => searchParams.get('status') || 'ALL', [searchParams]);
 
   return (
     <Tabs

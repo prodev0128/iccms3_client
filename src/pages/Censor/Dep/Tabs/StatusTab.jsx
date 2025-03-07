@@ -2,14 +2,15 @@ import { Tab, Tabs } from '@mui/material';
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router';
 
-import { initialTab } from '../../../../globals/constants';
-import { useCodes } from '../../../../redux/selectors';
-
 const StatusTab = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { individualCodes } = useCodes();
-  const status = useMemo(() => individualCodes?.status?.filter((item) => item.isActive) || [], [individualCodes]);
-  const tabs = useMemo(() => [initialTab, ...status], [status]);
+  const tabs = [
+    { name: 'All', value: 'ALL' },
+    { name: 'Transferred', value: 'TRANSFERRED' },
+    { name: 'Assigned', value: 'ASSIGNED' },
+    { name: 'Censored', value: 'CENSORED' },
+    { name: 'Checked', value: 'CHECKED' },
+  ];
 
   const setStatus = useCallback(
     (value) => {
@@ -22,7 +23,7 @@ const StatusTab = () => {
     [setSearchParams],
   );
 
-  const currentTab = useMemo(() => searchParams.get('status') || initialTab.value, [searchParams]);
+  const currentTab = useMemo(() => searchParams.get('status') || 'ALL', [searchParams]);
 
   return (
     <Tabs
