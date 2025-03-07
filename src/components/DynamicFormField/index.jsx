@@ -10,7 +10,13 @@ const DynamicFormField = ({ label, onChange, options, type, value }) => {
       return <TextField fullWidth label={label} value={value} onChange={(e) => onChange(e.target.value)} />;
     case codeOptionTypes.NUMBER.value:
       return (
-        <TextField fullWidth label={label} type="number" value={value} onChange={(e) => onChange(e.target.value)} />
+        <TextField
+          fullWidth
+          label={label}
+          type="number"
+          value={value}
+          onChange={(e) => onChange(e.target.valueAsNumber)}
+        />
       );
     case codeOptionTypes.BOOLEAN.value:
       return (

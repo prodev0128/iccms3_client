@@ -24,11 +24,21 @@ const useColumns = (actions) => {
           field: `options.${option?.key}`,
           headerName: option?.name,
           width: 150,
-          valueGetter: (value, row) => row?.options?.[option?.key] || '',
+          valueGetter: (value, row) => row?.options?.[option?.key],
         };
         if (option?.type === codeOptionTypes.SINGLE_SELECT.value) {
           column.valueFormatter = (value) =>
             individualCodes?.[option?.ref]?.find((item) => item?.value === value)?.name || '';
+        }
+        switch (option?.type) {
+          case codeOptionTypes.NUMBER.value:
+            column.type = 'number';
+            break;
+          case codeOptionTypes.BOOLEAN.value:
+            column.type = 'boolean';
+            break;
+          default:
+            break;
         }
         return column;
       }) || [],
