@@ -1,7 +1,7 @@
 import { RefreshTwoTone } from '@mui/icons-material';
 import { IconButton, Tooltip } from '@mui/material';
 
-const useToolbar = (actions) => {
+const Toolbar = (actions) => {
   return (
     <>
       <Tooltip arrow title="Refresh">
@@ -19,4 +19,4 @@ const useToolbar = (actions) => {
   );
 };
 
-export default useToolbar;
+export default Toolbar;

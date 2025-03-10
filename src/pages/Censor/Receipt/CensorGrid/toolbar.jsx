@@ -8,8 +8,8 @@ const useToolbar = (actions) => {
         <IconButton
           color="primary"
           onClick={() => {
-            actions.fetchInvoices();
             actions.fetchIndividualCodes();
+            actions.fetchInvoices();
           }}
         >
           <RefreshTwoTone />

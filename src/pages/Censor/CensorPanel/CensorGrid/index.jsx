@@ -6,9 +6,9 @@ import CustomDataGrid from '../../../../components/CustomDataGrid';
 import { initialPaginationModel } from '../../../../globals/constants';
 import { setSelectedInvoices } from '../../../../redux/actions/invoices';
 import { useInvoices } from '../../../../redux/selectors';
-import useActions from './actions';
-import useColumns from './columns';
-import useToolbar from './toolbar';
+import Toolbar from './Toolbar';
+import useActions from './useActions';
+import useColumns from './useColumns';
 
 const CensorGrid = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,6 @@ const CensorGrid = () => {
   const actions = useActions(paginationModel, filterModel, sortModel);
   const columns = useColumns(actions);
   const { invoices, status, totalCount } = useInvoices();
-  const toolbar = useToolbar(actions);
 
   const setPagination = useCallback(
     (pagination) => {
@@ -55,7 +54,7 @@ const CensorGrid = () => {
         placeholder="User ID / Name"
         rowCount={totalCount}
         rows={invoices}
-        toolbar={toolbar}
+        toolbar={<Toolbar actions={actions} />}
         onFilterModelChange={setFilterModel}
         onPaginationModelChange={setPagination}
         onSortModelChange={setSortModel}

@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { debounceTime } from '../../../../globals/constants';
+import { debounceTime, findCategory } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { fetchIndividualCodes } from '../../../../redux/actions/codes';
 import { fetchInvoices, updateInvoice, updateInvoicesStatus } from '../../../../redux/actions/invoices';
@@ -15,6 +15,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     useCallback(async () => {
       await dispatch(
         fetchInvoices({
+          category: selectedTab.category || findCategory.ALL,
           minStatus: selectedTab.status.min || selectedTab.status.value,
           maxStatus: selectedTab.status.max || selectedTab.status.value,
           fileType: selectedTab.fileType.value,

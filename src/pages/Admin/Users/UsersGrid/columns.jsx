@@ -32,18 +32,13 @@ const useColumns = (actions) => {
           <GridActionItem
             icon={DoDisturbTwoTone}
             label="Disallow"
-            visible={row.isActive}
+            visible={!!row.isActive}
             onClick={() => actions.disallowUser(row)}
           />
-          <GridActionItem visible icon={KeyTwoTone} label="Reset Password" onClick={() => actions.resetPassword(row)} />
-          <GridActionItem
-            visible
-            icon={EditNoteTwoTone}
-            label="Edit Roles"
-            onClick={() => actions.updateUserRoles(row)}
-          />
-          <GridActionItem visible icon={EditTwoTone} label="Edit" onClick={() => actions.updateUser(row)} />
-          <GridActionItem visible icon={DeleteTwoTone} label="Delete" onClick={() => actions.deleteUser(row)} />
+          <GridActionItem icon={KeyTwoTone} label="Reset Password" onClick={() => actions.resetPassword(row)} />
+          <GridActionItem icon={EditNoteTwoTone} label="Edit Roles" onClick={() => actions.updateUserRoles(row)} />
+          <GridActionItem icon={EditTwoTone} label="Edit" onClick={() => actions.updateUser(row)} />
+          <GridActionItem icon={DeleteTwoTone} label="Delete" onClick={() => actions.deleteUser(row)} />
         </>
       ),
       type: 'actions',

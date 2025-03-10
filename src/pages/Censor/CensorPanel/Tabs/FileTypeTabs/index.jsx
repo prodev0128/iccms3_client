@@ -3,50 +3,43 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router';
 
-import { invoiceStatus } from '../../../../globals/constants';
-import { setSelectedTab } from '../../../../redux/actions/invoices';
+import { initialTab } from '../../../../../globals/constants';
+import { setSelectedTab } from '../../../../../redux/actions/invoices';
+import useFileTypeTabs from './useFileTypeTabs';
 
-const StatusTab = () => {
+const FileTypeTabs = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
+  const tabs = useFileTypeTabs();
 
-  const tabs = useMemo(
-    () => [
-      { name: 'All', value: 'ALL', min: invoiceStatus.UNDEFINED, max: invoiceStatus.COMPLETED },
-      { name: 'Checking', value: 'CHECKING', min: invoiceStatus.UNDEFINED, max: invoiceStatus.OUTED },
-      { name: 'Completed', value: 'COMPLETED', min: invoiceStatus.COMPLETED, max: invoiceStatus.COMPLETED },
-    ],
-    [],
-  );
-
-  const setStatus = useCallback(
+  const setFileType = useCallback(
     (value) => {
       setSearchParams((prev) => {
         const newParams = new URLSearchParams(prev);
-        newParams.set('status', value);
+        newParams.set('file_type', value);
         return newParams;
       });
     },
     [setSearchParams],
   );
 
-  const currentTab = useMemo(() => searchParams.get('status') || 'ALL', [searchParams]);
+  const currentTab = useMemo(() => searchParams.get('file_type') || initialTab, [searchParams]);
 
   useEffect(() => {
     const foundTab = tabs.find((tab) => tab.value === currentTab);
     if (foundTab) {
-      dispatch(setSelectedTab({ status: foundTab }));
+      dispatch(setSelectedTab({ fileType: foundTab }));
     }
   }, [dispatch, tabs, currentTab]);
 
   return (
     <Tabs
       centered
-      indicatorColor="primary"
+      indicatorColor="secondary"
       textColor="primary"
       value={currentTab}
       variant="fullWidth"
-      onChange={(_, value) => setStatus(value)}
+      onChange={(_, value) => setFileType(value)}
     >
       {tabs.map((tab) => (
         <Tab key={tab.value} label={tab.name} value={tab.value} />
@@ -55,4 +48,4 @@ const StatusTab = () => {
   );
 };
 
-export default StatusTab;
+export default FileTypeTabs;

@@ -18,14 +18,12 @@ const useColumns = (actions) => {
       renderCell: ({ row }) => (
         <>
           <GridActionItem
-            visible
             icon={AppRegistrationTwoTone}
             label="Register"
             onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.REGISTER })}
           />
           <GridActionItem
             cancel
-            visible
             icon={AppRegistrationTwoTone}
             label="Unregister"
             onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.UNREGISTER })}

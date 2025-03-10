@@ -25,11 +25,11 @@ const useColumns = (actions) => {
           <GridActionItem
             icon={DoDisturbTwoTone}
             label="Disallow"
-            visible={row.isActive}
+            visible={!!row.isActive}
             onClick={() => actions.disallowCodeOption(row)}
           />
-          <GridActionItem visible icon={EditTwoTone} label="Edit" onClick={() => actions.updateCodeOption(row)} />
-          <GridActionItem visible icon={DeleteTwoTone} label="Delete" onClick={() => actions.deleteCodeOption(row)} />
+          <GridActionItem icon={EditTwoTone} label="Edit" onClick={() => actions.updateCodeOption(row)} />
+          <GridActionItem icon={DeleteTwoTone} label="Delete" onClick={() => actions.deleteCodeOption(row)} />
         </>
       ),
       type: 'actions',

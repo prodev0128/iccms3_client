@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import CustomIcon from '../CustomIcon';
 
-const GridActionItem = ({ cancel = false, color = 'inherit', icon, label, onClick, visible }) => {
+const GridActionItem = ({ cancel = false, color = 'inherit', icon, label, onClick, visible = true }) => {
   return visible ? (
     <Tooltip title={label}>
       <IconButton color={color} onClick={onClick}>
@@ -21,7 +21,7 @@ GridActionItem.propTypes = {
   icon: PropTypes.elementType.isRequired,
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  visible: PropTypes.bool.isRequired,
+  visible: PropTypes.bool,
 };
 
 export default GridActionItem;
