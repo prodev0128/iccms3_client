@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router';
@@ -10,7 +11,7 @@ import Toolbar from './Toolbar';
 import useActions from './useActions';
 import useColumns from './useColumns';
 
-const CensorGrid = () => {
+const CensorGrid = ({ type }) => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -30,7 +31,7 @@ const CensorGrid = () => {
   const [sortModel, setSortModel] = useState([]);
 
   const actions = useActions(paginationModel, filterModel, sortModel);
-  const columns = useColumns(actions);
+  const columns = useColumns(type)(actions);
   const { invoices, status, totalCount } = useInvoices();
 
   const setPagination = useCallback(
@@ -51,7 +52,7 @@ const CensorGrid = () => {
         columns={columns}
         initialPagination={initialPagination}
         loading={status === 'loading'}
-        placeholder="User ID / Name"
+        placeholder="Name"
         rowCount={totalCount}
         rows={invoices}
         toolbar={<Toolbar actions={actions} />}
@@ -64,6 +65,10 @@ const CensorGrid = () => {
       />
     </>
   );
+};
+
+CensorGrid.propTypes = {
+  type: PropTypes.string.isRequired,
 };
 
 export default CensorGrid;

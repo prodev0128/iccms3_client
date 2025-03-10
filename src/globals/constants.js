@@ -69,7 +69,13 @@ export const depStatusTabs = [
     category: findCategory.DEP,
   },
   { name: 'Transferred', value: invoiceStatus.TRANSFERRED, category: findCategory.DEP },
-  { name: 'Assigned', value: invoiceStatus.ASSIGNED, category: findCategory.DEP },
+  {
+    name: 'Checking',
+    value: 'CHECKING',
+    min: invoiceStatus.TRANSFERRED,
+    max: invoiceStatus.CHECKED,
+    category: findCategory.DEP,
+  },
   { name: 'To Check', value: invoiceStatus.ASSIGNED, category: findCategory.MINE },
   { name: 'Censored', value: invoiceStatus.CENSORED, category: findCategory.DEP },
   { name: 'Checked', value: invoiceStatus.CHECKED, category: findCategory.DEP },
@@ -77,16 +83,16 @@ export const depStatusTabs = [
 
 export const receiptStatusTabs = [
   { name: 'All', value: 'ALL', min: invoiceStatus.UNDEFINED, max: invoiceStatus.RECEIVED },
-  { name: 'Undefined', value: 'UNDEFINED' },
-  { name: 'Registered', value: 'REGISTERED' },
+  { name: 'Undefined', value: invoiceStatus.UNDEFINED },
+  { name: 'Registered', value: invoiceStatus.REGISTERED },
   { name: 'Checking', value: 'CHECKING', min: invoiceStatus.TRANSFERRED, max: invoiceStatus.CHECKED },
-  { name: 'Received', value: 'RECEIVED' },
+  { name: 'Received', value: invoiceStatus.RECEIVED },
 ];
 
 export const totalStatusTabs = [
   { name: 'All', value: 'ALL', min: invoiceStatus.UNDEFINED, max: invoiceStatus.COMPLETED },
   { name: 'Checking', value: 'CHECKING', min: invoiceStatus.UNDEFINED, max: invoiceStatus.OUTED },
-  { name: 'Completed', value: 'COMPLETED', min: invoiceStatus.COMPLETED, max: invoiceStatus.COMPLETED },
+  { name: 'Completed', value: invoiceStatus.COMPLETED },
 ];
 
 export const initialTab = 'ALL';
