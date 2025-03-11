@@ -31,7 +31,7 @@ const CensorGrid = ({ type }) => {
   const [sortModel, setSortModel] = useState([]);
 
   const actions = useActions(paginationModel, filterModel, sortModel);
-  const columns = useColumns(type)(actions);
+  const columns = useColumns(actions, type);
   const { invoices, status, totalCount } = useInvoices();
 
   const setPagination = useCallback(
