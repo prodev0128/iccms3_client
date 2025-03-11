@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { GridToolbarContainer, GridToolbarQuickFilter } from '@mui/x-data-grid-pro';
+import { GridToolbarContainer, GridToolbarQuickFilter } from '@mui/x-data-grid-premium';
 import PropTypes from 'prop-types';
 
 const GridCustomToolbar = ({ placeholder, toolbar }) => {

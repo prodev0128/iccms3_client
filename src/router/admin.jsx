@@ -2,9 +2,9 @@ import { lazy } from 'react';
 import { Navigate } from 'react-router';
 
 import ComponentLoader from '../components/ComponentLoader';
-import ProtectedRoute from '../components/ProtectedRoute';
 import { roles } from '../globals/constants';
 
+const ProtectedRoute = ComponentLoader(lazy(() => import('../components/ProtectedRoute')));
 const Users = ComponentLoader(lazy(() => import('../pages/Admin/Users')));
 const Codes = ComponentLoader(lazy(() => import('../pages/Admin/Codes')));
 const Settings = ComponentLoader(lazy(() => import('../pages/Admin/Settings')));
