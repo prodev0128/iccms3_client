@@ -2,6 +2,8 @@ import { lazy } from 'react';
 import { Navigate } from 'react-router';
 
 import ComponentLoader from '../components/ComponentLoader';
+import ProtectedRoute from '../components/ProtectedRoute';
+import { roles } from '../globals/constants';
 
 const Users = ComponentLoader(lazy(() => import('../pages/Admin/Users')));
 const Codes = ComponentLoader(lazy(() => import('../pages/Admin/Codes')));
@@ -16,15 +18,27 @@ const router = [
     children: [
       {
         path: 'users',
-        element: <Users />,
+        element: (
+          <ProtectedRoute roles={[roles.USERS_VIEW]}>
+            <Users />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'codes',
-        element: <Codes />,
+        element: (
+          <ProtectedRoute roles={[roles.CODES_VIEW]}>
+            <Codes />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'settings',
-        element: <Settings />,
+        element: (
+          <ProtectedRoute roles={[roles.SETTINGS_VIEW]}>
+            <Settings />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '*',

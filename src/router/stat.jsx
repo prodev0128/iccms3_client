@@ -2,6 +2,8 @@ import { lazy } from 'react';
 import { Navigate } from 'react-router';
 
 import ComponentLoader from '../components/ComponentLoader';
+import ProtectedRoute from '../components/ProtectedRoute';
+import { roles } from '../globals/constants';
 
 const People = ComponentLoader(lazy(() => import('../pages/Stat/People')));
 const Pub = ComponentLoader(lazy(() => import('../pages/Stat/Pub')));
@@ -16,15 +18,27 @@ const router = [
     children: [
       {
         path: 'people',
-        element: <People />,
+        element: (
+          <ProtectedRoute roles={[roles.PEOPLE_VIEW]}>
+            <People />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'pub',
-        element: <Pub />,
+        element: (
+          <ProtectedRoute roles={[roles.PUB_VIEW]}>
+            <Pub />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'flow',
-        element: <Flow />,
+        element: (
+          <ProtectedRoute roles={[roles.FLOW_VIEW]}>
+            <Flow />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '*',
