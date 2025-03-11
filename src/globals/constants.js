@@ -153,25 +153,74 @@ export const roleObjectArray = [
   {
     id: 'ADMIN',
     label: 'Admin',
+  },
+  {
+    id: 'ADMINISTRATION',
+    label: 'Administration',
     children: [
       {
         id: 'USERS',
         label: 'Users',
         children: [
           {
+            id: roles.USERS_VIEW,
+            label: 'Users View',
+          },
+          {
             id: roles.USERS_CREATE,
             label: 'Users Create',
-            role: roles.USERS_CREATE,
           },
           {
             id: roles.USERS_EDIT,
             label: 'Users Edit',
-            role: roles.USERS_EDIT,
           },
           {
             id: roles.USERS_DELETE,
             label: 'Users Delete',
-            role: roles.USERS_DELETE,
+          },
+        ],
+      },
+      {
+        id: 'CODES',
+        label: 'Codes',
+        children: [
+          {
+            id: roles.CODES_VIEW,
+            label: 'Codes View',
+          },
+          {
+            id: roles.CODES_CREATE,
+            label: 'Codes Create',
+          },
+          {
+            id: roles.CODES_EDIT,
+            label: 'Codes Edit',
+          },
+          {
+            id: roles.CODES_DELETE,
+            label: 'Codes Delete',
+          },
+        ],
+      },
+      {
+        id: 'SETTINGS',
+        label: 'Settings',
+        children: [
+          {
+            id: roles.SETTINGS_VIEW,
+            label: 'Settings View',
+          },
+          {
+            id: roles.SETTINGS_CREATE,
+            label: 'Settings Create',
+          },
+          {
+            id: roles.SETTINGS_EDIT,
+            label: 'Settings Edit',
+          },
+          {
+            id: roles.SETTINGS_DELETE,
+            label: 'Settings Delete',
           },
         ],
       },
@@ -182,13 +231,106 @@ export const roleObjectArray = [
     label: 'Censor',
     children: [
       {
-        id: 'PROCESS',
-        label: 'Process',
+        id: 'RECEIPT',
+        label: 'Receipt',
         children: [
           {
-            id: roles.PROCESSING_ASSIGN,
-            label: 'Censor Create',
-            role: roles.PROCESSING_ASSIGN,
+            id: roles.RECEIPT_VIEW,
+            label: 'Receipt View',
+          },
+          {
+            id: roles.RECEIPT_REGISTER,
+            label: 'Receipt Register',
+          },
+          {
+            id: roles.RECEIPT_TRANSFER,
+            label: 'Receipt Transfer',
+          },
+          {
+            id: roles.RECEIPT_OUT,
+            label: 'Receipt OUT',
+          },
+        ],
+      },
+      {
+        id: 'DEP',
+        label: 'Dep',
+        children: [
+          {
+            id: roles.DEP_VIEW,
+            label: 'Dep View',
+          },
+          {
+            id: roles.DEP_ASSIGN,
+            label: 'Dep Assign',
+          },
+          {
+            id: roles.DEP_RECEIVE,
+            label: 'Dep Receipt',
+          },
+        ],
+      },
+      {
+        id: 'PERSONAL',
+        label: 'Personal',
+        children: [
+          {
+            id: roles.PERSONAL_VIEW,
+            label: 'Personal View',
+          },
+          {
+            id: roles.PERSONAL_CENSOR,
+            label: 'Personal Censor',
+          },
+          {
+            id: roles.PERSONAL_CHECK,
+            label: 'Personal Check',
+          },
+        ],
+      },
+      {
+        id: 'TOTAL',
+        label: 'Total',
+        children: [
+          {
+            id: roles.TOTAL_VIEW,
+            label: 'Total View',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'STATISTICS',
+    label: 'Statistics',
+    children: [
+      {
+        id: 'PEOPLE',
+        label: 'People',
+        children: [
+          {
+            id: roles.PEOPLE_VIEW,
+            label: 'People View',
+          },
+        ],
+      },
+      {
+        id: 'PUB',
+        label: 'Pub',
+        children: [
+          {
+            id: roles.PUB_VIEW,
+            label: 'Pub View',
+          },
+        ],
+      },
+      {
+        id: 'FLOW',
+        label: 'Flow',
+        children: [
+          {
+            id: roles.FLOW_VIEW,
+            label: 'Flow View',
           },
         ],
       },

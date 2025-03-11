@@ -2,6 +2,7 @@ import { alpha, Box, List, ListSubheader, styled } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router';
 
+import { useAuth } from '../../../../redux/selectors';
 import SidebarMenuItem from './item';
 import menuItems from './items';
 
@@ -144,38 +145,41 @@ const SubMenuWrapper = styled(Box)(
 `,
 );
 
-const renderSidebarMenuItems = ({ items, path }) => (
-  <SubMenuWrapper>
-    <List component="div">{items.reduce((ev, item) => reduceChildRoutes({ ev, item, path }), [])}</List>
-  </SubMenuWrapper>
-);
+const renderSidebarMenuItems = ({ items, path, user }) =>
+  items.reduce((ev, item) => reduceChildRoutes({ ev, item, path, user }), []);
 
-const reduceChildRoutes = ({ ev, item, path }) => {
+const reduceChildRoutes = ({ ev, item, path, user }) => {
   const key = item.name;
 
   const exactMatch = item.link ? !!matchPath(item.link, path) : false;
 
   if (item.items) {
     const partialMatch = item.link ? !!matchPath(`${item.link}/*`, path) : false;
+    const children = renderSidebarMenuItems({
+      items: item.items,
+      path,
+      user,
+    });
 
-    ev.push(
-      <SidebarMenuItem
-        active={partialMatch}
-        badge={item.badge}
-        badgeTooltip={item.badgeTooltip}
-        icon={item.icon}
-        key={key}
-        link={item.link}
-        name={item.name}
-        open={partialMatch}
-      >
-        {renderSidebarMenuItems({
-          items: item.items,
-          path,
-        })}
-      </SidebarMenuItem>,
-    );
-  } else {
+    if (children.length) {
+      ev.push(
+        <SidebarMenuItem
+          active={partialMatch}
+          badge={item.badge}
+          badgeTooltip={item.badgeTooltip}
+          icon={item.icon}
+          key={key}
+          link={item.link}
+          name={item.name}
+          open={partialMatch}
+        >
+          <SubMenuWrapper>
+            <List component="div">{children}</List>
+          </SubMenuWrapper>
+        </SidebarMenuItem>,
+      );
+    }
+  } else if (!item?.right || item.right?.some((r) => user?.roles?.includes(r))) {
     ev.push(
       <SidebarMenuItem
         active={exactMatch}
@@ -195,26 +199,35 @@ const reduceChildRoutes = ({ ev, item, path }) => {
 const SidebarMenu = () => {
   const location = useLocation();
   const { t } = useTranslation();
+  const { user } = useAuth();
 
   return (
     <>
-      {menuItems.map((section) => (
-        <MenuWrapper key={section.heading}>
-          <List
-            component="div"
-            subheader={
-              <ListSubheader disableSticky component="div">
-                {t(section.heading)}
-              </ListSubheader>
-            }
-          >
-            {renderSidebarMenuItems({
-              items: section.items,
-              path: location.pathname,
-            })}
-          </List>
-        </MenuWrapper>
-      ))}
+      {menuItems
+        .map((section) => {
+          const children = renderSidebarMenuItems({ items: section.items, path: location.pathname, user });
+          if (!children.length) {
+            return null;
+          }
+          return (
+            <MenuWrapper key={section.heading}>
+              <List
+                component="div"
+                subheader={
+                  <ListSubheader disableSticky component="div">
+                    {t(section.heading)}
+                  </ListSubheader>
+                }
+              >
+                <SubMenuWrapper>
+                  <List component="div">{children}</List>
+                </SubMenuWrapper>
+                {}
+              </List>
+            </MenuWrapper>
+          );
+        })
+        .filter((section) => section)}
     </>
   );
 };

@@ -19,7 +19,7 @@ export const getRolesCategories = () => {
 };
 
 export const getRolesById = (itemId) => {
-  const findRoleObject = (roles) => {
+  const getRoleObject = (roles) => {
     let foundRoleObject = null;
     for (const role of roles) {
       if (role.id === itemId) {
@@ -27,7 +27,7 @@ export const getRolesById = (itemId) => {
         break;
       }
       if (role.children && role.children.length > 0) {
-        foundRoleObject = findRoleObject(role.children);
+        foundRoleObject = getRoleObject(role.children);
         if (foundRoleObject) {
           break;
         }
@@ -35,31 +35,31 @@ export const getRolesById = (itemId) => {
     }
     return foundRoleObject;
   };
-  const findAllRoles = (roleObject) => {
+  const getRolesByObject = (roleObject) => {
     if (roleObject.children && roleObject.children.length > 0) {
-      return roleObject.children.reduce((total, role) => total.concat(findAllRoles(role)), []);
+      return roleObject.children.reduce((total, role) => total.concat(getRolesByObject(role)), []);
     } else {
-      return [roleObject.role];
+      return [roleObject.id];
     }
   };
-  const foundRoleObject = findRoleObject(roleObjectArray);
+  const foundRoleObject = getRoleObject(roleObjectArray);
   if (!foundRoleObject) {
     return [];
   }
-  return findAllRoles(foundRoleObject);
+  return getRolesByObject(foundRoleObject);
 };
 
 export const getRolesByData = (roles) => {
   const foundRoles = [];
-  const f = (roleObject) => {
+  const callback = (roleObject) => {
     const haveAll = getRolesById(roleObject.id).every((r) => roles.includes(r));
     if (haveAll) {
       foundRoles.push(roleObject.id);
     }
     if (roleObject.children && roleObject.children.length > 0) {
-      roleObject.children.forEach(f);
+      roleObject.children.forEach(callback);
     }
   };
-  roleObjectArray.forEach(f);
+  roleObjectArray.forEach(callback);
   return foundRoles;
 };

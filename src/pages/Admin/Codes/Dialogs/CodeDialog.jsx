@@ -39,7 +39,6 @@ const CodeDialog = ({ onClose, open, payload }) => {
       });
       setErrors(newErrors);
     }
-    console.log('data', data);
   };
 
   const updateOptionData = async (key, value) => {

@@ -15,6 +15,8 @@ import {
   VerifiedUserTwoTone,
 } from '@mui/icons-material';
 
+import { roles } from '../../../../globals/constants';
+
 const menuItems = [
   {
     heading: 'Main Pages',
@@ -33,16 +35,19 @@ const menuItems = [
             name: 'Users',
             link: '/admin/users',
             icon: AssignmentIndTwoTone,
+            right: [roles.USERS_VIEW],
           },
           {
             name: 'Codes',
             link: '/admin/codes',
             icon: DesignServicesTwoTone,
+            right: [roles.CODES_VIEW],
           },
           {
             name: 'Settings',
             link: '/admin/settings',
             icon: SettingsTwoTone,
+            right: [roles.SETTINGS_VIEW],
           },
         ],
       },
@@ -55,16 +60,19 @@ const menuItems = [
             name: 'Receipt',
             link: '/censor/receipt',
             icon: InstallDesktopTwoTone,
+            right: [roles.RECEIPT_VIEW],
           },
           {
             name: 'Dep',
             link: '/censor/dep',
             icon: VerifiedUserTwoTone,
+            right: [roles.DEP_VIEW, roles.PERSONAL_VIEW],
           },
           {
             name: 'Total',
             link: '/censor/total',
             icon: FindInPageTwoTone,
+            right: [roles.TOTAL_VIEW],
           },
         ],
       },
@@ -77,16 +85,19 @@ const menuItems = [
             name: 'People',
             link: '/stat/people',
             icon: BarChartTwoTone,
+            right: [roles.PEOPLE_VIEW],
           },
           {
             name: 'Pub',
             link: '/stat/pub',
             icon: DataSaverOnTwoTone,
+            right: [roles.PUB_VIEW],
           },
           {
             name: 'Flow',
             link: '/stat/flow',
             icon: AutoGraphTwoTone,
+            right: [roles.FLOW_VIEW],
           },
         ],
       },
@@ -99,11 +110,13 @@ const menuItems = [
         link: '/overview',
         name: 'Overview',
         icon: DesignServicesTwoTone,
+        right: [],
       },
       {
         link: '/docs',
         name: 'Documentation',
         icon: SupportTwoTone,
+        right: [],
       },
     ],
   },

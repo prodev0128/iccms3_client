@@ -13,7 +13,6 @@ export const login = (data) => {
     method: 'POST',
     url: `${authUrl}/login`,
   };
-  console.log('apiInfo', apiInfo);
   return apiAction(authSlice.actions.login, apiInfo);
 };
 
