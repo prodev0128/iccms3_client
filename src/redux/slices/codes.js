@@ -27,12 +27,7 @@ const codesSlice = createSlice({
       }
     },
     createCode: (state, { payload }) => {
-      const { data, status } = payload;
-      state.status = status;
-      if (status === 'success') {
-        state.codes.push(data);
-        state.totalCount++;
-      }
+      state.status = payload.status;
     },
     updateCode: (state, { payload }) => {
       const { data, status } = payload;
@@ -42,12 +37,7 @@ const codesSlice = createSlice({
       }
     },
     deleteCode: (state, { payload }) => {
-      const { data, status } = payload;
-      state.status = status;
-      if (status === 'success') {
-        state.codes = state.codes.filter((code) => code.id !== data.id);
-        state.totalCount--;
-      }
+      state.status = payload.status;
     },
   },
 });

@@ -4,10 +4,14 @@ const apiAction = (sliceAction, params) => async (dispatch) => {
   dispatch(sliceAction({ status: 'loading' }));
   try {
     const result = await axios(params);
-    dispatch(sliceAction({ data: result.data, status: 'success' }));
+    dispatch(sliceAction({ data: result.data, status: 'success', params }));
   } catch (error) {
     dispatch(
-      sliceAction({ error: error.message || 'An unexpected error occurred during the operation.', status: 'failed' }),
+      sliceAction({
+        error: error.message || 'An unexpected error occurred during the operation.',
+        status: 'failed',
+        params,
+      }),
     );
   }
 };

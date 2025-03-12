@@ -20,32 +20,12 @@ const invoicesSlice = createSlice({
         state.totalCount = data.totalCount;
       }
     },
-    // createInvoice: (state, { payload }) => {
-    //   const { data, status } = payload;
-    //   state.status = status;
-    //   if (status === 'success') {
-    //     state.invoices.push(data);
-    //     state.totalCount++;
-    //   }
-    // },
     updateInvoice: (state, { payload }) => {
-      const { data, status } = payload;
-      state.status = status;
-      if (status === 'success') {
-        state.invoices = state.invoices.map((invoice) => (invoice.id === data.id ? data : invoice));
-      }
+      state.status = payload.status;
     },
     updateInvoicesStatus: (state, { payload }) => {
       state.status = payload.status;
     },
-    // deleteInvoice: (state, { payload }) => {
-    //   const { data, status } = payload;
-    //   state.status = status;
-    //   if (status === 'success') {
-    //     state.invoices = state.invoices.filter((invoice) => invoice.id !== data.id);
-    //     state.totalCount--;
-    //   }
-    // },
     setSelectedInvoices: (state, { payload }) => {
       state.status = 'success';
       state.selectedInvoices = payload;

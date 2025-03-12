@@ -17,12 +17,6 @@ const useColumnActions = (actions) => {
           label="Register"
           onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.REGISTER })}
         />
-        <GridActionItem
-          cancel
-          icon={AppRegistrationTwoTone}
-          label="Unregister"
-          onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.UNREGISTER })}
-        />
       </>
     ),
   };

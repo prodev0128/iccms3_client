@@ -19,12 +19,7 @@ const usersSlice = createSlice({
       }
     },
     createUser: (state, { payload }) => {
-      const { data, status } = payload;
-      state.status = status;
-      if (status === 'success') {
-        state.users.push(data);
-        state.totalCount++;
-      }
+      state.status = payload.status;
     },
     updateUser: (state, { payload }) => {
       const { data, status } = payload;
@@ -33,24 +28,15 @@ const usersSlice = createSlice({
         state.users = state.users.map((user) => (user.id === data.id ? data : user));
       }
     },
-    updateUserRoles: (state, { payload }) => {
+    deleteUser: (state, { payload }) => {
+      state.status = payload.status;
+    },
+    resetPassword: (state, { payload }) => {
       const { data, status } = payload;
       state.status = status;
       if (status === 'success') {
         state.users = state.users.map((user) => (user.id === data.id ? data : user));
       }
-    },
-    deleteUser: (state, { payload }) => {
-      const { data, status } = payload;
-      state.status = status;
-      if (status === 'success') {
-        state.users = state.users.filter((user) => user.id !== data.id);
-        state.totalCount--;
-      }
-    },
-    resetPassword: (state, { payload }) => {
-      const { status } = payload;
-      state.status = status;
     },
   },
 });

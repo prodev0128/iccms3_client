@@ -1,10 +1,23 @@
-import { AppRegistrationTwoTone } from '@mui/icons-material';
+import { AppRegistrationTwoTone, GroupTwoTone } from '@mui/icons-material';
+import { useCallback } from 'react';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
 import { invoiceActions } from '../../../../globals/constants';
+import { useCodes } from '../../../../redux/selectors';
 import MenuToolbar from './MenuToolbar';
 
 const useColumnActions = (actions) => {
+  const { individualCodes } = useCodes();
+  const { action: cenActions = [] } = individualCodes;
+
+  const checkStatus = useCallback(
+    (cenAction, status) => {
+      const action = cenActions.find((action) => action.value === cenAction);
+      return action?.options?.prevStatus === status;
+    },
+    [cenActions],
+  );
+
   return {
     field: 'actions',
     type: 'actions',
@@ -13,15 +26,17 @@ const useColumnActions = (actions) => {
     renderCell: ({ row }) => (
       <>
         <GridActionItem
-          icon={AppRegistrationTwoTone}
-          label="Register"
-          onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.REGISTER })}
+          icon={GroupTwoTone}
+          label="Assign"
+          visible={checkStatus(invoiceActions.ASSIGN, row.status)}
+          onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.ASSIGN })}
         />
         <GridActionItem
           cancel
-          icon={AppRegistrationTwoTone}
-          label="Unregister"
-          onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.UNREGISTER })}
+          icon={GroupTwoTone}
+          label="Unassign"
+          visible={checkStatus(invoiceActions.UNASSIGN, row.status)}
+          onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.UNASSIGN })}
         />
       </>
     ),

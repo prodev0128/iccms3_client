@@ -7,12 +7,14 @@ import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { fetchIndividualCodes } from '../../../../redux/actions/codes';
 import { fetchInvoices, updateInvoice, updateInvoicesStatus } from '../../../../redux/actions/invoices';
 import { fetchUsers } from '../../../../redux/actions/users';
-import { useCodes, useInvoices } from '../../../../redux/selectors';
+import { useCodes, useInvoices, useUsers } from '../../../../redux/selectors';
+import AssignDialog from '../Dialogs/AssignDialog';
 import TransferDialog from '../Dialogs/TransferDialog';
 
 const useActions = (paginationModel, filterModel, sortModel) => {
   const { selectedTab } = useInvoices();
   const { individualCodes } = useCodes();
+  const { users } = useUsers();
   const dispatch = useDispatch();
   const dialogs = useDialogs();
 
@@ -40,8 +42,9 @@ const useActions = (paginationModel, filterModel, sortModel) => {
   const handleUpdateInvoice = useCallback(
     async (data) => {
       await dispatch(updateInvoice(data.id, data));
+      await debouncedFetchInvoices();
     },
-    [dispatch],
+    [dispatch, debouncedFetchInvoices],
   );
 
   const handleUpdateInvoicesStatus = useCallback(
@@ -50,19 +53,27 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       switch (data.action) {
         case invoiceActions.TRANSFER: {
           const res = await dialogs.open(TransferDialog, { data, individualCodes });
+          if (!res) {
+            return;
+          }
           moreData = { ...data, ...res };
           break;
         }
-        case invoiceActions.ASSIGN:
-          // moreData = data.concat(await dialogs.open(TransferDialog));
+        case invoiceActions.ASSIGN: {
+          const res = await dialogs.open(AssignDialog, { data, users });
+          if (!res) {
+            return;
+          }
+          moreData = { ...data, ...res };
           break;
+        }
         default:
           break;
       }
-      console.log('handleUpdateInvoiceStatus', moreData);
       await dispatch(updateInvoicesStatus(moreData));
+      await debouncedFetchInvoices();
     },
-    [dispatch, dialogs, individualCodes],
+    [dispatch, dialogs, individualCodes, users, debouncedFetchInvoices],
   );
 
   const debouncedFetchIndividualCodes = useDebounceCallback(

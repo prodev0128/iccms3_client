@@ -70,14 +70,14 @@ export const depStatusTabs = [
   },
   { name: 'Transferred', value: invoiceStatus.TRANSFERRED, category: findCategory.DEP },
   {
-    name: 'Checking',
-    value: 'CHECKING',
-    min: invoiceStatus.TRANSFERRED,
+    name: 'Censoring',
+    value: 'CENSORING',
+    min: invoiceStatus.ASSIGNED,
     max: invoiceStatus.CHECKED,
     category: findCategory.DEP,
   },
-  { name: 'To Check', value: invoiceStatus.ASSIGNED, category: findCategory.MINE },
-  { name: 'Censored', value: invoiceStatus.CENSORED, category: findCategory.DEP },
+  { name: 'To Censor', value: invoiceStatus.ASSIGNED, category: findCategory.MINE },
+  { name: 'To Check', value: invoiceStatus.CENSORED, category: findCategory.MINE },
   { name: 'Checked', value: invoiceStatus.CHECKED, category: findCategory.DEP },
 ];
 

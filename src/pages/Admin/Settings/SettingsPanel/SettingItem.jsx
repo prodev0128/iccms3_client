@@ -6,7 +6,7 @@ import DynamicFormField from '../../../../components/DynamicFormField';
 
 const SettingItem = ({ actions, setting }) => {
   return (
-    <Grid2 container sx={{ p: 2 }}>
+    <Grid2 container sx={{ px: 2, py: 1 }}>
       <Grid2 size={10} sx={{ display: 'flex', alignItems: 'center' }}>
         <DynamicFormField label={setting.name} type={setting.type} value={setting.value} onChange={(f) => f} />
       </Grid2>

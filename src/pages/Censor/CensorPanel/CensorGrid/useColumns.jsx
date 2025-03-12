@@ -1,12 +1,13 @@
 import { useMemo } from 'react';
 
 import { sidebarCategory } from '../../../../globals/constants';
-import { useCodes } from '../../../../redux/selectors';
+import { useCodes, useUsers } from '../../../../redux/selectors';
 import useDepColumnActions from '../../Dep/CensorGrid/useColumnActions';
 import useReceiptColumnActions from '../../Receipt/CensorGrid/useColumnActions';
 import useTotalColumnActions from '../../Total/CensorGrid/useColumnActions';
 
 const useColumns = (actions, type) => {
+  const { users } = useUsers();
   const { individualCodes } = useCodes();
   const { dep: deps = [], fileType: fileTypes = [], status = [] } = individualCodes;
 
@@ -48,7 +49,13 @@ const useColumns = (actions, type) => {
       field: 'censor',
       headerName: 'Censor',
       width: 150,
-      valueFormatter: (value) => (deps.find((dep) => dep.value === value) || {}).name,
+      valueFormatter: (value) => (users.find((user) => user.userID === value) || {}).name,
+    },
+    {
+      field: 'checker',
+      headerName: 'Checker',
+      width: 150,
+      valueFormatter: (value) => (users.find((user) => user.userID === value) || {}).name,
     },
   ];
 };

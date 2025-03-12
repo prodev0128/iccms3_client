@@ -20,27 +20,20 @@ const codeOptionsSlice = createSlice({
       }
     },
     createCodeOption: (state, { payload }) => {
-      const { data, status } = payload;
-      state.status = status;
-      if (status === 'success') {
-        state.codeOptions.push(data);
-        state.totalCount++;
-      }
+      state.status = payload.status;
     },
     updateCodeOption: (state, { payload }) => {
       const { data, status } = payload;
       state.status = status;
       if (status === 'success') {
         state.codeOptions = state.codeOptions.map((codeOption) => (codeOption.id === data.id ? data : codeOption));
+        if (data.id === state.currentCodeOption.id) {
+          state.currentCodeOption = data;
+        }
       }
     },
     deleteCodeOption: (state, { payload }) => {
-      const { data, status } = payload;
-      state.status = status;
-      if (status === 'success') {
-        state.codeOptions = state.codeOptions.filter((codeOption) => codeOption.id !== data.id);
-        state.totalCount--;
-      }
+      state.status = payload.status;
     },
     setCurrentCodeOption: (state, { payload }) => {
       state.status = 'success';

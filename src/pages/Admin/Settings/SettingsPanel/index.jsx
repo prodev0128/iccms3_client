@@ -24,7 +24,7 @@ const SettingsPanel = () => {
         </Tooltip>
       </Box>
       <Box sx={{ height: 500 }}>
-        <Grid2 container spacing={2}>
+        <Grid2 container spacing={1}>
           {settings.map((setting, index) => (
             <Grid2 key={index} size={12}>
               <SettingItem actions={actions} setting={setting} />

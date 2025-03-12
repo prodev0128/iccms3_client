@@ -5,14 +5,7 @@ import { useDispatch } from 'react-redux';
 import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { fetchIndividualCodes } from '../../../../redux/actions/codes';
-import {
-  createUser,
-  deleteUser,
-  fetchUsers,
-  resetPassword,
-  updateUser,
-  updateUserRoles,
-} from '../../../../redux/actions/users';
+import { createUser, deleteUser, fetchUsers, resetPassword, updateUser } from '../../../../redux/actions/users';
 import { useCodes } from '../../../../redux/selectors';
 import RolesDialog from '../Dialogs/RolesDialog';
 import UserDialog from '../Dialogs/UserDialog';
@@ -41,7 +34,8 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       return;
     }
     await dispatch(createUser(createdUser));
-  }, [dispatch, dialogs, individualCodes]);
+    await debouncedFetchUsers();
+  }, [dispatch, dialogs, individualCodes, debouncedFetchUsers]);
 
   const handleUpdateUser = useCallback(
     async (data) => {
@@ -60,7 +54,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       if (!roles) {
         return;
       }
-      await dispatch(updateUserRoles(data.id, { roles }));
+      await dispatch(updateUser(data.id, { roles }));
     },
     [dispatch, dialogs],
   );
@@ -76,8 +70,9 @@ const useActions = (paginationModel, filterModel, sortModel) => {
         return;
       }
       await dispatch(deleteUser(data.id));
+      await debouncedFetchUsers();
     },
-    [dispatch, dialogs],
+    [dispatch, dialogs, debouncedFetchUsers],
   );
 
   const handleResetPassword = useCallback(

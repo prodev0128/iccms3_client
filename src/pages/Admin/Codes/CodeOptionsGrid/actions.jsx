@@ -36,7 +36,8 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       return;
     }
     await dispatch(createCodeOption(createdCodeOption));
-  }, [dispatch, dialogs]);
+    await debouncedFetchCodeOptions();
+  }, [dispatch, dialogs, debouncedFetchCodeOptions]);
 
   const handleUpdateCodeOption = useCallback(
     async (data) => {
@@ -60,8 +61,9 @@ const useActions = (paginationModel, filterModel, sortModel) => {
         return;
       }
       await dispatch(deleteCodeOption(data.id));
+      await debouncedFetchCodeOptions();
     },
-    [dispatch, dialogs],
+    [dispatch, dialogs, debouncedFetchCodeOptions],
   );
 
   const handleAllowCodeOption = useCallback(
