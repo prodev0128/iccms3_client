@@ -40,12 +40,12 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
   };
 
   const handleAddOption = () => {
-    updateData('options', [...data.options, {}]);
+    updateData('options', [...(data?.options || []), {}]);
   };
 
   const handleRemoveOption = (index) => {
     setData((prevData) => {
-      const options = [...prevData.options];
+      const options = [...(prevData?.options || [])];
       options.splice(index, 1);
       return { ...prevData, options: [...options] };
     });
@@ -53,7 +53,7 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
 
   const updateOptionsData = (index, key, value) => {
     setData((prevData) => {
-      const options = [...prevData.options];
+      const options = [...(prevData?.options || [])];
       const newOptions = options.map((option, i) => (index === i ? { ...option, [key]: value } : { ...option }));
       return { ...prevData, options: newOptions };
     });
