@@ -5,14 +5,14 @@ import { useSearchParams } from 'react-router';
 
 import { initialTab } from '../../../../../globals/constants';
 import { setSelectedTab } from '../../../../../redux/actions/invoices';
-import useFileTypeTabs from './useFileTypeTabs';
+import useDataTypeTabs from './useDataTypeTabs';
 
-const FileTypeTabs = () => {
+const DataTypeTabs = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const tabs = useFileTypeTabs();
+  const tabs = useDataTypeTabs();
 
-  const setFileType = useCallback(
+  const setDataType = useCallback(
     (value) => {
       setSearchParams((prev) => {
         const newParams = new URLSearchParams(prev);
@@ -28,7 +28,7 @@ const FileTypeTabs = () => {
   useEffect(() => {
     const foundTab = tabs.find((tab) => tab.value === currentTab);
     if (foundTab) {
-      dispatch(setSelectedTab({ fileType: foundTab }));
+      dispatch(setSelectedTab({ dataType: foundTab }));
     }
   }, [dispatch, tabs, currentTab]);
 
@@ -39,7 +39,7 @@ const FileTypeTabs = () => {
       textColor="primary"
       value={currentTab}
       variant="fullWidth"
-      onChange={(_, value) => setFileType(value)}
+      onChange={(_, value) => setDataType(value)}
     >
       {tabs.map((tab) => (
         <Tab key={tab.value} label={tab.name} value={tab.value} />
@@ -48,4 +48,4 @@ const FileTypeTabs = () => {
   );
 };
 
-export default FileTypeTabs;
+export default DataTypeTabs;

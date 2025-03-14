@@ -25,7 +25,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
           category: selectedTab.status.category || findCategory.ALL,
           minStatus: selectedTab.status.min || selectedTab.status.value,
           maxStatus: selectedTab.status.max || selectedTab.status.value,
-          fileType: selectedTab.fileType.value,
+          dataType: selectedTab.dataType.value,
           ...paginationModel,
           filterModel: JSON.stringify(filterModel),
           sortModel: JSON.stringify(sortModel),
@@ -78,7 +78,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
 
   const debouncedFetchIndividualCodes = useDebounceCallback(
     useCallback(async () => {
-      await dispatch(fetchIndividualCodes({ types: 'dep,status,action,cenFlag,fileType' }));
+      await dispatch(fetchIndividualCodes({ types: 'dep,status,action,cenFlag,dataType' }));
     }, [dispatch]),
     debounceTime,
   );

@@ -9,7 +9,7 @@ import useTotalColumnActions from '../../Total/CensorGrid/useColumnActions';
 const useColumns = (actions, type) => {
   const { users } = useUsers();
   const { individualCodes } = useCodes();
-  const { dep: deps = [], fileType: fileTypes = [], status = [] } = individualCodes;
+  const { dataType: dataTypes = [], dep: deps = [], status = [] } = individualCodes;
 
   const useColumnActions = useMemo(() => {
     switch (type) {
@@ -28,10 +28,10 @@ const useColumns = (actions, type) => {
     useColumnActions(actions),
     { field: 'name', headerName: 'Name', width: 150 },
     {
-      field: 'fileType',
+      field: 'dataType',
       headerName: 'Type',
       width: 150,
-      valueFormatter: (value) => (fileTypes.find((fileType) => fileType.value === value) || {}).name,
+      valueFormatter: (value) => (dataTypes.find((dataType) => dataType.value === value) || {}).name,
     },
     {
       field: 'status',

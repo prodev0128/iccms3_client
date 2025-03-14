@@ -2,16 +2,16 @@ import { useMemo } from 'react';
 
 import { useCodes } from '../../../../../redux/selectors';
 
-const useFileTypeTabs = () => {
+const useDataTypeTabs = () => {
   const { individualCodes } = useCodes();
-  const fileTypes = useMemo(
+  const dataTypes = useMemo(
     () =>
-      individualCodes?.fileType
+      individualCodes?.dataType
         ?.filter((item) => item.isActive)
         ?.map((item) => ({ name: item.name, value: item.value })) || [],
     [individualCodes],
   );
-  return useMemo(() => [{ name: 'All', value: 'ALL' }, ...fileTypes], [fileTypes]);
+  return useMemo(() => [{ name: 'All', value: 'ALL' }, ...dataTypes], [dataTypes]);
 };
 
-export default useFileTypeTabs;
+export default useDataTypeTabs;

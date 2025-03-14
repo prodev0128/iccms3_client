@@ -53,7 +53,7 @@ export const findCategory = {
   MINE: 'MINE',
 };
 
-export const fileTypes = {
+export const dataTypes = {
   ALL: 'ALL',
   EMAIL: 'EMAIL',
   FTP: 'FTP',

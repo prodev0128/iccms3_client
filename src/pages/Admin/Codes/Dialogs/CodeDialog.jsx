@@ -43,7 +43,7 @@ const CodeDialog = ({ onClose, open, payload }) => {
 
   const updateOptionData = async (key, value) => {
     setData((prevData) => {
-      const options = { ...prevData.options };
+      const options = { ...prevData?.options };
       options[key] = value;
       return { ...prevData, options: { ...options } };
     });
@@ -84,8 +84,9 @@ const CodeDialog = ({ onClose, open, payload }) => {
               {currentCodeOption?.options?.map((option, index) => (
                 <Grid2 key={index} size={6}>
                   <DynamicFormField
+                    haveDisableOption
                     label={option?.name}
-                    options={individualCodes?.[option?.ref]}
+                    options={individualCodes?.[option?.ref] || []}
                     type={option?.type}
                     value={data?.options?.[option?.key]}
                     onChange={(value) => updateOptionData(option?.key, value)}
