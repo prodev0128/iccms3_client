@@ -7,6 +7,7 @@ import { roles } from '../globals/constants';
 const ProtectedRoute = ComponentLoader(lazy(() => import('../components/ProtectedRoute')));
 const Receipt = ComponentLoader(lazy(() => import('../pages/Censor/Receipt')));
 const Dep = ComponentLoader(lazy(() => import('../pages/Censor/Dep')));
+const Personal = ComponentLoader(lazy(() => import('../pages/Censor/Personal')));
 const Total = ComponentLoader(lazy(() => import('../pages/Censor/Total')));
 
 const router = [
@@ -27,8 +28,16 @@ const router = [
       {
         path: 'dep',
         element: (
-          <ProtectedRoute roles={[roles.DEP_VIEW, roles.PERSONAL_VIEW]}>
+          <ProtectedRoute roles={[roles.DEP_VIEW]}>
             <Dep />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'personal',
+        element: (
+          <ProtectedRoute roles={[roles.PERSONAL_VIEW]}>
+            <Personal />
           </ProtectedRoute>
         ),
       },

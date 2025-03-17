@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { sidebarCategory } from '../../../../globals/constants';
 import { useCodes, useUsers } from '../../../../redux/selectors';
 import useDepColumnActions from '../../Dep/CensorGrid/useColumnActions';
+import usePersonalColumnActions from '../../Personal/CensorGrid/useColumnActions';
 import useReceiptColumnActions from '../../Receipt/CensorGrid/useColumnActions';
 import useTotalColumnActions from '../../Total/CensorGrid/useColumnActions';
 
@@ -17,6 +18,8 @@ const useColumns = (actions, type) => {
         return useReceiptColumnActions;
       case sidebarCategory.DEP:
         return useDepColumnActions;
+      case sidebarCategory.PERSONAL:
+        return usePersonalColumnActions;
       case sidebarCategory.TOTAL:
         return useTotalColumnActions;
       default:

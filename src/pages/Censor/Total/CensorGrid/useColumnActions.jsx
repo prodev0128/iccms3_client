@@ -10,15 +10,7 @@ const useColumnActions = (actions) => {
     type: 'actions',
     width: 160,
     renderHeader: () => <MenuToolbar actions={actions} />,
-    renderCell: ({ row }) => (
-      <>
-        <GridActionItem
-          icon={AppRegistrationTwoTone}
-          label="Register"
-          onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.REGISTER })}
-        />
-      </>
-    ),
+    renderCell: ({ row }) => <></>,
   };
 };
 

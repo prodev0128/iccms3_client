@@ -7,6 +7,7 @@ import {
   DataSaverOnTwoTone,
   DesignServicesTwoTone,
   FindInPageTwoTone,
+  GroupsTwoTone,
   HomeTwoTone,
   InstallDesktopTwoTone,
   LocalPoliceTwoTone,
@@ -65,8 +66,14 @@ const menuItems = [
           {
             name: 'Dep',
             link: '/censor/dep',
+            icon: GroupsTwoTone,
+            right: [roles.DEP_VIEW],
+          },
+          {
+            name: 'Personal',
+            link: '/censor/personal',
             icon: VerifiedUserTwoTone,
-            right: [roles.DEP_VIEW, roles.PERSONAL_VIEW],
+            right: [roles.PERSONAL_VIEW],
           },
           {
             name: 'Total',

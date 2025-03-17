@@ -1,4 +1,10 @@
-import { depStatusTabs, receiptStatusTabs, sidebarCategory, totalStatusTabs } from '../../../../../globals/constants';
+import {
+  depStatusTabs,
+  personalStatusTabs,
+  receiptStatusTabs,
+  sidebarCategory,
+  totalStatusTabs,
+} from '../../../../../globals/constants';
 
 const useStatusTabs = (type) => {
   switch (type) {
@@ -6,6 +12,8 @@ const useStatusTabs = (type) => {
       return receiptStatusTabs;
     case sidebarCategory.DEP:
       return depStatusTabs;
+    case sidebarCategory.PERSONAL:
+      return personalStatusTabs;
     case sidebarCategory.TOTAL:
       return totalStatusTabs;
     default:

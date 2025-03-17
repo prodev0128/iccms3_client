@@ -1,12 +1,13 @@
-import { FlightTwoTone, GroupTwoTone } from '@mui/icons-material';
+import { FlightTwoTone, GroupTwoTone, TransferWithinAStationTwoTone } from '@mui/icons-material';
 import { useCallback } from 'react';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
 import { invoiceActions } from '../../../../globals/constants';
-import { useCodes } from '../../../../redux/selectors';
+import { useAuth, useCodes } from '../../../../redux/selectors';
 import MenuToolbar from './MenuToolbar';
 
 const useColumnActions = (actions) => {
+  const { user: me } = useAuth();
   const { individualCodes } = useCodes();
   const { action: cenActions = [] } = individualCodes;
 
@@ -44,6 +45,12 @@ const useColumnActions = (actions) => {
           label="Unassign"
           visible={checkStatus(invoiceActions.UNASSIGN, row.status)}
           onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.UNASSIGN })}
+        />
+        <GridActionItem
+          icon={TransferWithinAStationTwoTone}
+          label="Receive"
+          visible={checkStatus(invoiceActions.RECEIVE, row.status)}
+          onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.RECEIVE })}
         />
       </>
     ),

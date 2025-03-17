@@ -60,6 +60,15 @@ export const dataTypes = {
   OUTFTP: 'OUTFTP',
 };
 
+export const receiptStatusTabs = [
+  { name: 'All', value: 'ALL', min: invoiceStatus.UNDEFINED, max: invoiceStatus.COMPLETED },
+  { name: 'Undefined', value: invoiceStatus.UNDEFINED },
+  { name: 'Registered', value: invoiceStatus.REGISTERED },
+  { name: 'Checking', value: 'CHECKING', min: invoiceStatus.TRANSFERRED, max: invoiceStatus.CHECKED },
+  { name: 'Received', value: invoiceStatus.RECEIVED },
+  { name: 'Outed', value: invoiceStatus.OUTED },
+];
+
 export const depStatusTabs = [
   {
     name: 'All',
@@ -76,17 +85,19 @@ export const depStatusTabs = [
     max: invoiceStatus.CHECKED,
     category: findCategory.DEP,
   },
-  { name: 'To Censor', value: invoiceStatus.ASSIGNED, category: findCategory.MINE },
-  { name: 'To Check', value: invoiceStatus.CENSORED, category: findCategory.MINE },
   { name: 'Checked', value: invoiceStatus.CHECKED, category: findCategory.DEP },
 ];
 
-export const receiptStatusTabs = [
-  { name: 'All', value: 'ALL', min: invoiceStatus.UNDEFINED, max: invoiceStatus.RECEIVED },
-  { name: 'Undefined', value: invoiceStatus.UNDEFINED },
-  { name: 'Registered', value: invoiceStatus.REGISTERED },
-  { name: 'Checking', value: 'CHECKING', min: invoiceStatus.TRANSFERRED, max: invoiceStatus.CHECKED },
-  { name: 'Received', value: invoiceStatus.RECEIVED },
+export const personalStatusTabs = [
+  {
+    name: 'All',
+    value: 'ALL',
+    min: invoiceStatus.ASSIGNED,
+    max: invoiceStatus.COMPLETED,
+    category: findCategory.MINE,
+  },
+  { name: 'To Censor', value: invoiceStatus.ASSIGNED, category: findCategory.MINE },
+  { name: 'To Check', value: invoiceStatus.CENSORED, category: findCategory.MINE },
 ];
 
 export const totalStatusTabs = [
@@ -100,6 +111,7 @@ export const initialTab = { name: 'All', value: 'ALL' };
 export const sidebarCategory = {
   RECEIPT: 'RECEIPT',
   DEP: 'DEP',
+  PERSONAL: 'PERSONAL',
   TOTAL: 'TOTAL',
 };
 
