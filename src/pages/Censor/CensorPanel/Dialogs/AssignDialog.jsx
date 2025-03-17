@@ -20,7 +20,7 @@ const AssignDialog = ({ onClose, open, payload }) => {
       users
         .filter((user) => user.dep === me.dep)
         .map((user) => ({ value: user.userID, name: user.name, isActive: user.isActive })),
-    [users],
+    [users, me],
   );
 
   const [data, setData] = useState({ censor: '', checker: '' });

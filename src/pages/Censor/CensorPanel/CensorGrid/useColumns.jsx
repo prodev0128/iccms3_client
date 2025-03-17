@@ -9,7 +9,7 @@ import useTotalColumnActions from '../../Total/CensorGrid/useColumnActions';
 const useColumns = (actions, type) => {
   const { users } = useUsers();
   const { individualCodes } = useCodes();
-  const { dataType: dataTypes = [], dep: deps = [], status = [] } = individualCodes;
+  const { dataType: dataTypes = [], dep: deps = [], org: orgs = [], status = [] } = individualCodes;
 
   const useColumnActions = useMemo(() => {
     switch (type) {
@@ -56,6 +56,12 @@ const useColumns = (actions, type) => {
       headerName: 'Checker',
       width: 150,
       valueFormatter: (value) => (users?.find((user) => user.userID === value) || {}).name,
+    },
+    {
+      field: 'org',
+      headerName: 'Org',
+      width: 150,
+      valueFormatter: (value) => (orgs?.find((org) => org.value === value) || {}).name,
     },
   ];
 };

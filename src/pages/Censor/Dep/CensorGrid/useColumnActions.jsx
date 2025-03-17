@@ -1,4 +1,4 @@
-import { GroupTwoTone } from '@mui/icons-material';
+import { FlightTwoTone, GroupTwoTone } from '@mui/icons-material';
 import { useCallback } from 'react';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
@@ -26,10 +26,11 @@ const useColumnActions = (actions) => {
     renderCell: ({ row }) => (
       <>
         <GridActionItem
-          icon={GroupTwoTone}
-          label="Assign"
-          visible={checkStatus(invoiceActions.ASSIGN, row.status)}
-          onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.ASSIGN })}
+          cancel
+          icon={FlightTwoTone}
+          label="Untransfer"
+          visible={checkStatus(invoiceActions.UNTRANSFER, row.status)}
+          onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.UNTRANSFER })}
         />
         <GridActionItem
           icon={GroupTwoTone}
