@@ -31,31 +31,31 @@ const useColumns = (actions, type) => {
       field: 'dataType',
       headerName: 'Type',
       width: 150,
-      valueFormatter: (value) => (dataTypes.find((dataType) => dataType.value === value) || {}).name,
+      valueFormatter: (value) => (dataTypes?.find((dataType) => dataType.value === value) || {}).name,
     },
     {
       field: 'status',
       headerName: 'Status',
       width: 150,
-      valueFormatter: (value) => (status.find((status) => status.value === value) || {}).name,
+      valueFormatter: (value) => (status?.find((status) => status.value === value) || {}).name,
     },
     {
       field: 'dep',
       headerName: 'Dep',
       width: 150,
-      valueFormatter: (value) => (deps.find((dep) => dep.value === value) || {}).name,
+      valueFormatter: (value) => (deps?.find((dep) => dep.value === value) || {}).name,
     },
     {
       field: 'censor',
       headerName: 'Censor',
       width: 150,
-      valueFormatter: (value) => (users.find((user) => user.userID === value) || {}).name,
+      valueFormatter: (value) => (users?.find((user) => user.userID === value) || {}).name,
     },
     {
       field: 'checker',
       headerName: 'Checker',
       width: 150,
-      valueFormatter: (value) => (users.find((user) => user.userID === value) || {}).name,
+      valueFormatter: (value) => (users?.find((user) => user.userID === value) || {}).name,
     },
   ];
 };

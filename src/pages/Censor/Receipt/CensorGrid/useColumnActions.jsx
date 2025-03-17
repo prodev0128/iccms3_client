@@ -12,7 +12,7 @@ const useColumnActions = (actions) => {
 
   const checkStatus = useCallback(
     (cenAction, status) => {
-      const action = cenActions.find((action) => action.value === cenAction);
+      const action = cenActions?.find((action) => action.value === cenAction);
       return action?.options?.prevStatus === status;
     },
     [cenActions],

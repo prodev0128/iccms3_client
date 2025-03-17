@@ -95,7 +95,7 @@ export const totalStatusTabs = [
   { name: 'Completed', value: invoiceStatus.COMPLETED },
 ];
 
-export const initialTab = 'ALL';
+export const initialTab = { name: 'All', value: 'ALL' };
 
 export const sidebarCategory = {
   RECEIPT: 'RECEIPT',

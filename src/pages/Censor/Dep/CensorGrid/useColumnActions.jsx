@@ -1,4 +1,4 @@
-import { AppRegistrationTwoTone, GroupTwoTone } from '@mui/icons-material';
+import { GroupTwoTone } from '@mui/icons-material';
 import { useCallback } from 'react';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
@@ -12,7 +12,7 @@ const useColumnActions = (actions) => {
 
   const checkStatus = useCallback(
     (cenAction, status) => {
-      const action = cenActions.find((action) => action.value === cenAction);
+      const action = cenActions?.find((action) => action.value === cenAction);
       return action?.options?.prevStatus === status;
     },
     [cenActions],
@@ -25,6 +25,12 @@ const useColumnActions = (actions) => {
     renderHeader: () => <MenuToolbar actions={actions} />,
     renderCell: ({ row }) => (
       <>
+        <GridActionItem
+          icon={GroupTwoTone}
+          label="Assign"
+          visible={checkStatus(invoiceActions.ASSIGN, row.status)}
+          onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.ASSIGN })}
+        />
         <GridActionItem
           icon={GroupTwoTone}
           label="Assign"

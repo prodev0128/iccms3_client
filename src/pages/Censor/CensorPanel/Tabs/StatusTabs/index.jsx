@@ -24,10 +24,10 @@ const StatusTabs = ({ type }) => {
     [setSearchParams],
   );
 
-  const currentTab = useMemo(() => searchParams.get('status') || initialTab, [searchParams]);
+  const currentTab = useMemo(() => searchParams.get('status') || initialTab.value, [searchParams]);
 
   useEffect(() => {
-    const foundTab = tabs.find((tab) => tab.value === currentTab);
+    const foundTab = tabs?.find((tab) => tab.value === currentTab);
     if (foundTab) {
       dispatch(setSelectedTab({ status: foundTab }));
     }

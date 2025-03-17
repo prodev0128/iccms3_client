@@ -50,7 +50,7 @@ const useColumns = (actions) => {
       field: 'gender',
       headerName: 'Gender',
       width: 150,
-      valueFormatter: (value) => (genders.find((gender) => gender.value === value) || {}).name,
+      valueFormatter: (value) => (genders?.find((gender) => gender.value === value) || {}).name,
     },
     {
       field: 'birthday',
@@ -64,13 +64,13 @@ const useColumns = (actions) => {
       field: 'dep',
       headerName: 'Dep Name',
       width: 150,
-      valueFormatter: (value) => (deps.find((dep) => dep.value === value) || {}).name,
+      valueFormatter: (value) => (deps?.find((dep) => dep.value === value) || {}).name,
     },
     {
       field: 'job',
       headerName: 'Job Name',
       width: 150,
-      valueFormatter: (value) => (jobs.find((job) => job.value === value) || {}).name,
+      valueFormatter: (value) => (jobs?.find((job) => job.value === value) || {}).name,
     },
     {
       field: 'isActive',

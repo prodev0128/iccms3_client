@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import { initialTab } from '../../../../../globals/constants';
 import { useCodes } from '../../../../../redux/selectors';
 
 const useDataTypeTabs = () => {
@@ -11,7 +12,7 @@ const useDataTypeTabs = () => {
         ?.map((item) => ({ name: item.name, value: item.value })) || [],
     [individualCodes],
   );
-  return useMemo(() => [{ name: 'All', value: 'ALL' }, ...dataTypes], [dataTypes]);
+  return useMemo(() => [initialTab, ...dataTypes], [dataTypes]);
 };
 
 export default useDataTypeTabs;
