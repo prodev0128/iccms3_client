@@ -18,5 +18,5 @@ export const SidebarProvider = ({ children }) => {
 };
 
 SidebarProvider.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };

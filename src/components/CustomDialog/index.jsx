@@ -38,7 +38,7 @@ const CustomDialog = ({ children, confirmWithoutSaving = false, draggable = fals
 };
 
 CustomDialog.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   confirmWithoutSaving: PropTypes.bool,
   draggable: PropTypes.bool,
   onClose: PropTypes.func.isRequired,

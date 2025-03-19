@@ -31,7 +31,7 @@ const GroupBoxWithLabel = ({ children, label, toolbar }) => {
 GroupBoxWithLabel.propTypes = {
   label: PropTypes.string.isRequired,
   toolbar: PropTypes.element,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default GroupBoxWithLabel;

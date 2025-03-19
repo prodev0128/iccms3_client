@@ -8,15 +8,11 @@ const PageTitle = styled(Box)(
 );
 
 const PageTitleWrapper = ({ children }) => {
-  return (
-    <>
-      <PageTitle className="MuiPageTitle-wrapper">{children}</PageTitle>
-    </>
-  );
+  return <PageTitle className="MuiPageTitle-wrapper">{children}</PageTitle>;
 };
 
 PageTitleWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default PageTitleWrapper;
