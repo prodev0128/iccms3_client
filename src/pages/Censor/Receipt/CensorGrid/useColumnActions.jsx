@@ -6,7 +6,7 @@ import { invoiceActions } from '../../../../globals/constants';
 import { useCodes } from '../../../../redux/selectors';
 import MenuToolbar from './MenuToolbar';
 
-const useColumnActions = (actions) => {
+const useColumnActions = (actions, censorActions) => {
   const { individualCodes } = useCodes();
   const { action: cenActions = [] } = individualCodes;
 

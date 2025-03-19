@@ -3,6 +3,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { authReducer } from './auth';
 import { codeOptionsReducer } from './codeOptions';
 import { codesReducer } from './codes';
+import { filesReducer } from './files';
 import { invoicesReducer } from './invoices';
 import { newsReducer } from './news';
 import { notificationReducer } from './notification';
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   settings: settingsReducer,
 
   invoices: invoicesReducer,
+  files: filesReducer,
 
   notification: notificationReducer,
 });

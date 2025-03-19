@@ -26,7 +26,7 @@ const invoicesSlice = createSlice({
     updateInvoicesStatus: (state, { payload }) => {
       state.status = payload.status;
     },
-    setSelectedInvoices: (state, { payload }) => {
+    selectInvoices: (state, { payload }) => {
       state.status = 'success';
       state.selectedInvoices = payload;
     },

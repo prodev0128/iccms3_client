@@ -5,13 +5,15 @@ import * as Yup from 'yup';
 
 import CustomDialog from '../../../../components/CustomDialog';
 import SingleSelect from '../../../../components/CustomSelect/SingleSelect';
+import { useCodes } from '../../../../redux/selectors';
 
 const schema = Yup.object({
   dep: Yup.string().required('Dep is required'),
 });
 
-const TransferDialog = ({ onClose, open, payload }) => {
-  const { dep: deps = [] } = payload.individualCodes || {};
+const TransferDialog = ({ onClose, open }) => {
+  const { individualCodes = {} } = useCodes();
+  const { dep: deps = [] } = individualCodes;
 
   const [data, setData] = useState({ dep: '' });
   const [errors, setErrors] = useState({});
@@ -81,7 +83,6 @@ const TransferDialog = ({ onClose, open, payload }) => {
 TransferDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  payload: PropTypes.object.isRequired,
 };
 
 export default TransferDialog;

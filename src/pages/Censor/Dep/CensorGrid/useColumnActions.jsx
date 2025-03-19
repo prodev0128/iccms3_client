@@ -3,11 +3,10 @@ import { useCallback } from 'react';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
 import { invoiceActions } from '../../../../globals/constants';
-import { useAuth, useCodes } from '../../../../redux/selectors';
+import { useCodes } from '../../../../redux/selectors';
 import MenuToolbar from './MenuToolbar';
 
-const useColumnActions = (actions) => {
-  const { user: me } = useAuth();
+const useColumnActions = (actions, censorActions) => {
   const { individualCodes } = useCodes();
   const { action: cenActions = [] } = individualCodes;
 
@@ -51,6 +50,13 @@ const useColumnActions = (actions) => {
           label="Receive"
           visible={checkStatus(invoiceActions.RECEIVE, row.status)}
           onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.RECEIVE })}
+        />
+        <GridActionItem
+          cancel
+          icon={TransferWithinAStationTwoTone}
+          label="Unreceive"
+          visible={checkStatus(invoiceActions.UNRECEIVE, row.status)}
+          onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.UNRECEIVE })}
         />
       </>
     ),

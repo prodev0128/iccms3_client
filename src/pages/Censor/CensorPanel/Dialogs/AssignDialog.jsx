@@ -5,16 +5,16 @@ import * as Yup from 'yup';
 
 import CustomDialog from '../../../../components/CustomDialog';
 import SingleSelect from '../../../../components/CustomSelect/SingleSelect';
-import { useAuth } from '../../../../redux/selectors';
+import { useAuth, useUsers } from '../../../../redux/selectors';
 
 const schema = Yup.object({
   censor: Yup.string().required('Censor is required'),
   checker: Yup.string().required('Checker is required'),
 });
 
-const AssignDialog = ({ onClose, open, payload }) => {
+const AssignDialog = ({ onClose, open }) => {
   const { user: me } = useAuth();
-  const { users = [] } = payload;
+  const { users = [] } = useUsers();
   const depUsers = useMemo(
     () =>
       users
@@ -103,7 +103,6 @@ const AssignDialog = ({ onClose, open, payload }) => {
 AssignDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  payload: PropTypes.object.isRequired,
 };
 
 export default AssignDialog;

@@ -39,8 +39,8 @@ export const updateInvoicesStatus = (data) => {
   return apiAction(invoicesSlice.actions.updateInvoicesStatus, apiInfo);
 };
 
-export const setSelectedInvoices = (data) => (dispatch) => {
-  dispatch(invoicesSlice.actions.setSelectedInvoices(data));
+export const selectInvoices = (data) => (dispatch) => {
+  dispatch(invoicesSlice.actions.selectInvoices(data));
 };
 
 export const setSelectedTab = (data) => (dispatch) => {

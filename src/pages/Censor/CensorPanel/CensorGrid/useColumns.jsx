@@ -7,7 +7,7 @@ import usePersonalColumnActions from '../../Personal/CensorGrid/useColumnActions
 import useReceiptColumnActions from '../../Receipt/CensorGrid/useColumnActions';
 import useTotalColumnActions from '../../Total/CensorGrid/useColumnActions';
 
-const useColumns = (actions, type) => {
+const useColumns = (actions, censorActions, type) => {
   const { users } = useUsers();
   const { individualCodes } = useCodes();
   const { dataType: dataTypes = [], dep: deps = [], org: orgs = [], status = [] } = individualCodes;
@@ -28,7 +28,7 @@ const useColumns = (actions, type) => {
   }, [type]);
 
   return [
-    useColumnActions(actions),
+    useColumnActions(actions, censorActions),
     { field: 'name', headerName: 'Name', width: 150 },
     {
       field: 'dataType',

@@ -8,6 +8,7 @@ export const useCodes = () => useSelector((state) => state.codes);
 export const useNews = () => useSelector((state) => state.news);
 export const useSettings = () => useSelector((state) => state.settings);
 
-export const useNotification = () => useSelector((state) => state.notification);
-
 export const useInvoices = () => useSelector((state) => state.invoices);
+export const useFiles = () => useSelector((state) => state.files);
+
+export const useNotification = () => useSelector((state) => state.notification);

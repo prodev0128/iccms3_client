@@ -5,16 +5,14 @@ import { useDispatch } from 'react-redux';
 import { debounceTime, findCategory, invoiceActions } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { fetchIndividualCodes } from '../../../../redux/actions/codes';
-import { fetchInvoices, updateInvoice, updateInvoicesStatus } from '../../../../redux/actions/invoices';
+import { fetchInvoices, selectInvoices, updateInvoice, updateInvoicesStatus } from '../../../../redux/actions/invoices';
 import { fetchUsers } from '../../../../redux/actions/users';
-import { useCodes, useInvoices, useUsers } from '../../../../redux/selectors';
+import { useInvoices } from '../../../../redux/selectors';
 import AssignDialog from '../Dialogs/AssignDialog';
 import TransferDialog from '../Dialogs/TransferDialog';
 
-const useActions = (paginationModel, filterModel, sortModel) => {
+const useInvoiceActions = (paginationModel, filterModel, sortModel) => {
   const { selectedTab } = useInvoices();
-  const { individualCodes } = useCodes();
-  const { users } = useUsers();
   const dispatch = useDispatch();
   const dialogs = useDialogs();
 
@@ -52,7 +50,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       let moreData = data;
       switch (data.action) {
         case invoiceActions.TRANSFER: {
-          const res = await dialogs.open(TransferDialog, { data, individualCodes });
+          const res = await dialogs.open(TransferDialog);
           if (!res) {
             return;
           }
@@ -60,7 +58,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
           break;
         }
         case invoiceActions.ASSIGN: {
-          const res = await dialogs.open(AssignDialog, { data, users });
+          const res = await dialogs.open(AssignDialog);
           if (!res) {
             return;
           }
@@ -73,7 +71,7 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       await dispatch(updateInvoicesStatus(moreData));
       await debouncedFetchInvoices();
     },
-    [dispatch, dialogs, individualCodes, users, debouncedFetchInvoices],
+    [dispatch, dialogs, debouncedFetchInvoices],
   );
 
   const debouncedFetchIndividualCodes = useDebounceCallback(
@@ -81,6 +79,13 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       await dispatch(fetchIndividualCodes({ types: 'dep,status,action,cenFlag,dataType,org' }));
     }, [dispatch]),
     debounceTime,
+  );
+
+  const handleSelectInvoices = useCallback(
+    (ids) => {
+      dispatch(selectInvoices(ids));
+    },
+    [dispatch],
   );
 
   useEffect(() => {
@@ -102,9 +107,10 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     fetchInvoices: debouncedFetchInvoices,
     updateInvoice: handleUpdateInvoice,
     updateInvoicesStatus: handleUpdateInvoicesStatus,
+    selectInvoices: handleSelectInvoices,
     fetchIndividualCodes: debouncedFetchIndividualCodes,
     fetchUsers: debouncedFetchAllUsers,
   };
 };
 
-export default useActions;
+export default useInvoiceActions;

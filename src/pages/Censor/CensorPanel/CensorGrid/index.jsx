@@ -1,18 +1,16 @@
 import PropTypes from 'prop-types';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router';
 
 import CustomDataGrid from '../../../../components/CustomDataGrid';
 import { initialPaginationModel } from '../../../../globals/constants';
-import { setSelectedInvoices } from '../../../../redux/actions/invoices';
 import { useInvoices } from '../../../../redux/selectors';
 import Toolbar from './Toolbar';
-import useActions from './useActions';
+import useCensorActions from './useCensorActions';
 import useColumns from './useColumns';
+import useInvoiceActions from './useInvoiceActions';
 
 const CensorGrid = ({ type }) => {
-  const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialPagination = useRef({
@@ -30,8 +28,9 @@ const CensorGrid = ({ type }) => {
   const [filterModel, setFilterModel] = useState({ items: [] });
   const [sortModel, setSortModel] = useState([]);
 
-  const actions = useActions(paginationModel, filterModel, sortModel);
-  const columns = useColumns(actions, type);
+  const actions = useInvoiceActions(paginationModel, filterModel, sortModel);
+  const censorActions = useCensorActions();
+  const columns = useColumns(actions, censorActions, type);
   const { invoices, status, totalCount } = useInvoices();
 
   const setPagination = useCallback(
@@ -58,10 +57,8 @@ const CensorGrid = ({ type }) => {
         toolbar={<Toolbar actions={actions} />}
         onFilterModelChange={setFilterModel}
         onPaginationModelChange={setPagination}
+        onRowSelectionModelChange={(data, { api }) => actions.selectInvoices(api.getSelectedRows().values().toArray())}
         onSortModelChange={setSortModel}
-        onRowSelectionModelChange={(data, { api }) =>
-          dispatch(setSelectedInvoices(api.getSelectedRows().values().toArray()))
-        }
       />
     </>
   );

@@ -1,4 +1,4 @@
-import { ApprovalTwoTone, FlightTwoTone, GroupTwoTone, SpellcheckTwoTone } from '@mui/icons-material';
+import { ApprovalTwoTone, SafetyCheckTwoTone, SpellcheckTwoTone } from '@mui/icons-material';
 import { useCallback } from 'react';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
@@ -6,7 +6,7 @@ import { invoiceActions } from '../../../../globals/constants';
 import { useAuth, useCodes } from '../../../../redux/selectors';
 import MenuToolbar from './MenuToolbar';
 
-const useColumnActions = (actions) => {
+const useColumnActions = (actions, censorActions) => {
   const { user: me } = useAuth();
   const { individualCodes } = useCodes();
   const { action: cenActions = [] } = individualCodes;
@@ -27,8 +27,14 @@ const useColumnActions = (actions) => {
     renderCell: ({ row }) => (
       <>
         <GridActionItem
-          icon={ApprovalTwoTone}
+          icon={SafetyCheckTwoTone}
           label="Censor"
+          visible={checkStatus(invoiceActions.CENSOR, row.status) && row.censor === me.userID}
+          onClick={() => censorActions.censorInvoices({ ids: [row.id] })}
+        />
+        <GridActionItem
+          icon={ApprovalTwoTone}
+          label="Censor Done"
           visible={checkStatus(invoiceActions.CENSOR, row.status) && row.censor === me.userID}
           onClick={() => actions.updateInvoicesStatus({ ids: [row.id], action: invoiceActions.CENSOR })}
         />
