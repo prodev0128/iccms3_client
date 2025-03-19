@@ -1,6 +1,22 @@
+import { format } from 'date-fns';
+
 import { codeOptionTypes, roleObjectArray } from './constants';
 
 export const delay = (time) => new Promise((res) => setTimeout(res, time));
+
+export const getDateFromString = (dateString) => {
+  const result = dateString.match(/^\d{4}-\d{2}-\d{2}/);
+  return result?.[0];
+};
+
+export const getDateFromObject = (date) => {
+  return format(date, 'yyyy-MM-dd') + 'T00:00:00.000Z';
+};
+
+export const getUTCDate = (dateString) => {
+  const date = new Date(dateString);
+  return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+};
 
 export const getCodeOptionTypesToArray = () => {
   return Object.keys(codeOptionTypes).map((key) => codeOptionTypes[key]);

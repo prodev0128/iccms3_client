@@ -9,9 +9,9 @@ import {
   KeyTwoTone,
 } from '@mui/icons-material';
 import { Chip } from '@mui/material';
-import { format } from 'date-fns';
 
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
+import { getDateFromString } from '../../../../globals/utils';
 import { useCodes } from '../../../../redux/selectors';
 
 const useColumns = (actions) => {
@@ -57,7 +57,7 @@ const useColumns = (actions) => {
       headerName: 'Birthday',
       type: 'date',
       width: 150,
-      valueFormatter: (value) => format(new Date(value), 'yyyy-MM-dd'),
+      valueFormatter: (value) => getDateFromString(value),
     },
     { field: 'stampNo', headerName: 'Stamp No', type: 'number', width: 150 },
     {

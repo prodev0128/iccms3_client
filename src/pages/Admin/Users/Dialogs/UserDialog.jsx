@@ -1,12 +1,12 @@
 import { Button, DialogActions, DialogContent, DialogTitle, Grid2, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import { format, parseISO } from 'date-fns';
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
 
 import CustomDialog from '../../../../components/CustomDialog';
 import SingleSelect from '../../../../components/CustomSelect/SingleSelect';
+import { getDateFromObject, getUTCDate } from '../../../../globals/utils';
 
 const schema = Yup.object({
   userID: Yup.string().required('UserID is required'),
@@ -99,7 +99,7 @@ const UserDialog = ({ onClose, open, payload }) => {
           <Grid2 size={{ sm: 6, xs: 12 }}>
             <DatePicker
               label="birthday *"
-              value={data.birthday ? parseISO(data.birthday, 'yyyy-MM-dd', new Date()) : null}
+              value={data.birthday ? getUTCDate(data.birthday) : null}
               slotProps={{
                 textField: {
                   error: !!errors.birthday,
@@ -107,7 +107,7 @@ const UserDialog = ({ onClose, open, payload }) => {
                   onBlur: () => validate('birthday'),
                 },
               }}
-              onChange={(value) => updateData('birthday', value ? format(value, 'yyyy-MM-dd') : '')}
+              onChange={(value) => updateData('birthday', value ? getDateFromObject(value) : null)}
             />
           </Grid2>
           <Grid2 size={{ sm: 6, xs: 12 }}>
