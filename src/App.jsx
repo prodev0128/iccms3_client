@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useRoutes } from 'react-router';
 
 import Authenticated from './components/Authenticated';
+import News from './components/News';
 import { debounceTime } from './globals/constants';
 import useDebounceCallback from './hooks/useDebounceCallback';
 import SnackbarManager from './pages/SnackbarManager';
@@ -51,7 +52,9 @@ const App = () => {
           <SnackbarManager />
           <DialogsProvider>
             <CssBaseline />
-            <Authenticated>{content}</Authenticated>
+            <Authenticated>
+              <News>{content}</News>
+            </Authenticated>
           </DialogsProvider>
         </SnackbarProvider>
       </LocalizationProvider>

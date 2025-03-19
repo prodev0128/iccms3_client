@@ -26,7 +26,7 @@ const Authenticated = ({ children }) => {
 };
 
 Authenticated.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
 export default Authenticated;
