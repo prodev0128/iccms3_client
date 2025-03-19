@@ -8,6 +8,7 @@ const ProtectedRoute = ComponentLoader(lazy(() => import('../components/Protecte
 const Users = ComponentLoader(lazy(() => import('../pages/Admin/Users')));
 const Codes = ComponentLoader(lazy(() => import('../pages/Admin/Codes')));
 const Settings = ComponentLoader(lazy(() => import('../pages/Admin/Settings')));
+const News = ComponentLoader(lazy(() => import('../pages/Admin/News')));
 
 const router = [
   {
@@ -19,7 +20,7 @@ const router = [
       {
         path: 'users',
         element: (
-          <ProtectedRoute roles={[roles.USERS_VIEW]}>
+          <ProtectedRoute requireRoles={[roles.USERS_VIEW]}>
             <Users />
           </ProtectedRoute>
         ),
@@ -27,7 +28,7 @@ const router = [
       {
         path: 'codes',
         element: (
-          <ProtectedRoute roles={[roles.CODES_VIEW]}>
+          <ProtectedRoute requireRoles={[roles.CODES_VIEW]}>
             <Codes />
           </ProtectedRoute>
         ),
@@ -35,8 +36,16 @@ const router = [
       {
         path: 'settings',
         element: (
-          <ProtectedRoute roles={[roles.SETTINGS_VIEW]}>
+          <ProtectedRoute requireRoles={[roles.SETTINGS_VIEW]}>
             <Settings />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'news',
+        element: (
+          <ProtectedRoute requireRoles={[roles.NEWS_VIEW]}>
+            <News />
           </ProtectedRoute>
         ),
       },

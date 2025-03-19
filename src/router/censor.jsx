@@ -20,7 +20,7 @@ const router = [
       {
         path: 'receipt',
         element: (
-          <ProtectedRoute roles={[roles.RECEIPT_VIEW]}>
+          <ProtectedRoute requireRoles={[roles.RECEIPT_VIEW]}>
             <Receipt />
           </ProtectedRoute>
         ),
@@ -28,7 +28,7 @@ const router = [
       {
         path: 'dep',
         element: (
-          <ProtectedRoute roles={[roles.DEP_VIEW]}>
+          <ProtectedRoute requireRoles={[roles.DEP_VIEW]}>
             <Dep />
           </ProtectedRoute>
         ),
@@ -36,7 +36,7 @@ const router = [
       {
         path: 'personal',
         element: (
-          <ProtectedRoute roles={[roles.PERSONAL_VIEW]}>
+          <ProtectedRoute requireRoles={[roles.PERSONAL_VIEW]}>
             <Personal />
           </ProtectedRoute>
         ),
@@ -44,7 +44,7 @@ const router = [
       {
         path: 'total',
         element: (
-          <ProtectedRoute roles={[roles.TOTAL_VIEW]}>
+          <ProtectedRoute requireRoles={[roles.TOTAL_VIEW]}>
             <Total />
           </ProtectedRoute>
         ),

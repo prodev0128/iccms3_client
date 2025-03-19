@@ -2,6 +2,7 @@ import { alpha, Box, List, ListSubheader, styled } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router';
 
+import { roles } from '../../../../globals/constants';
 import { useAuth } from '../../../../redux/selectors';
 import SidebarMenuItem from './item';
 import menuItems from './items';
@@ -179,7 +180,7 @@ const reduceChildRoutes = ({ ev, item, path, user }) => {
         </SidebarMenuItem>,
       );
     }
-  } else if (!item?.right || item.right?.some((r) => user?.roles?.includes(r))) {
+  } else if (!item?.right || user?.roles?.includes(roles.ADMIN) || item.right?.some((r) => user?.roles?.includes(r))) {
     ev.push(
       <SidebarMenuItem
         active={exactMatch}

@@ -82,7 +82,7 @@ export const depStatusTabs = [
     name: 'Censoring',
     value: 'CENSORING',
     min: invoiceStatus.ASSIGNED,
-    max: invoiceStatus.CHECKED,
+    max: invoiceStatus.CENSORED,
     category: findCategory.DEP,
   },
   { name: 'Checked', value: invoiceStatus.CHECKED, category: findCategory.DEP },
@@ -135,6 +135,12 @@ export const roles = {
   SETTINGS_CREATE: 'SETTINGS_CREATE',
   SETTINGS_EDIT: 'SETTINGS_EDIT',
   SETTINGS_DELETE: 'SETTINGS_DELETE',
+
+  // NEWS
+  NEWS_VIEW: 'NEWS_VIEW',
+  NEWS_CREATE: 'NEWS_CREATE',
+  NEWS_EDIT: 'NEWS_EDIT',
+  NEWS_DELETE: 'NEWS_DELETE',
 
   // RECEIPT
   RECEIPT_VIEW: 'RECEIPT_VIEW',

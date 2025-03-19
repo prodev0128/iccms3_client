@@ -1,15 +1,16 @@
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router';
 
+import { roles } from '../../globals/constants';
 import { useAuth } from '../../redux/selectors';
 
-const ProtectedRoute = ({ children, roles }) => {
+const ProtectedRoute = ({ children, requireRoles }) => {
   const { user } = useAuth();
-  if (!user.roles) {
+  if (!user.roles || user.roles.includes(roles.ADMIN)) {
     return children;
   }
 
-  if (roles && !roles.some((role) => user.roles.includes(role))) {
+  if (requireRoles && !requireRoles.some((role) => user.roles.includes(role))) {
     return <Navigate to="/" />;
   }
 
@@ -18,7 +19,7 @@ const ProtectedRoute = ({ children, roles }) => {
 
 ProtectedRoute.propTypes = {
   children: PropTypes.node,
-  roles: PropTypes.array.isRequired,
+  requireRoles: PropTypes.array.isRequired,
 };
 
 export default ProtectedRoute;

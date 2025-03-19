@@ -19,7 +19,7 @@ const router = [
       {
         path: 'people',
         element: (
-          <ProtectedRoute roles={[roles.PEOPLE_VIEW]}>
+          <ProtectedRoute requireRoles={[roles.PEOPLE_VIEW]}>
             <People />
           </ProtectedRoute>
         ),
@@ -27,7 +27,7 @@ const router = [
       {
         path: 'pub',
         element: (
-          <ProtectedRoute roles={[roles.PUB_VIEW]}>
+          <ProtectedRoute requireRoles={[roles.PUB_VIEW]}>
             <Pub />
           </ProtectedRoute>
         ),
@@ -35,7 +35,7 @@ const router = [
       {
         path: 'flow',
         element: (
-          <ProtectedRoute roles={[roles.FLOW_VIEW]}>
+          <ProtectedRoute requireRoles={[roles.FLOW_VIEW]}>
             <Flow />
           </ProtectedRoute>
         ),

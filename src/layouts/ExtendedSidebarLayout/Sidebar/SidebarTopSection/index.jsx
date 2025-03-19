@@ -194,9 +194,7 @@ const SidebarTopSection = () => {
             button
             component={NavLink}
             to={`/${location.pathname.split('/')[1]}/management/users/single/1`}
-            onClick={() => {
-              handleClose();
-            }}
+            onClick={handleClose}
           >
             <AccountBoxTwoTone fontSize="small" />
             <ListItemText primary={t('Profile')} />
@@ -205,9 +203,7 @@ const SidebarTopSection = () => {
             button
             component={NavLink}
             to={`/${location.pathname.split('/')[1]}/applications/mailbox/inbox`}
-            onClick={() => {
-              handleClose();
-            }}
+            onClick={handleClose}
           >
             <InboxTwoTone fontSize="small" />
             <ListItemText primary={t('Inbox')} />
@@ -216,9 +212,7 @@ const SidebarTopSection = () => {
             button
             component={NavLink}
             to={`/${location.pathname.split('/')[1]}/applications/projects-board`}
-            onClick={() => {
-              handleClose();
-            }}
+            onClick={handleClose}
           >
             <AccountTreeTwoTone fontSize="small" />
             <ListItemText primary={t('Projects')} />

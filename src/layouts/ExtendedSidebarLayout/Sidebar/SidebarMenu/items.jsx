@@ -1,5 +1,6 @@
 import {
   AdminPanelSettingsTwoTone,
+  AnnouncementTwoTone,
   AssessmentTwoTone,
   AssignmentIndTwoTone,
   AutoGraphTwoTone,
@@ -49,6 +50,12 @@ const menuItems = [
             link: '/admin/settings',
             icon: SettingsTwoTone,
             right: [roles.SETTINGS_VIEW],
+          },
+          {
+            name: 'News',
+            link: '/admin/news',
+            icon: AnnouncementTwoTone,
+            right: [roles.NEWS_VIEW],
           },
         ],
       },
