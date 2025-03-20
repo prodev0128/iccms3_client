@@ -21,15 +21,6 @@ export const updateFile = (id, data) => {
   return apiAction(filesSlice.actions.updateFile, apiInfo);
 };
 
-export const updateFilesStatus = (data) => {
-  const apiInfo = {
-    data,
-    method: 'PATCH',
-    url: `${filesUrl}/status`,
-  };
-  return apiAction(filesSlice.actions.updateFilesStatus, apiInfo);
-};
-
 export const selectFile = (data) => (dispatch) => {
   dispatch(filesSlice.actions.selectFile(data));
 };

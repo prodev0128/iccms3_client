@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
-import { fetchFiles, selectFile } from '../../../../redux/actions/files';
+import { fetchFiles, selectFile, updateFile } from '../../../../redux/actions/files';
 
 const useFileActions = () => {
   const dispatch = useDispatch();
@@ -25,9 +25,17 @@ const useFileActions = () => {
     [dispatch],
   );
 
+  const handleUpdateFile = useCallback(
+    (data) => {
+      dispatch(updateFile(data.id, data));
+    },
+    [dispatch],
+  );
+
   return {
     fetchFiles: debouncedFetchFiles,
     selectFile: handleSelectFile,
+    updateFile: handleUpdateFile,
   };
 };
 

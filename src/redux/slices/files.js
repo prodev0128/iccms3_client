@@ -17,13 +17,15 @@ const filesSlice = createSlice({
       if (status === 'success') {
         state.files = data.files;
         state.totalCount = data.totalCount;
+        state.selectedFile = {};
       }
     },
     updateFile: (state, { payload }) => {
-      state.status = payload.status;
-    },
-    updateFilesStatus: (state, { payload }) => {
-      state.status = payload.status;
+      const { data, status } = payload;
+      state.status = status;
+      if (status === 'success') {
+        state.files = state.files.map((file) => (file.id === data.id ? data : file));
+      }
     },
     selectFile: (state, { payload }) => {
       state.status = 'success';

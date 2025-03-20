@@ -21,7 +21,11 @@ const invoicesSlice = createSlice({
       }
     },
     updateInvoice: (state, { payload }) => {
-      state.status = payload.status;
+      const { data, status } = payload;
+      state.status = status;
+      if (status === 'success') {
+        state.invoices = state.invoices.map((invoice) => (invoice.id === data.id ? data : invoice));
+      }
     },
     updateInvoicesStatus: (state, { payload }) => {
       state.status = payload.status;
