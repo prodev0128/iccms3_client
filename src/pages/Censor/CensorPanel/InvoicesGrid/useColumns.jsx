@@ -1,34 +1,24 @@
-import { useMemo } from 'react';
-
 import { sidebarCategory } from '../../../../globals/constants';
 import { useCodes, useUsers } from '../../../../redux/selectors';
-import useDepColumnActions from '../../Dep/CensorGrid/useColumnActions';
-import usePersonalColumnActions from '../../Personal/CensorGrid/useColumnActions';
-import useReceiptColumnActions from '../../Receipt/CensorGrid/useColumnActions';
-import useTotalColumnActions from '../../Total/CensorGrid/useColumnActions';
+import useDepColumnActions from '../../Dep/InvoiceGridUtils/useColumnActions';
+import usePersonalColumnActions from '../../Personal/InvoiceGridUtils/useColumnActions';
+import useReceiptColumnActions from '../../Receipt/InvoiceGridUtils/useColumnActions';
+import useTotalColumnActions from '../../Total/InvoiceGridUtils/useColumnActions';
 
-const useColumns = (actions, censorActions, type) => {
+const useColumns = (type) => {
   const { users } = useUsers();
   const { individualCodes } = useCodes();
   const { dataType: dataTypes = [], dep: deps = [], org: orgs = [], status = [] } = individualCodes;
 
-  const useColumnActions = useMemo(() => {
-    switch (type) {
-      case sidebarCategory.RECEIPT:
-        return useReceiptColumnActions;
-      case sidebarCategory.DEP:
-        return useDepColumnActions;
-      case sidebarCategory.PERSONAL:
-        return usePersonalColumnActions;
-      case sidebarCategory.TOTAL:
-        return useTotalColumnActions;
-      default:
-        return useTotalColumnActions;
-    }
-  }, [type]);
+  const columnActions = {
+    [sidebarCategory.RECEIPT]: useReceiptColumnActions(),
+    [sidebarCategory.DEP]: useDepColumnActions(),
+    [sidebarCategory.PERSONAL]: usePersonalColumnActions(),
+    [sidebarCategory.TOTAL]: useTotalColumnActions(),
+  };
 
   return [
-    useColumnActions(actions, censorActions),
+    columnActions[type],
     { field: 'name', headerName: 'Name', width: 150 },
     {
       field: 'dataType',

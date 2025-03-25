@@ -1,18 +1,29 @@
 import { useDialogs } from '@toolpad/core';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { debounceTime, findCategory, invoiceActions } from '../../../../globals/constants';
+import { findCategory, invoiceActions } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { fetchIndividualCodes } from '../../../../redux/actions/codes';
-import { fetchInvoices, selectInvoices, updateInvoice, updateInvoicesStatus } from '../../../../redux/actions/invoices';
+import {
+  fetchInvoices,
+  setSearchModel,
+  setSelectedInvoices,
+  setSelectedTab,
+  updateInvoice,
+  updateInvoicesStatus,
+} from '../../../../redux/actions/invoices';
 import { fetchUsers } from '../../../../redux/actions/users';
 import { useInvoices } from '../../../../redux/selectors';
 import AssignDialog from '../Dialogs/AssignDialog';
+import CensorDialog from '../Dialogs/CensorDialog';
 import TransferDialog from '../Dialogs/TransferDialog';
 
-const useInvoiceActions = (paginationModel, filterModel, sortModel) => {
-  const { selectedTab } = useInvoices();
+const useActions = () => {
+  const {
+    searchModel: { filterModel, paginationModel, sortModel },
+    selectedTab,
+  } = useInvoices();
   const dispatch = useDispatch();
   const dialogs = useDialogs();
 
@@ -29,13 +40,8 @@ const useInvoiceActions = (paginationModel, filterModel, sortModel) => {
           sortModel: JSON.stringify(sortModel),
         }),
       );
-    }, [dispatch, paginationModel, filterModel, sortModel, selectedTab]),
-    debounceTime,
+    }, [dispatch, selectedTab, paginationModel, filterModel, sortModel]),
   );
-
-  useEffect(() => {
-    debouncedFetchInvoices();
-  }, [debouncedFetchInvoices]);
 
   const handleUpdateInvoice = useCallback(
     async (data) => {
@@ -78,39 +84,39 @@ const useInvoiceActions = (paginationModel, filterModel, sortModel) => {
     useCallback(async () => {
       await dispatch(fetchIndividualCodes({ types: 'dep,status,action,cenFlag,dataType,org' }));
     }, [dispatch]),
-    debounceTime,
   );
-
-  const handleSelectInvoices = useCallback(
-    (ids) => {
-      dispatch(selectInvoices(ids));
-    },
-    [dispatch],
-  );
-
-  useEffect(() => {
-    debouncedFetchIndividualCodes();
-  }, [debouncedFetchIndividualCodes]);
 
   const debouncedFetchAllUsers = useDebounceCallback(
     useCallback(async () => {
       await dispatch(fetchUsers());
     }, [dispatch]),
-    debounceTime,
   );
 
-  useEffect(() => {
-    debouncedFetchAllUsers();
-  }, [debouncedFetchAllUsers]);
+  const handleSetSelectedInvoices = useCallback((ids) => dispatch(setSelectedInvoices(ids)), [dispatch]);
+
+  const handleSetSearchModel = useCallback((data) => dispatch(setSearchModel(data)), [dispatch]);
+
+  const handleSetSelectedTab = useCallback((data) => dispatch(setSelectedTab(data)), [dispatch]);
+
+  const handleCensorInvoices = useCallback((data) => dialogs.open(CensorDialog, { data }), [dialogs]);
+
+  const handleViewInvoices = useCallback(() => {}, []);
+
+  const handleDownloadInvoices = useCallback(() => {}, []);
 
   return {
     fetchInvoices: debouncedFetchInvoices,
     updateInvoice: handleUpdateInvoice,
     updateInvoicesStatus: handleUpdateInvoicesStatus,
-    selectInvoices: handleSelectInvoices,
     fetchIndividualCodes: debouncedFetchIndividualCodes,
     fetchUsers: debouncedFetchAllUsers,
+    setSelectedInvoices: handleSetSelectedInvoices,
+    setSearchModel: handleSetSearchModel,
+    setSelectedTab: handleSetSelectedTab,
+    censorInvoices: handleCensorInvoices,
+    viewInvoices: handleViewInvoices,
+    downloadInvoices: handleDownloadInvoices,
   };
 };
 
-export default useInvoiceActions;
+export default useActions;

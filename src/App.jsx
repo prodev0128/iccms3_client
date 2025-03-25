@@ -9,7 +9,6 @@ import { useRoutes } from 'react-router';
 
 import Authenticated from './components/Authenticated';
 import News from './components/News';
-import { debounceTime } from './globals/constants';
 import useDebounceCallback from './hooks/useDebounceCallback';
 import SnackbarManager from './pages/SnackbarManager';
 import { fetchProfile, initialize } from './redux/actions/auth';
@@ -22,10 +21,7 @@ const App = () => {
   const { authenticated, initialized } = useAuth();
   const content = useRoutes(router);
 
-  const debouncedFetchProfile = useDebounceCallback(
-    useCallback(() => dispatch(fetchProfile()), [dispatch]),
-    debounceTime,
-  );
+  const debouncedFetchProfile = useDebounceCallback(useCallback(() => dispatch(fetchProfile()), [dispatch]));
 
   useEffect(() => {
     if (!initialized) {

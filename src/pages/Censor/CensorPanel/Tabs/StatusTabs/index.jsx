@@ -1,19 +1,18 @@
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router';
 
 import TabList from '../../../../../components/TabList';
 import { initialTab } from '../../../../../globals/constants';
-import { setSelectedTab } from '../../../../../redux/actions/invoices';
+import useActions from '../../InvoicesGrid/useActions';
 import useStatusTabs from './useStatusTabs';
 
 const StatusTabs = ({ type }) => {
-  const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const tabs = useStatusTabs(type);
+  const { setSelectedTab } = useActions();
 
-  const setStatus = useCallback(
+  const setStatusTab = useCallback(
     (value) => {
       setSearchParams((prev) => {
         const newParams = new URLSearchParams(prev);
@@ -29,11 +28,13 @@ const StatusTabs = ({ type }) => {
   useEffect(() => {
     const foundTab = tabs?.find((tab) => tab.value === currentTab);
     if (foundTab) {
-      dispatch(setSelectedTab({ status: foundTab }));
+      setSelectedTab({ status: foundTab });
+    } else {
+      setStatusTab(initialTab.value);
     }
-  }, [dispatch, tabs, currentTab]);
+  }, [currentTab, setStatusTab, setSelectedTab, tabs]);
 
-  return <TabList color="primary" tabs={tabs} value={currentTab} onChange={(value) => setStatus(value)} />;
+  return <TabList color="primary" tabs={tabs} value={currentTab} onChange={(value) => setStatusTab(value)} />;
 };
 
 StatusTabs.propTypes = {

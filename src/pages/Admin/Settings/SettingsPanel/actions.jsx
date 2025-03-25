@@ -2,7 +2,6 @@ import { useDialogs } from '@toolpad/core';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { createSetting, deleteSetting, fetchSettings, updateSetting } from '../../../../redux/actions/settings';
 import SettingDialog from '../Dialogs/SettingDialog';
@@ -15,7 +14,6 @@ const useActions = () => {
     useCallback(async () => {
       await dispatch(fetchSettings());
     }, [dispatch]),
-    debounceTime,
   );
 
   const handleCreateSetting = useCallback(async () => {

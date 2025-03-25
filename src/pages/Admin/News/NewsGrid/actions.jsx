@@ -2,7 +2,6 @@ import { useDialogs } from '@toolpad/core';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { createNews, deleteNews, fetchNews, updateNews } from '../../../../redux/actions/news';
 import NewsDialog from '../Dialogs/NewsDialog';
@@ -21,7 +20,6 @@ const useActions = (paginationModel, filterModel, sortModel) => {
         }),
       );
     }, [dispatch, paginationModel, filterModel, sortModel]),
-    debounceTime,
   );
 
   const handleCreateNews = useCallback(async () => {

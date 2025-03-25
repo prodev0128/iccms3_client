@@ -27,6 +27,12 @@ const filesSlice = createSlice({
         state.files = state.files.map((file) => (file.id === data.id ? data : file));
       }
     },
+    censorFiles: (state, { payload }) => {
+      state.status = payload.status;
+    },
+    checkFiles: (state, { payload }) => {
+      state.status = payload.status;
+    },
     selectFile: (state, { payload }) => {
       state.status = 'success';
       state.selectedFile = payload;

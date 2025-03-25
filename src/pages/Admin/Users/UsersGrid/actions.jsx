@@ -2,7 +2,6 @@ import { useDialogs } from '@toolpad/core';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { fetchIndividualCodes } from '../../../../redux/actions/codes';
 import { createUser, deleteUser, fetchUsers, resetPassword, updateUser } from '../../../../redux/actions/users';
@@ -25,7 +24,6 @@ const useActions = (paginationModel, filterModel, sortModel) => {
         }),
       );
     }, [dispatch, paginationModel, filterModel, sortModel]),
-    debounceTime,
   );
 
   const handleCreateUser = useCallback(async () => {
@@ -108,7 +106,6 @@ const useActions = (paginationModel, filterModel, sortModel) => {
     useCallback(async () => {
       await dispatch(fetchIndividualCodes({ types: 'gender,job,dep' }));
     }, [dispatch]),
-    debounceTime,
   );
 
   useEffect(() => {

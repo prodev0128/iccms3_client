@@ -1,5 +1,7 @@
 import { useCallback, useRef } from 'react';
 
+import { debounceTime } from '../globals/constants';
+
 /**
  * A custom React hook for debouncing a callback function.
  *
@@ -7,7 +9,7 @@ import { useCallback, useRef } from 'react';
  * @param {number} delay - The debounce delay in milliseconds.
  * @returns {Function} - A debounced function.
  */
-const useDebounceCallback = (callback, delay = 0) => {
+const useDebounceCallback = (callback, delay = debounceTime) => {
   const timeoutRef = useRef(null);
 
   return useCallback(

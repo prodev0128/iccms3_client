@@ -1,11 +1,13 @@
 import { Box, Button, Checkbox, DialogActions, DialogContent, DialogTitle, FormControlLabel } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { Scrollbars } from 'react-custom-scrollbars-2';
 import { useDispatch } from 'react-redux';
 
 import { fetchNews } from '../../redux/actions/news';
 import { useNews } from '../../redux/selectors';
 import CustomDialog from '../CustomDialog';
+import Scrollbar from '../Scrollbar';
 import NewsItem from './NewsItem';
 
 const NewsDialog = ({ onClose, open }) => {
@@ -40,9 +42,11 @@ const NewsDialog = ({ onClose, open }) => {
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent>
         <Box sx={{ height: 500 }}>
-          {news.map((item) => (
-            <NewsItem expanded={expanded} key={item.id} news={item} setExpanded={setExpanded} />
-          ))}
+          <Scrollbar>
+            {news.map((item) => (
+              <NewsItem expanded={expanded} key={item.id} news={item} setExpanded={setExpanded} />
+            ))}
+          </Scrollbar>
         </Box>
       </DialogContent>
       <DialogActions>

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 
-import CensorGrid from './CensorGrid';
+import InvoiceGrid from './InvoicesGrid';
 import DataTypeTabs from './Tabs/DataTypeTabs';
 import StatusTabs from './Tabs/StatusTabs';
 
@@ -15,7 +15,7 @@ const CensorPanel = ({ type }) => {
         </Box>
       </Box>
       <Box sx={{ height: 600, p: 1, width: '100%' }}>
-        <CensorGrid type={type} />
+        <InvoiceGrid type={type} />
       </Box>
     </>
   );

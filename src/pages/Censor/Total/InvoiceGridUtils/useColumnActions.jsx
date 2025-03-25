@@ -1,11 +1,11 @@
 import MenuToolbar from './MenuToolbar';
 
-const useColumnActions = (actions, censorActions) => {
+const useColumnActions = () => {
   return {
     field: 'actions',
     type: 'actions',
     width: 160,
-    renderHeader: () => <MenuToolbar actions={actions} />,
+    renderHeader: () => <MenuToolbar />,
     renderCell: ({ row }) => <></>,
   };
 };

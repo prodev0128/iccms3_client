@@ -21,6 +21,15 @@ export const updateFile = (id, data) => {
   return apiAction(filesSlice.actions.updateFile, apiInfo);
 };
 
+export const censorFiles = (id, data) => {
+  const apiInfo = {
+    data,
+    method: 'PATCH',
+    url: `${filesUrl}/censor`,
+  };
+  return apiAction(filesSlice.actions.censorFiles, apiInfo);
+};
+
 export const selectFile = (data) => (dispatch) => {
   dispatch(filesSlice.actions.selectFile(data));
 };

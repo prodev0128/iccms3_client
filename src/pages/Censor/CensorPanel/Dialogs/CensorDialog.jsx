@@ -1,23 +1,12 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Grid2,
-  List,
-  ListItemButton,
-  Typography,
-} from '@mui/material';
+import { Button, ButtonGroup, DialogActions, DialogContent, DialogTitle, Grid2 } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo } from 'react';
 
 import CustomDialog from '../../../../components/CustomDialog';
-import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { useCodes, useFiles } from '../../../../redux/selectors';
-import useFileActions from '../CensorGrid/useFileActions';
+import FilesGrid from '../FilesGrid';
+import useActions from '../FilesGrid/useActions';
 
 const CensorDialog = ({ onClose, open, payload }) => {
   const {
@@ -25,7 +14,7 @@ const CensorDialog = ({ onClose, open, payload }) => {
   } = useCodes();
   const activeCenFlags = useMemo(() => cenFlags.filter((item) => item.isActive), [cenFlags]);
   const { files, selectedFile } = useFiles();
-  const { fetchFiles, selectFile, updateFile } = useFileActions();
+  const { censorFiles, fetchFiles, selectFile } = useActions();
 
   const { ids = [] } = payload.data;
 
@@ -33,7 +22,6 @@ const CensorDialog = ({ onClose, open, payload }) => {
     useCallback(() => {
       fetchFiles(ids);
     }, [ids, fetchFiles]),
-    debounceTime,
   );
 
   useEffect(() => {
@@ -54,21 +42,13 @@ const CensorDialog = ({ onClose, open, payload }) => {
       <DialogContent sx={{ minHeight: 'calc(100vh - 180px)' }}>
         <Grid2 container spacing={1}>
           <Grid2 size={3}>
-            <List sx={{ width: '100%', border: '1px solid black' }}>
-              {files.map((file, index) => (
-                <ListItemButton key={file.id} selected={selectedFile.id === file.id} onClick={() => selectFile(file)}>
-                  <Typography sx={{ pr: 2 }}>{index + 1}</Typography>
-                  <Typography sx={{ pr: 2 }}>{file.name}</Typography>
-                  <Typography>{file.cenFlag || ''}</Typography>
-                </ListItemButton>
-              ))}
-            </List>
+            <FilesGrid rows={files} />
             <ButtonGroup fullWidth aria-label="Basic button group" variant="outlined">
               {activeCenFlags.map((item) => (
                 <Button
                   color="primary"
                   key={item.id}
-                  onClick={() => updateFile({ id: selectedFile.id, cenFlag: item.value })}
+                  onClick={() => censorFiles({ id: selectedFile.id, cenFlag: item.value })}
                 >
                   {item.name} ({item.options?.shortcut})
                 </Button>

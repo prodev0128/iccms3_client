@@ -4,9 +4,11 @@ import { useCallback } from 'react';
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
 import { invoiceActions } from '../../../../globals/constants';
 import { useAuth, useCodes } from '../../../../redux/selectors';
+import useActions from '../../CensorPanel/InvoicesGrid/useActions';
 import MenuToolbar from './MenuToolbar';
 
-const useColumnActions = (actions, censorActions) => {
+const useColumnActions = () => {
+  const actions = useActions();
   const { user: me } = useAuth();
   const { individualCodes } = useCodes();
   const { action: cenActions = [] } = individualCodes;
@@ -23,14 +25,14 @@ const useColumnActions = (actions, censorActions) => {
     field: 'actions',
     type: 'actions',
     width: 160,
-    renderHeader: () => <MenuToolbar actions={actions} />,
+    renderHeader: () => <MenuToolbar />,
     renderCell: ({ row }) => (
       <>
         <GridActionItem
           icon={SafetyCheckTwoTone}
           label="Censor"
           visible={checkStatus(invoiceActions.CENSOR, row.status) && row.censor === me.userID}
-          onClick={() => censorActions.censorInvoices({ ids: [row.id] })}
+          onClick={() => actions.censorInvoices({ ids: [row.id] })}
         />
         <GridActionItem
           icon={ApprovalTwoTone}

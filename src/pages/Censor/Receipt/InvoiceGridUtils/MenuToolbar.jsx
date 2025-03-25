@@ -1,13 +1,14 @@
 import { AppRegistrationTwoTone, DeleteTwoTone, ExpandMoreTwoTone } from '@mui/icons-material';
 import { Divider, IconButton, Menu } from '@mui/material';
-import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 
 import CustomMenuItem from '../../../../components/CustomMenu/CustomMenuItem';
 import { invoiceActions } from '../../../../globals/constants';
 import { useInvoices } from '../../../../redux/selectors';
+import useActions from '../../CensorPanel/InvoicesGrid/useActions';
 
-const MenuToolbar = ({ actions }) => {
+const MenuToolbar = () => {
+  const actions = useActions();
   const { selectedInvoices } = useInvoices();
   const selectedInvoiceIds = useMemo(() => selectedInvoices?.map((invoice) => invoice.id), [selectedInvoices]);
 
@@ -61,10 +62,6 @@ const MenuToolbar = ({ actions }) => {
       </Menu>
     </>
   );
-};
-
-MenuToolbar.propTypes = {
-  actions: PropTypes.object.isRequired,
 };
 
 export default MenuToolbar;

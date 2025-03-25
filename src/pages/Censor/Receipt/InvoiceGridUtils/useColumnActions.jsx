@@ -4,9 +4,11 @@ import { useCallback } from 'react';
 import GridActionItem from '../../../../components/CustomDataGrid/GridActionItem';
 import { invoiceActions } from '../../../../globals/constants';
 import { useCodes } from '../../../../redux/selectors';
+import useActions from '../../CensorPanel/InvoicesGrid/useActions';
 import MenuToolbar from './MenuToolbar';
 
-const useColumnActions = (actions, censorActions) => {
+const useColumnActions = () => {
+  const actions = useActions();
   const { individualCodes } = useCodes();
   const { action: cenActions = [] } = individualCodes;
 
@@ -22,7 +24,7 @@ const useColumnActions = (actions, censorActions) => {
     field: 'actions',
     type: 'actions',
     width: 160,
-    renderHeader: () => <MenuToolbar actions={actions} />,
+    renderHeader: () => <MenuToolbar />,
     renderCell: ({ row }) => (
       <>
         <GridActionItem

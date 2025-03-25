@@ -2,7 +2,7 @@ import { useDialogs } from '@toolpad/core';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { codeOptionTypes, debounceTime } from '../../../../globals/constants';
+import { codeOptionTypes } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { createCode, deleteCode, fetchCodes, fetchIndividualCodes, updateCode } from '../../../../redux/actions/codes';
 import { useCodeOptions } from '../../../../redux/selectors';
@@ -26,7 +26,6 @@ const useActions = (paginationModel, filterModel, sortModel) => {
       const optionUniqueArray = [...new Set(optionArray)].join(',');
       await dispatch(fetchIndividualCodes({ types: optionUniqueArray }));
     }, [dispatch, currentCodeOption]),
-    debounceTime,
   );
 
   const debouncedFetchCodes = useDebounceCallback(
@@ -42,7 +41,6 @@ const useActions = (paginationModel, filterModel, sortModel) => {
         }),
       );
     }, [dispatch, currentCodeOption, paginationModel, filterModel, sortModel]),
-    debounceTime,
   );
 
   const handleCreateCode = useCallback(async () => {

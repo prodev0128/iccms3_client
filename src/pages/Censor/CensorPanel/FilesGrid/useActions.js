@@ -1,11 +1,10 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
-import { fetchFiles, selectFile, updateFile } from '../../../../redux/actions/files';
+import { censorFiles, fetchFiles, selectFile, updateFile } from '../../../../redux/actions/files';
 
-const useFileActions = () => {
+const useActions = () => {
   const dispatch = useDispatch();
 
   const debouncedFetchFiles = useDebounceCallback(
@@ -15,7 +14,6 @@ const useFileActions = () => {
       },
       [dispatch],
     ),
-    debounceTime,
   );
 
   const handleSelectFile = useCallback(
@@ -32,11 +30,19 @@ const useFileActions = () => {
     [dispatch],
   );
 
+  const handleCensorFiles = useCallback(
+    (data) => {
+      dispatch(censorFiles(data));
+    },
+    [dispatch],
+  );
+
   return {
     fetchFiles: debouncedFetchFiles,
     selectFile: handleSelectFile,
     updateFile: handleUpdateFile,
+    censorFiles: handleCensorFiles,
   };
 };
 
-export default useFileActions;
+export default useActions;

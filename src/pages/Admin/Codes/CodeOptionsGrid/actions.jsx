@@ -2,7 +2,6 @@ import { useDialogs } from '@toolpad/core';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { debounceTime } from '../../../../globals/constants';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import {
   createCodeOption,
@@ -27,7 +26,6 @@ const useActions = (paginationModel, filterModel, sortModel) => {
         }),
       );
     }, [dispatch, paginationModel, filterModel, sortModel]),
-    debounceTime,
   );
 
   const handleCreateCodeOption = useCallback(async () => {
