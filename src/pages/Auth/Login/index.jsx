@@ -12,16 +12,20 @@ const Content = styled(Box)(
     display: flex;
     flex: 1;
     width: 100%;
-`,
+  `,
 );
 
 const MainContent = styled(Box)(
-  () => `
-  padding: 0 0 0 440px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-`,
+  ({ theme }) => `
+    padding-left: 440px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    ${theme.breakpoints.down('md')} {
+      padding-left: 0;
+    }
+  `,
 );
 
 const SidebarWrapper = styled(Box)(
@@ -32,15 +36,15 @@ const SidebarWrapper = styled(Box)(
     height: 100%;
     background: ${theme.colors.alpha.white[100]};
     width: 440px;
-`,
+  `,
 );
 
 const SidebarContent = styled(Box)(
   ({ theme }) => `
-  display: flex;
-  flex-direction: column;
-  padding: ${theme.spacing(6)};
-`,
+    display: flex;
+    flex-direction: column;
+    padding: ${theme.spacing(6)};
+  `,
 );
 
 const TypographyH1 = styled(Typography)(
