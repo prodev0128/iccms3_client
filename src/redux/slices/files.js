@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   files: [],
-  selectedFile: {},
+  selectedFiles: [],
   status: 'idle',
   totalCount: 0,
 };
@@ -33,9 +33,9 @@ const filesSlice = createSlice({
     checkFiles: (state, { payload }) => {
       state.status = payload.status;
     },
-    selectFile: (state, { payload }) => {
+    setSelectedFiles: (state, { payload }) => {
       state.status = 'success';
-      state.selectedFile = payload;
+      state.selectedFiles = payload;
     },
   },
 });

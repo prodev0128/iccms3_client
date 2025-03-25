@@ -1,8 +1,9 @@
-import { Button, ButtonGroup, DialogActions, DialogContent, DialogTitle, Grid2 } from '@mui/material';
+import { Box, Button, ButtonGroup, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo } from 'react';
 
 import CustomDialog from '../../../../components/CustomDialog';
+import ResizableBox from '../../../../components/ResizableBox';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { useCodes, useFiles } from '../../../../redux/selectors';
 import FilesGrid from '../FilesGrid';
@@ -13,8 +14,8 @@ const CensorDialog = ({ onClose, open, payload }) => {
     individualCodes: { cenFlag: cenFlags = [] },
   } = useCodes();
   const activeCenFlags = useMemo(() => cenFlags.filter((item) => item.isActive), [cenFlags]);
-  const { files, selectedFile } = useFiles();
-  const { censorFiles, fetchFiles, selectFile } = useActions();
+  const { files, selectedFiles } = useFiles();
+  const { censorFiles, fetchFiles, setSelectedFiles } = useActions();
 
   const { ids = [] } = payload.data;
 
@@ -29,10 +30,10 @@ const CensorDialog = ({ onClose, open, payload }) => {
   }, [debouncedFetchFiles]);
 
   useEffect(() => {
-    if (!selectedFile.id && files.length) {
-      selectFile(files[0]);
+    if (!selectedFiles.length && files.length) {
+      setSelectedFiles([files[0]]);
     }
-  }, [files, selectedFile, selectFile]);
+  }, [files, selectedFiles, setSelectedFiles]);
 
   const title = 'Censor Dialog';
 
@@ -40,23 +41,23 @@ const CensorDialog = ({ onClose, open, payload }) => {
     <CustomDialog draggable maxWidth="" open={open} onClose={() => {}}>
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent sx={{ minHeight: 'calc(100vh - 180px)' }}>
-        <Grid2 container spacing={1}>
-          <Grid2 size={3}>
-            <FilesGrid rows={files} />
+        <ResizableBox sx={{ width: '100%', height: '100%' }}>
+          <Box>
+            <FilesGrid />
             <ButtonGroup fullWidth aria-label="Basic button group" variant="outlined">
               {activeCenFlags.map((item) => (
                 <Button
                   color="primary"
                   key={item.id}
-                  onClick={() => censorFiles({ id: selectedFile.id, cenFlag: item.value })}
+                  onClick={() => censorFiles({ ids: selectedFiles, cenFlag: item.value })}
                 >
                   {item.name} ({item.options?.shortcut})
                 </Button>
               ))}
             </ButtonGroup>
-          </Grid2>
-          <Grid2 size={9}></Grid2>
-        </Grid2>
+          </Box>
+          <Box sx={{ border: 'solid 1px' }}>Hi</Box>
+        </ResizableBox>
       </DialogContent>
       <DialogActions>
         <Button color="primary" variant="outlined" onClick={() => onClose()}>

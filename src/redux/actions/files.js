@@ -30,6 +30,6 @@ export const censorFiles = (id, data) => {
   return apiAction(filesSlice.actions.censorFiles, apiInfo);
 };
 
-export const selectFile = (data) => (dispatch) => {
-  dispatch(filesSlice.actions.selectFile(data));
+export const setSelectedFiles = (data) => (dispatch) => {
+  dispatch(filesSlice.actions.setSelectedFiles(data));
 };

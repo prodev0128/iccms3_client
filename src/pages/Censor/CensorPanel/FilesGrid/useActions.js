@@ -1,47 +1,30 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
-import { censorFiles, fetchFiles, selectFile, updateFile } from '../../../../redux/actions/files';
+import { censorFiles, fetchFiles, setSelectedFiles, updateFile } from '../../../../redux/actions/files';
+import { useInvoices } from '../../../../redux/selectors';
 
 const useActions = () => {
   const dispatch = useDispatch();
+  const { selectedInvoices } = useInvoices();
+  const selectedInvoiceIds = useMemo(() => selectedInvoices?.map((invoice) => invoice.id), [selectedInvoices]);
 
   const debouncedFetchFiles = useDebounceCallback(
-    useCallback(
-      async (ids) => {
-        await dispatch(fetchFiles({ ids: ids.join(',') }));
-      },
-      [dispatch],
-    ),
+    useCallback(() => dispatch(fetchFiles({ ids: selectedInvoiceIds.join(',') })), [dispatch, selectedInvoiceIds]),
   );
 
-  const handleSelectFile = useCallback(
-    (data) => {
-      dispatch(selectFile(data));
-    },
-    [dispatch],
-  );
+  const handleSetSelectedFiles = useCallback((data) => dispatch(setSelectedFiles(data)), [dispatch]);
 
-  const handleUpdateFile = useCallback(
-    (data) => {
-      dispatch(updateFile(data.id, data));
-    },
-    [dispatch],
-  );
+  const handleUpdateFile = useCallback((data) => dispatch(updateFile(data.id, data)), [dispatch]);
 
-  const handleCensorFiles = useCallback(
-    (data) => {
-      dispatch(censorFiles(data));
-    },
-    [dispatch],
-  );
+  const handleCensorFiles = useCallback((data) => dispatch(censorFiles(data)), [dispatch]);
 
   return {
     fetchFiles: debouncedFetchFiles,
-    selectFile: handleSelectFile,
     updateFile: handleUpdateFile,
     censorFiles: handleCensorFiles,
+    setSelectedFiles: handleSetSelectedFiles,
   };
 };
 
