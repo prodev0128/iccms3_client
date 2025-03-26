@@ -5,6 +5,7 @@ import { codeOptionsReducer } from './codeOptions';
 import { codesReducer } from './codes';
 import { filesReducer } from './files';
 import { invoicesReducer } from './invoices';
+import { mediaReducer } from './media';
 import { newsReducer } from './news';
 import { notificationReducer } from './notification';
 import { settingsReducer } from './settings';
@@ -21,6 +22,8 @@ const rootReducer = combineReducers({
 
   invoices: invoicesReducer,
   files: filesReducer,
+
+  media: mediaReducer,
 
   notification: notificationReducer,
 });

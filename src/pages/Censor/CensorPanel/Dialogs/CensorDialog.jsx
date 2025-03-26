@@ -16,14 +16,21 @@ const CensorDialog = ({ onClose, open, payload }) => {
   } = useCodes();
   const activeCenFlags = useMemo(() => cenFlags.filter((item) => item.isActive), [cenFlags]);
   const { files, selectedFiles } = useFiles();
-  const { censorFiles, fetchFiles, setSelectedFiles } = useActions();
+  const { censorFiles, fetchFiles, fetchMedia, setSelectedFiles } = useActions();
 
   const { invoiceIds = [] } = payload.data;
 
+  useEffect(() => {
+    if (selectedFiles.length) {
+      fetchMedia(selectedFiles[selectedFiles.length - 1].path);
+    }
+  }, [selectedFiles, fetchMedia]);
+
   const debouncedFetchFiles = useDebounceCallback(
     useCallback(() => {
+      setSelectedFiles([]);
       fetchFiles(invoiceIds);
-    }, [invoiceIds, fetchFiles]),
+    }, [invoiceIds, fetchFiles, setSelectedFiles]),
   );
 
   useEffect(() => {
@@ -31,10 +38,10 @@ const CensorDialog = ({ onClose, open, payload }) => {
   }, [debouncedFetchFiles]);
 
   useEffect(() => {
-    if (!selectedFiles.length && files.length) {
+    if (files.length) {
       setSelectedFiles([files[0]]);
     }
-  }, [files, selectedFiles, setSelectedFiles]);
+  }, [files, setSelectedFiles]);
 
   const title = 'Censor Dialog';
 

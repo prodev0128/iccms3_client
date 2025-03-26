@@ -11,4 +11,6 @@ export const useSettings = () => useSelector((state) => state.settings);
 export const useInvoices = () => useSelector((state) => state.invoices);
 export const useFiles = () => useSelector((state) => state.files);
 
+export const useMedia = () => useSelector((state) => state.media);
+
 export const useNotification = () => useSelector((state) => state.notification);

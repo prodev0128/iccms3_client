@@ -79,3 +79,5 @@ export const getRolesByData = (roles) => {
   roleObjectArray.forEach(callback);
   return foundRoles;
 };
+
+export const getExtension = (fileName) => fileName.slice(fileName.lastIndexOf('.')).toLowerCase();
