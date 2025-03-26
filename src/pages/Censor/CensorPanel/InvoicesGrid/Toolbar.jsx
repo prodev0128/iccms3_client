@@ -4,7 +4,7 @@ import { IconButton, Tooltip } from '@mui/material';
 import useActions from './useActions';
 
 const Toolbar = () => {
-  const { fetchIndividualCodes, fetchInvoices } = useActions();
+  const { fetchDepUsers, fetchIndividualCodes, fetchInvoices } = useActions();
 
   return (
     <>
@@ -14,6 +14,7 @@ const Toolbar = () => {
           onClick={() => {
             fetchInvoices();
             fetchIndividualCodes();
+            fetchDepUsers();
           }}
         >
           <RefreshTwoTone />

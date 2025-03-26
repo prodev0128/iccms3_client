@@ -1,11 +1,8 @@
 import { RefreshTwoTone } from '@mui/icons-material';
 import { IconButton, Tooltip } from '@mui/material';
+import PropTypes from 'prop-types';
 
-import useActions from './useActions';
-
-const Toolbar = () => {
-  const { fetchFiles } = useActions();
-
+const Toolbar = ({ fetchFiles }) => {
   return (
     <>
       <Tooltip arrow title="Refresh">
@@ -15,6 +12,10 @@ const Toolbar = () => {
       </Tooltip>
     </>
   );
+};
+
+Toolbar.propTypes = {
+  fetchFiles: PropTypes.func.isRequired,
 };
 
 export default Toolbar;

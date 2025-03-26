@@ -10,11 +10,11 @@ import useColumns from './useColumns';
 
 const InvoiceGrid = ({ type }) => {
   const columns = useColumns(type);
-  const { fetchIndividualCodes, fetchInvoices, setSearchModel, setSelectedInvoices } = useActions();
+  const { fetchDepUsers, fetchIndividualCodes, fetchInvoices, setSearchModel, setSelectedInvoices } = useActions();
   const { invoices, status, totalCount } = useInvoices();
 
   useEffect(() => fetchInvoices(), [fetchInvoices]);
-
+  useEffect(() => fetchDepUsers(), [fetchDepUsers]);
   useEffect(() => fetchIndividualCodes(), [fetchIndividualCodes]);
 
   return (

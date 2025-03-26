@@ -1,17 +1,14 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { censorFiles, fetchFiles, setSelectedFiles, updateFile } from '../../../../redux/actions/files';
-import { useInvoices } from '../../../../redux/selectors';
 
 const useActions = () => {
   const dispatch = useDispatch();
-  const { selectedInvoices } = useInvoices();
-  const selectedInvoiceIds = useMemo(() => selectedInvoices?.map((invoice) => invoice.id), [selectedInvoices]);
 
   const debouncedFetchFiles = useDebounceCallback(
-    useCallback(() => dispatch(fetchFiles({ ids: selectedInvoiceIds.join(',') })), [dispatch, selectedInvoiceIds]),
+    useCallback((invoiceIds) => dispatch(fetchFiles({ invoiceIds: invoiceIds.join(',') })), [dispatch]),
   );
 
   const handleSetSelectedFiles = useCallback((data) => dispatch(setSelectedFiles(data)), [dispatch]);

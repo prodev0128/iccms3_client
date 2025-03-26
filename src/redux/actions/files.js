@@ -21,7 +21,7 @@ export const updateFile = (id, data) => {
   return apiAction(filesSlice.actions.updateFile, apiInfo);
 };
 
-export const censorFiles = (id, data) => {
+export const censorFiles = (data) => {
   const apiInfo = {
     data,
     method: 'PATCH',

@@ -13,7 +13,7 @@ import {
   updateInvoice,
   updateInvoicesStatus,
 } from '../../../../redux/actions/invoices';
-import { fetchUsers } from '../../../../redux/actions/users';
+import { fetchDepUsers } from '../../../../redux/actions/users';
 import { useInvoices } from '../../../../redux/selectors';
 import AssignDialog from '../Dialogs/AssignDialog';
 import CensorDialog from '../Dialogs/CensorDialog';
@@ -86,9 +86,9 @@ const useActions = () => {
     }, [dispatch]),
   );
 
-  const debouncedFetchAllUsers = useDebounceCallback(
+  const debouncedFetchDepUsers = useDebounceCallback(
     useCallback(async () => {
-      await dispatch(fetchUsers());
+      await dispatch(fetchDepUsers());
     }, [dispatch]),
   );
 
@@ -109,7 +109,7 @@ const useActions = () => {
     updateInvoice: handleUpdateInvoice,
     updateInvoicesStatus: handleUpdateInvoicesStatus,
     fetchIndividualCodes: debouncedFetchIndividualCodes,
-    fetchUsers: debouncedFetchAllUsers,
+    fetchDepUsers: debouncedFetchDepUsers,
     setSelectedInvoices: handleSetSelectedInvoices,
     setSearchModel: handleSetSearchModel,
     setSelectedTab: handleSetSelectedTab,

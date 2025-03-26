@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo } from 'react';
 
 import CustomDialog from '../../../../components/CustomDialog';
+import MediaViewer from '../../../../components/MediaViewer';
 import ResizableBox from '../../../../components/ResizableBox';
 import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { useCodes, useFiles } from '../../../../redux/selectors';
@@ -17,12 +18,12 @@ const CensorDialog = ({ onClose, open, payload }) => {
   const { files, selectedFiles } = useFiles();
   const { censorFiles, fetchFiles, setSelectedFiles } = useActions();
 
-  const { ids = [] } = payload.data;
+  const { invoiceIds = [] } = payload.data;
 
   const debouncedFetchFiles = useDebounceCallback(
     useCallback(() => {
-      fetchFiles(ids);
-    }, [ids, fetchFiles]),
+      fetchFiles(invoiceIds);
+    }, [invoiceIds, fetchFiles]),
   );
 
   useEffect(() => {
@@ -41,22 +42,27 @@ const CensorDialog = ({ onClose, open, payload }) => {
     <CustomDialog draggable maxWidth="" open={open} onClose={() => {}}>
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent sx={{ minHeight: 'calc(100vh - 180px)' }}>
-        <ResizableBox sx={{ width: '100%', height: '100%' }}>
+        <ResizableBox initialWidth={500}>
           <Box>
-            <FilesGrid />
+            <FilesGrid fetchFiles={debouncedFetchFiles} />
             <ButtonGroup fullWidth aria-label="Basic button group" variant="outlined">
               {activeCenFlags.map((item) => (
                 <Button
                   color="primary"
                   key={item.id}
-                  onClick={() => censorFiles({ ids: selectedFiles, cenFlag: item.value })}
+                  onClick={() => {
+                    censorFiles({ ids: selectedFiles.map((file) => file.id), cenFlag: item.value });
+                    debouncedFetchFiles();
+                  }}
                 >
                   {item.name} ({item.options?.shortcut})
                 </Button>
               ))}
             </ButtonGroup>
           </Box>
-          <Box sx={{ border: 'solid 1px' }}>Hi</Box>
+          <Box sx={{ border: 'solid 1px' }}>
+            <MediaViewer />
+          </Box>
         </ResizableBox>
       </DialogContent>
       <DialogActions>

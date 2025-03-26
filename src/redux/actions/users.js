@@ -12,6 +12,15 @@ export const fetchUsers = (params) => {
   return apiAction(usersSlice.actions.fetchUsers, apiInfo);
 };
 
+export const fetchDepUsers = (params) => {
+  const apiInfo = {
+    method: 'GET',
+    params,
+    url: `${usersUrl}/dep`,
+  };
+  return apiAction(usersSlice.actions.fetchDepUsers, apiInfo);
+};
+
 export const createUser = (data) => {
   const apiInfo = {
     data,

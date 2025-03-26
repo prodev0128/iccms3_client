@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import CustomDataGrid from '../../../../components/CustomDataGrid';
 import { useFiles } from '../../../../redux/selectors';
@@ -7,15 +7,13 @@ import Toolbar from './Toolbar';
 import useActions from './useActions';
 import useColumns from './useColumns';
 
-const FilesGrid = () => {
+const FilesGrid = ({ fetchFiles }) => {
   const columns = useColumns();
-  const { fetchFiles, setSelectedFiles } = useActions();
+  const { setSelectedFiles } = useActions();
   const { files, status, totalCount } = useFiles();
 
-  useEffect(() => fetchFiles(), [fetchFiles]);
-
   return (
-    <Box sx={{ height: 600, p: 1, width: '100%' }}>
+    <Box sx={{ height: 700, p: 1, width: '100%' }}>
       <CustomDataGrid
         checkboxSelection={false}
         columns={columns}
@@ -23,11 +21,15 @@ const FilesGrid = () => {
         placeholder="Name"
         rowCount={totalCount}
         rows={files}
-        toolbar={<Toolbar />}
+        toolbar={<Toolbar fetchFiles={fetchFiles} />}
         onRowSelectionModelChange={(data, { api }) => setSelectedFiles(api.getSelectedRows().values().toArray())}
       />
     </Box>
   );
+};
+
+FilesGrid.propTypes = {
+  fetchFiles: PropTypes.func.isRequired,
 };
 
 export default FilesGrid;

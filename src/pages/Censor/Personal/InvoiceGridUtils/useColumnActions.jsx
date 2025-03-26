@@ -32,7 +32,7 @@ const useColumnActions = () => {
           icon={SafetyCheckTwoTone}
           label="Censor"
           visible={checkStatus(invoiceActions.CENSOR, row.status) && row.censor === me.userID}
-          onClick={() => actions.censorInvoices({ ids: [row.id] })}
+          onClick={() => actions.censorInvoices({ invoiceIds: [row.id] })}
         />
         <GridActionItem
           icon={ApprovalTwoTone}

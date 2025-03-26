@@ -4,6 +4,7 @@ const initialState = {
   status: 'idle',
   totalCount: 0,
   users: [],
+  depUsers: [],
 };
 
 const usersSlice = createSlice({
@@ -15,6 +16,14 @@ const usersSlice = createSlice({
       state.status = status;
       if (status === 'success') {
         state.users = data.users;
+        state.totalCount = data.totalCount;
+      }
+    },
+    fetchDepUsers: (state, { payload }) => {
+      const { data, status } = payload;
+      state.status = status;
+      if (status === 'success') {
+        state.depUsers = data.depUsers;
         state.totalCount = data.totalCount;
       }
     },

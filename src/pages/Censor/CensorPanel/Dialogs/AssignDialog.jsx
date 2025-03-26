@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 import CustomDialog from '../../../../components/CustomDialog';
 import SingleSelect from '../../../../components/CustomSelect/SingleSelect';
-import { useAuth, useUsers } from '../../../../redux/selectors';
+import { useUsers } from '../../../../redux/selectors';
 
 const schema = Yup.object({
   censor: Yup.string().required('Censor is required'),
@@ -13,14 +13,10 @@ const schema = Yup.object({
 });
 
 const AssignDialog = ({ onClose, open }) => {
-  const { user: me } = useAuth();
-  const { users = [] } = useUsers();
-  const depUsers = useMemo(
-    () =>
-      users
-        .filter((user) => user.dep === me.dep)
-        .map((user) => ({ value: user.userID, name: user.name, isActive: user.isActive })),
-    [users, me],
+  const { depUsers = [] } = useUsers();
+  const users = useMemo(
+    () => depUsers.map((user) => ({ value: user.userID, name: user.name, isActive: user.isActive })),
+    [depUsers],
   );
 
   const [data, setData] = useState({ censor: '', checker: '' });
@@ -68,7 +64,7 @@ const AssignDialog = ({ onClose, open }) => {
               error={!!errors.censor}
               helperText={errors.censor}
               label="censor *"
-              options={depUsers}
+              options={users}
               value={data.censor}
               onBlur={() => validate('censor')}
               onChange={({ value }) => updateData('censor', value)}
@@ -80,7 +76,7 @@ const AssignDialog = ({ onClose, open }) => {
               error={!!errors.checker}
               helperText={errors.checker}
               label="checker *"
-              options={depUsers}
+              options={users}
               value={data.checker}
               onBlur={() => validate('checker')}
               onChange={({ value }) => updateData('checker', value)}

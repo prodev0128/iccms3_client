@@ -1,7 +1,6 @@
 import { Box, Button, Checkbox, DialogActions, DialogContent, DialogTitle, FormControlLabel } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { Scrollbars } from 'react-custom-scrollbars-2';
 import { useDispatch } from 'react-redux';
 
 import { fetchNews } from '../../redux/actions/news';
