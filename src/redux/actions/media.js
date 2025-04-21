@@ -13,7 +13,6 @@ export const fetchMedia = (filePath) => {
   return apiAction(mediaSlice.actions.fetchMedia, apiInfo, {
     transformResponse: (response) => ({
       blobUrl: URL.createObjectURL(response),
-      filePath,
     }),
   });
 };

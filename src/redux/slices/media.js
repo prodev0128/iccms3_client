@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   blobUrl: null,
-  filePath: null,
   loading: false,
 };
 
@@ -15,7 +14,6 @@ const mediaSlice = createSlice({
       state.status = status;
       if (status === 'success') {
         state.blobUrl = data.blobUrl;
-        state.filePath = data.filePath;
       } else if (status === 'failed') {
         state.blobUrl = null;
       }

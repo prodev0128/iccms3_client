@@ -1,5 +1,5 @@
 import { DeleteTwoTone } from '@mui/icons-material';
-import { Grid2, IconButton, TextField } from '@mui/material';
+import { Grid, IconButton, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 
@@ -16,8 +16,8 @@ const ExtraOptionItem = ({ handleRemoveOption, option, updateOptionsData }) => {
   );
 
   return (
-    <Grid2 container columns={13} spacing={2}>
-      <Grid2 size={3}>
+    <Grid container columns={13} spacing={2}>
+      <Grid size={3}>
         <TextField
           fullWidth
           label="key"
@@ -25,8 +25,8 @@ const ExtraOptionItem = ({ handleRemoveOption, option, updateOptionsData }) => {
           value={option?.key || ''}
           onChange={(e) => updateOptionsData('key', e.target.value)}
         />
-      </Grid2>
-      <Grid2 size={3}>
+      </Grid>
+      <Grid size={3}>
         <TextField
           fullWidth
           label="name"
@@ -34,16 +34,16 @@ const ExtraOptionItem = ({ handleRemoveOption, option, updateOptionsData }) => {
           value={option?.name || ''}
           onChange={(e) => updateOptionsData('name', e.target.value)}
         />
-      </Grid2>
-      <Grid2 size={3}>
+      </Grid>
+      <Grid size={3}>
         <SingleSelect
           label="type"
           options={getCodeOptionTypesToArray()}
           value={option?.type || ''}
           onChange={({ value }) => updateOptionsData('type', value)}
         />
-      </Grid2>
-      <Grid2 size={3}>
+      </Grid>
+      <Grid size={3}>
         {[codeOptionTypes.SINGLE_SELECT.value, codeOptionTypes.MULTI_SELECT.value].includes(option?.type) && (
           <SingleSelect
             label="code-option"
@@ -52,13 +52,13 @@ const ExtraOptionItem = ({ handleRemoveOption, option, updateOptionsData }) => {
             onChange={({ value }) => updateOptionsData('ref', value)}
           />
         )}
-      </Grid2>
-      <Grid2 size={1}>
+      </Grid>
+      <Grid size={1}>
         <IconButton color="error" onClick={handleRemoveOption}>
           <DeleteTwoTone />
         </IconButton>
-      </Grid2>
-    </Grid2>
+      </Grid>
+    </Grid>
   );
 };
 

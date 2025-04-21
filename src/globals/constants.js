@@ -59,7 +59,6 @@ export const dataTypes = {
   ALL: 'ALL',
   EMAIL: 'EMAIL',
   FTP: 'FTP',
-  OUTFTP: 'OUTFTP',
 };
 
 export const receiptStatusTabs = [

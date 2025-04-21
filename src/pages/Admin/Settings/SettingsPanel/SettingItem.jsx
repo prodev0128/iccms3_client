@@ -1,16 +1,16 @@
 import { DeleteTwoTone, EditTwoTone } from '@mui/icons-material';
-import { Grid2, IconButton, Tooltip } from '@mui/material';
+import { Grid, IconButton, Tooltip } from '@mui/material';
 import PropTypes from 'prop-types';
 
 import DynamicFormField from '../../../../components/DynamicFormField';
 
 const SettingItem = ({ actions, setting }) => {
   return (
-    <Grid2 container sx={{ px: 2, py: 1 }}>
-      <Grid2 size={10} sx={{ display: 'flex', alignItems: 'center' }}>
+    <Grid container sx={{ px: 2, py: 1 }}>
+      <Grid size={10} sx={{ display: 'flex', alignItems: 'center' }}>
         <DynamicFormField label={setting.name} type={setting.type} value={setting.value} onChange={(f) => f} />
-      </Grid2>
-      <Grid2 size={2} sx={{ display: 'flex', justifyContent: 'end' }}>
+      </Grid>
+      <Grid size={2} sx={{ display: 'flex', justifyContent: 'end' }}>
         <Tooltip arrow title="Edit">
           <IconButton color="primary" onClick={() => actions.updateSetting(setting)}>
             <EditTwoTone />
@@ -21,8 +21,8 @@ const SettingItem = ({ actions, setting }) => {
             <DeleteTwoTone />
           </IconButton>
         </Tooltip>
-      </Grid2>
-    </Grid2>
+      </Grid>
+    </Grid>
   );
 };
 

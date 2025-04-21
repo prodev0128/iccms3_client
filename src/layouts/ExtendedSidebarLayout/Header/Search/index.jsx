@@ -15,7 +15,7 @@ import {
   CircularProgress,
   Dialog,
   Divider,
-  Grid2,
+  Grid,
   IconButton,
   InputBase,
   Link,
@@ -402,8 +402,8 @@ const HeaderSearch = () => {
                     />
                     <Typography variant="h5">{t('Popular searches')}</Typography>
                     <Box p={4}>
-                      <Grid2 container spacing={3}>
-                        <Grid2 size={{ sm: 6, xs: 12 }}>
+                      <Grid container spacing={3}>
+                        <Grid size={{ sm: 6, xs: 12 }}>
                           <Box alignItems="center" display="flex" fontSize={13} mb={1}>
                             <DashboardTwoTone
                               sx={{
@@ -460,8 +460,8 @@ const HeaderSearch = () => {
                               </Link>
                             </ListItem>
                           </List>
-                        </Grid2>
-                        <Grid2 size={{ sm: 6, xs: 12 }}>
+                        </Grid>
+                        <Grid size={{ sm: 6, xs: 12 }}>
                           <Box alignItems="center" display="flex" fontSize={13} mb={1}>
                             <AppSettingsAltTwoTone
                               sx={{
@@ -518,8 +518,8 @@ const HeaderSearch = () => {
                               </Link>
                             </ListItem>
                           </List>
-                        </Grid2>
-                      </Grid2>
+                        </Grid>
+                      </Grid>
                     </Box>
                   </Box>
                 </Scrollbar>

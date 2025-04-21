@@ -1,4 +1,4 @@
-import { Button, DialogActions, DialogContent, DialogTitle, Grid2 } from '@mui/material';
+import { Button, DialogActions, DialogContent, DialogTitle, Grid } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
@@ -57,8 +57,8 @@ const AssignDialog = ({ onClose, open }) => {
     <CustomDialog draggable confirmWithoutSaving={confirmWithoutSaving} open={open} onClose={onClose}>
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent>
-        <Grid2 container spacing={2} sx={{ pt: 2 }}>
-          <Grid2 size={{ sm: 6, xs: 12 }}>
+        <Grid container spacing={2} sx={{ pt: 2 }}>
+          <Grid size={{ sm: 6, xs: 12 }}>
             <SingleSelect
               haveDisableOption
               error={!!errors.censor}
@@ -69,8 +69,8 @@ const AssignDialog = ({ onClose, open }) => {
               onBlur={() => validate('censor')}
               onChange={({ value }) => updateData('censor', value)}
             />
-          </Grid2>
-          <Grid2 size={{ sm: 6, xs: 12 }}>
+          </Grid>
+          <Grid size={{ sm: 6, xs: 12 }}>
             <SingleSelect
               haveDisableOption
               error={!!errors.checker}
@@ -81,8 +81,8 @@ const AssignDialog = ({ onClose, open }) => {
               onBlur={() => validate('checker')}
               onChange={({ value }) => updateData('checker', value)}
             />
-          </Grid2>
-        </Grid2>
+          </Grid>
+        </Grid>
       </DialogContent>
       <DialogActions>
         <Button color="primary" variant="contained" onClick={validateAndSave}>

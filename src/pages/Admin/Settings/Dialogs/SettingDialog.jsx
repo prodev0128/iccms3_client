@@ -1,4 +1,4 @@
-import { Button, DialogActions, DialogContent, DialogTitle, Grid2, TextField } from '@mui/material';
+import { Button, DialogActions, DialogContent, DialogTitle, Grid, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
@@ -45,8 +45,8 @@ const SettingDialog = ({ onClose, open, payload }) => {
     <CustomDialog draggable confirmWithoutSaving={confirmWithoutSaving} maxWidth="lg" open={open} onClose={onClose}>
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent>
-        <Grid2 container spacing={2} sx={{ pt: 2 }}>
-          <Grid2 size={{ sm: 6, xs: 12 }}>
+        <Grid container spacing={2} sx={{ pt: 2 }}>
+          <Grid size={{ sm: 6, xs: 12 }}>
             <TextField
               fullWidth
               error={!!errors.key}
@@ -56,8 +56,8 @@ const SettingDialog = ({ onClose, open, payload }) => {
               value={data?.key || ''}
               onChange={(e) => updateData('key', e.target.value)}
             />
-          </Grid2>
-          <Grid2 size={{ sm: 6, xs: 12 }}>
+          </Grid>
+          <Grid size={{ sm: 6, xs: 12 }}>
             <TextField
               fullWidth
               error={!!errors.name}
@@ -67,8 +67,8 @@ const SettingDialog = ({ onClose, open, payload }) => {
               value={data?.name || ''}
               onChange={(e) => updateData('name', e.target.value)}
             />
-          </Grid2>
-          <Grid2 size={{ sm: 6, xs: 12 }}>
+          </Grid>
+          <Grid size={{ sm: 6, xs: 12 }}>
             <SingleSelect
               error={!!errors.type}
               helperText={errors.type}
@@ -77,16 +77,16 @@ const SettingDialog = ({ onClose, open, payload }) => {
               value={data?.type || ''}
               onChange={({ value }) => updateData('type', value)}
             />
-          </Grid2>
-          <Grid2 size={{ sm: 6, xs: 12 }}>
+          </Grid>
+          <Grid size={{ sm: 6, xs: 12 }}>
             <DynamicFormField
               label={data?.name || ''}
               type={data?.type}
               value={data?.value || ''}
               onChange={(value) => updateData('value', value)}
             />
-          </Grid2>
-        </Grid2>
+          </Grid>
+        </Grid>
       </DialogContent>
       <DialogActions>
         <Button color="primary" variant="contained" onClick={validateAndSave}>

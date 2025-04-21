@@ -67,9 +67,7 @@ const CensorDialog = ({ onClose, open, payload }) => {
               ))}
             </ButtonGroup>
           </Box>
-          <Box sx={{ border: 'solid 1px' }}>
-            <MediaViewer />
-          </Box>
+          <MediaViewer />
         </ResizableBox>
       </DialogContent>
       <DialogActions>
