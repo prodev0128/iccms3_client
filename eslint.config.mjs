@@ -6,7 +6,6 @@ import reactPlugin from 'eslint-plugin-react';
 import sortPlugin from 'eslint-plugin-sort';
 import globals from 'globals';
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
   jsPlugin.configs.recommended,
   reactPlugin.configs.flat.recommended,

@@ -1,4 +1,4 @@
-import { Button, DialogActions, DialogContent, DialogTitle, Grid, TextField } from '@mui/material';
+import { Button, DialogActions, DialogContent, DialogTitle, Grid2, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
@@ -59,8 +59,8 @@ const UserDialog = ({ onClose, open, payload }) => {
     <CustomDialog draggable confirmWithoutSaving={confirmWithoutSaving} open={open} onClose={onClose}>
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent>
-        <Grid container spacing={2} sx={{ pt: 2 }}>
-          <Grid size={{ sm: 6, xs: 12 }}>
+        <Grid2 container spacing={2} sx={{ pt: 2 }}>
+          <Grid2 size={{ sm: 6, xs: 12 }}>
             <TextField
               fullWidth
               error={!!errors.userID}
@@ -71,8 +71,8 @@ const UserDialog = ({ onClose, open, payload }) => {
               onBlur={() => validate('userID')}
               onChange={(e) => updateData('userID', e.target.value)}
             />
-          </Grid>
-          <Grid size={{ sm: 6, xs: 12 }}>
+          </Grid2>
+          <Grid2 size={{ sm: 6, xs: 12 }}>
             <TextField
               fullWidth
               error={!!errors.name}
@@ -83,8 +83,8 @@ const UserDialog = ({ onClose, open, payload }) => {
               onBlur={() => validate('name')}
               onChange={(e) => updateData('name', e.target.value)}
             />
-          </Grid>
-          <Grid size={{ sm: 6, xs: 12 }}>
+          </Grid2>
+          <Grid2 size={{ sm: 6, xs: 12 }}>
             <SingleSelect
               haveDisableOption
               error={!!errors.gender}
@@ -95,8 +95,8 @@ const UserDialog = ({ onClose, open, payload }) => {
               onBlur={() => validate('gender')}
               onChange={({ value }) => updateData('gender', value)}
             />
-          </Grid>
-          <Grid size={{ sm: 6, xs: 12 }}>
+          </Grid2>
+          <Grid2 size={{ sm: 6, xs: 12 }}>
             <DatePicker
               label="birthday *"
               value={data.birthday ? getUTCDate(data.birthday) : null}
@@ -109,8 +109,8 @@ const UserDialog = ({ onClose, open, payload }) => {
               }}
               onChange={(value) => updateData('birthday', value ? getDateFromObject(value) : null)}
             />
-          </Grid>
-          <Grid size={{ sm: 6, xs: 12 }}>
+          </Grid2>
+          <Grid2 size={{ sm: 6, xs: 12 }}>
             <SingleSelect
               haveDisableOption
               error={!!errors.dep}
@@ -121,8 +121,8 @@ const UserDialog = ({ onClose, open, payload }) => {
               onBlur={() => validate('dep')}
               onChange={({ value }) => updateData('dep', value)}
             />
-          </Grid>
-          <Grid size={{ sm: 6, xs: 12 }}>
+          </Grid2>
+          <Grid2 size={{ sm: 6, xs: 12 }}>
             <SingleSelect
               haveDisableOption
               error={!!errors.job}
@@ -133,8 +133,8 @@ const UserDialog = ({ onClose, open, payload }) => {
               onBlur={() => validate('job')}
               onChange={({ value }) => updateData('job', value)}
             />
-          </Grid>
-          <Grid size={{ sm: 6, xs: 12 }}>
+          </Grid2>
+          <Grid2 size={{ sm: 6, xs: 12 }}>
             <TextField
               fullWidth
               error={!!errors.stampNo}
@@ -146,8 +146,8 @@ const UserDialog = ({ onClose, open, payload }) => {
               onBlur={() => validate('stampNo')}
               onChange={(e) => updateData('stampNo', e.target.valueAsNumber || 0)}
             />
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </DialogContent>
       <DialogActions>
         <Button color="primary" variant="contained" onClick={validateAndSave}>

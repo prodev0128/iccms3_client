@@ -1,5 +1,5 @@
 import { AddTwoTone } from '@mui/icons-material';
-import { Button, DialogActions, DialogContent, DialogTitle, Grid, IconButton, TextField } from '@mui/material';
+import { Button, DialogActions, DialogContent, DialogTitle, Grid2, IconButton, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
@@ -63,8 +63,8 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
     <CustomDialog draggable confirmWithoutSaving={confirmWithoutSaving} maxWidth="lg" open={open} onClose={onClose}>
       <DialogTitle style={{ cursor: 'move' }}>{title}</DialogTitle>
       <DialogContent>
-        <Grid container spacing={2} sx={{ pt: 2 }}>
-          <Grid size={{ sm: 6, xs: 12 }}>
+        <Grid2 container spacing={2} sx={{ pt: 2 }}>
+          <Grid2 size={{ sm: 6, xs: 12 }}>
             <TextField
               fullWidth
               error={!!errors.type}
@@ -74,8 +74,8 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
               value={data?.type || ''}
               onChange={(e) => updateData('type', e.target.value)}
             />
-          </Grid>
-          <Grid size={{ sm: 6, xs: 12 }}>
+          </Grid2>
+          <Grid2 size={{ sm: 6, xs: 12 }}>
             <TextField
               fullWidth
               error={!!errors.name}
@@ -85,8 +85,8 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
               value={data?.name || ''}
               onChange={(e) => updateData('name', e.target.value)}
             />
-          </Grid>
-          <Grid size={12}>
+          </Grid2>
+          <Grid2 size={12}>
             <GroupBox
               label="options"
               toolbar={
@@ -95,20 +95,20 @@ const CodeOptionDialog = ({ onClose, open, payload }) => {
                 </IconButton>
               }
             >
-              <Grid container spacing={2}>
+              <Grid2 container spacing={2}>
                 {data?.options?.map((option, index) => (
-                  <Grid key={index} size={12}>
+                  <Grid2 key={index} size={12}>
                     <ExtraOptionItem
                       handleRemoveOption={() => handleRemoveOption(index)}
                       option={option}
                       updateOptionsData={(key, value) => updateOptionsData(index, key, value)}
                     />
-                  </Grid>
+                  </Grid2>
                 ))}
-              </Grid>
+              </Grid2>
             </GroupBox>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </DialogContent>
       <DialogActions>
         <Button color="primary" variant="contained" onClick={validateAndSave}>
